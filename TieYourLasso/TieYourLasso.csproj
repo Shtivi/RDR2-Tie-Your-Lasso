@@ -47,7 +47,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AttachedRope.cs" />
-    <Compile Include="Client.cs" />
     <Compile Include="ePedHash.cs" />
     <Compile Include="LassoHandler.cs" />
     <Compile Include="Logger.cs" />
