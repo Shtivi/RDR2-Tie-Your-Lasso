@@ -34,8 +34,11 @@ namespace TieYourLasso
             }
         }
 
+        public bool DidJustLassoed { get; private set; }
+
         public void Update()
         {
+            DidJustLassoed = false;
             var player = Game.Player.Character;
 
             if (!IsLassoEquiped)
@@ -52,6 +55,7 @@ namespace TieYourLasso
                     if (target != null)
                     {
                         LassoTarget = target;
+                        DidJustLassoed = true;
                         Script.Wait(500);
                     }
                 }

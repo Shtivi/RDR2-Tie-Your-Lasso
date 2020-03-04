@@ -20,6 +20,8 @@ namespace TieYourLasso
 
         private List<IScenario> activeScenarios { get; set; }
 
+        private Ped target { get; set; }
+
         public Main()
         {
             Interval = 1;
@@ -46,9 +48,19 @@ namespace TieYourLasso
                 activeScenarios.ForEach(scenario => scenario.Update());
                 activeScenarios.RemoveAll(scenario => scenario.IsFinished);
 
-                if (lassoHandler.IsTargetPed && !Game.Player.Character.IsOnMount)
+                if (lassoHandler.IsTargetPed && !Game.Player.Character.IsOnMount && lassoHandler.DidJustLassoed)
                 {
                     RDR2.UI.Screen.ShowSubtitle("~INPUT_RELOAD~ Attach to ground");
+                }
+
+                if (target != null && target.Exists())
+                {
+                    Function.Call(Hash._DISPLAY_TEXT, target.IsCuffed + "");
+                }
+
+                if (Game.IsControlJustReleased(0, RDR2.Control.Reload))
+                {
+                    AttachToGroundScenario();
                 }
             }
             catch(Exception ex)
@@ -61,14 +73,9 @@ namespace TieYourLasso
         {
             try
             {
-                if (e.KeyCode == Keys.R)
+                if (e.KeyCode == Keys.F3)
                 {
-                    if (lassoHandler.IsTargetPed && !Game.Player.Character.IsOnMount)
-                    {
-                        var scenario = new AttachToGroundScenario(ropesFactory, propsManager, lassoHandler.LassoTarget as Ped);
-                        scenario.Start();
-                        activeScenarios.Add(scenario);
-                    }
+                    target = World.CreatePed((PedHash)ePedHash.A_F_M_LowerSDTownfolk_01, Game.Player.Character.Position + Game.Player.Character.ForwardVector * 4);
                 }
             } 
             catch(Exception ex)
@@ -85,6 +92,16 @@ namespace TieYourLasso
         private void log(string msg)
         {
             Logger.Log(msg);
+        }
+
+        private void AttachToGroundScenario()
+        {
+            if (lassoHandler.IsTargetPed && !Game.Player.Character.IsOnMount)
+            {
+                var scenario = new AttachToGroundScenario(ropesFactory, propsManager, lassoHandler.LassoTarget as Ped);
+                scenario.Start();
+                activeScenarios.Add(scenario);
+            }
         }
     }
 }
