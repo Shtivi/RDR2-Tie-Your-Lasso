@@ -28,7 +28,7 @@ namespace TieYourLasso
             KeyUp += OnKeyUp;
             Tick += OnTick;
 
-            Logger.SetPath(this.BaseDirectory + "/Lasso.txt");
+            Logger.SetPath(this.BaseDirectory + "/TieYourLasso.txt");
             log("started");
 
             this.activeScenarios = new List<IScenario>();
@@ -70,44 +70,6 @@ namespace TieYourLasso
                         activeScenarios.Add(scenario);
                     }
                 }
-                //else if (e.KeyCode == Keys.T)
-                //{
-                //    if (!lassoHandler.IsLassoEquiped || !lassoHandler.IsTargetPed)
-                //    {
-                //        log("lasso not equiped / not ped " + lassoHandler.IsLassoEquiped + " " + lassoHandler.IsTargetPed);
-                //        RDR2.UI.Screen.ShowSubtitle(lassoHandler.IsLassoEquiped + " " + lassoHandler.IsTargetPed);
-                //        return;
-                //    }
-
-                //    var hangingSpot = raycastHelper.FindHangingSpot();
-                //    if (!hangingSpot.Equals(Vector3.Zero))
-                //    {
-                //        RDR2.UI.Screen.ShowSubtitle("Hit!");
-                //        var scenario =
-                //            new HangPedScenario(ropesFactory, propsManager, lassoHandler.LassoTarget as Ped, hangingSpot);
-
-                //        scenario.Start();
-                //        this.activeScenarios.Add(scenario);
-                //    }
-                //    else
-                //    {
-                //    }
-                //    Wait(1000);
-                //}
-                else if (e.KeyCode == Keys.F9)
-                {
-                    // p_chair25x
-
-                    var player = Game.Player.Character;
-                    var pos = player.Position + player.ForwardVector * 4;
-                    var ped = World.CreatePed((PedHash)ePedHash.A_F_M_LowerSDTownfolk_01, pos);
-                    
-                }
-                else if (e.KeyCode == Keys.F2)
-                {
-                    var player = Game.Player.Character;
-                    propsManager.CreateProp("p_cs_nailbarrel01x", player.Position + player.ForwardVector * 3);
-                }
             } 
             catch(Exception ex)
             {
@@ -118,20 +80,6 @@ namespace TieYourLasso
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
 
-        }
-
-        private Vector3 FindHangingSpot()
-        {
-            if (!lassoHandler.IsLassoEquiped || !lassoHandler.IsTargetPed)
-            {
-                log("lasso not equiped / not ped " + lassoHandler.IsLassoEquiped + " " + lassoHandler.IsTargetPed);
-                RDR2.UI.Screen.ShowSubtitle(lassoHandler.IsLassoEquiped + " " + lassoHandler.IsTargetPed);
-
-                return Vector3.Zero;
-            }
-            Script.Wait(1000);
-
-            return raycastHelper.FindHangingSpot();
         }
 
         private void log(string msg)
