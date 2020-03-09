@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="keyboard.cpp">
+      <Filter>Trainer\Keys</Filter>
+    </ClCompile>
+    <ClCompile Include="Self.cpp">
+      <Filter>Submenu\Self</Filter>
+    </ClCompile>
+    <ClCompile Include="entity.cpp">
+      <Filter>Trainer\common</Filter>
+    </ClCompile>
+    <ClCompile Include="weapons.cpp">
+      <Filter>Submenu\Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="Math.cpp">
+      <Filter>Trainer\common</Filter>
+    </ClCompile>
+    <ClCompile Include="spawner.cpp">
+      <Filter>Submenu\Car</Filter>
+    </ClCompile>
+    <ClCompile Include="gui.cpp">
+      <Filter>Trainer\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="script.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="LassoHandling.cpp">
+      <Filter>Src\Lasso</Filter>
+    </ClCompile>
+    <ClCompile Include="AttachedRopes.cpp">
+      <Filter>Src\AttachedRopes</Filter>
+    </ClCompile>
+    <ClCompile Include="UserActions.cpp">
+      <Filter>Src\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Prompts.cpp">
+      <Filter>Src\Prompt</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\inc\types.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\enums.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\natives.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\main.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="keyboard.h">
+      <Filter>Trainer\Keys</Filter>
+    </ClInclude>
+    <ClInclude Include="gui.h">
+      <Filter>Trainer\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Main.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="entity.h">
+      <Filter>Trainer\common</Filter>
+    </ClInclude>
+    <ClInclude Include="Self.h">
+      <Filter>Submenu\Self</Filter>
+    </ClInclude>
+    <ClInclude Include="weapons.h">
+      <Filter>Submenu\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="Math.h">
+      <Filter>Trainer\common</Filter>
+    </ClInclude>
+    <ClInclude Include="spawner.h">
+      <Filter>Submenu\Car</Filter>
+    </ClInclude>
+    <ClInclude Include="script.h">
+      <Filter>Src</Filter>
+    </ClInclude>
+    <ClInclude Include="LassoHandling.h">
+      <Filter>Src\Lasso</Filter>
+    </ClInclude>
+    <ClInclude Include="AttachedRopes.h">
+      <Filter>Src\AttachedRopes</Filter>
+    </ClInclude>
+    <ClInclude Include="UserActions.h">
+      <Filter>Src\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Prompts.h">
+      <Filter>Src\Prompt</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="include">
+      <UniqueIdentifier>{fe82bd4a-2d14-486a-8be5-8bf6b50a2414}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Trainer">
+      <UniqueIdentifier>{b0210a86-83eb-4c1d-bf3c-9af3e3639feb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Trainer\GUI">
+      <UniqueIdentifier>{34286a38-5625-4605-adc5-49b5d8cf9837}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Trainer\Other">
+      <UniqueIdentifier>{90b18379-fc58-4f67-a6ea-80bee690ffab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Trainer\Keys">
+      <UniqueIdentifier>{f698adf2-3aa5-464e-8de2-6a5adf717e3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Submenu">
+      <UniqueIdentifier>{6506b9ba-7e24-4101-a68c-f1731e3bcfe8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Submenu\Self">
+      <UniqueIdentifier>{40e56b41-40a2-4e6a-9432-a93341962162}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Trainer\common">
+      <UniqueIdentifier>{378d3568-96e3-42fa-bcc6-9cee1b0b0b24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Submenu\Main">
+      <UniqueIdentifier>{5e9b9f45-37ed-4eb0-a6b3-f401600c50ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Submenu\Weapons">
+      <UniqueIdentifier>{d373127d-59d0-405a-9dc7-5afcae003d8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Submenu\Car">
+      <UniqueIdentifier>{824335a7-086a-4858-98a5-63913292c8f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src">
+      <UniqueIdentifier>{99988ac4-ab5d-4a8e-ad13-6426aa838402}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Lasso">
+      <UniqueIdentifier>{dcb89a57-955d-426c-ba6b-b21a3029ac38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Actions">
+      <UniqueIdentifier>{a42d84bc-a9ac-4542-b8d2-614ebde654fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\AttachedRopes">
+      <UniqueIdentifier>{f9123656-93e1-4279-9c47-af84e66142b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Prompt">
+      <UniqueIdentifier>{733612d0-6ed0-48b3-bea5-e46a72eb43ff}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
