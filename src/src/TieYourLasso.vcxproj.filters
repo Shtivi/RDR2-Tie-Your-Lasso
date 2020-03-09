@@ -16,11 +16,11 @@
     <ClCompile Include="UserActions.cpp">
       <Filter>Src\Actions</Filter>
     </ClCompile>
-    <ClCompile Include="Prompts.cpp">
-      <Filter>Src\Prompt</Filter>
-    </ClCompile>
     <ClCompile Include="keyboard.cpp">
       <Filter>Src\Others</Filter>
+    </ClCompile>
+    <ClCompile Include="Prompt.cpp">
+      <Filter>Src\Prompt</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -51,11 +51,11 @@
     <ClInclude Include="UserActions.h">
       <Filter>Src\Actions</Filter>
     </ClInclude>
-    <ClInclude Include="Prompts.h">
-      <Filter>Src\Prompt</Filter>
-    </ClInclude>
     <ClInclude Include="keyboard.h">
       <Filter>Src\Others</Filter>
+    </ClInclude>
+    <ClInclude Include="Prompt.h">
+      <Filter>Src\Prompt</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

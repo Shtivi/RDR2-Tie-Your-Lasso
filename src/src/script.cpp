@@ -14,7 +14,6 @@ void log(const char* msg);
 
 void Initialize() 
 {
-	initializeActions();
 }
 
 void main()

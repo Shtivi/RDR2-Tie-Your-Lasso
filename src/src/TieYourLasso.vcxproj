@@ -8,7 +8,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="keyboard.cpp" />
-    <ClCompile Include="Prompts.cpp" />
+    <ClCompile Include="Prompt.cpp" />
     <ClCompile Include="UserActions.cpp" />
     <ClCompile Include="LassoHandling.cpp" />
     <ClCompile Include="main.cpp" />
@@ -21,7 +21,7 @@
     <ClInclude Include="..\..\inc\natives.h" />
     <ClInclude Include="..\..\inc\types.h" />
     <ClInclude Include="keyboard.h" />
-    <ClInclude Include="Prompts.h" />
+    <ClInclude Include="Prompt.h" />
     <ClInclude Include="UserActions.h" />
     <ClInclude Include="LassoHandling.h" />
     <ClInclude Include="Main.h" />
@@ -53,7 +53,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <TargetExt>.asi</TargetExt>
-    <OutDir>D:\Program Files\Rockstar Games\Red Dead Redemption 2</OutDir>
+    <OutDir>\bin</OutDir>
     <IntDir>tmp\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -74,6 +74,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalOptions>..\..\lib\ScriptHookRDR2.lib %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>
