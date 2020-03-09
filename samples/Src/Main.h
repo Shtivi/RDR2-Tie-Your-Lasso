@@ -4,7 +4,6 @@
 #include "..\..\inc\types.h"
 #include "..\..\inc\enums.h"
 #include "..\..\inc\main.h"
-#include "entity.h"
 #include "Math.h"
 
 //Scripts
