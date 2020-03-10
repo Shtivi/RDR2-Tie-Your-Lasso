@@ -2,13 +2,18 @@
 
 Prompt::Prompt(const char* text, Hash control)
 {
-	this->handle = UI::_0x04F97DE45A519419(); // _UIPROMPT_REGISTER_BEGIN
-	this->setControl(control);
-	this->setText(text);
-	this->setTargetEntity(NULL);
-	UI::_0xF7AA2696A22AD8B9(this->handle); // _UIPROMPT_REGISTER_END
-
+	this->text = text;
+	this->control = control;
 	this->isEnabled = false;
+	this->targetEntity = NULL;
+	this->handle = UI::_0x29FA7910726C3889(control, (Any*)UI::_CREATE_VAR_STRING(10, "LITERAL_STRING", text), 0, 0, 0, 0);
+	//this->handle = UI::_0x04F97DE45A519419(); // _UIPROMPT_REGISTER_BEGIN
+	//this->setControl(control);
+	//this->setText(text);
+	//this->setTargetEntity(NULL);
+	//UI::_0xF7AA2696A22AD8B9(this->handle); // _UIPROMPT_REGISTER_END
+
+	//this->isEnabled = false;
 }
 
 Entity Prompt::getTargetEntity()
