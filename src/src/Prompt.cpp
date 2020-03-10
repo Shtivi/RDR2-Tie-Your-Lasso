@@ -11,6 +11,16 @@ Prompt::Prompt(const char* text, Hash control)
 	this->isEnabled = false;
 }
 
+Entity Prompt::getTargetEntity()
+{
+	return this->targetEntity;
+}
+
+bool Prompt::getIsEnabled()
+{
+	return isEnabled;
+}
+
 void Prompt::setText(const char* text)
 {
 	this->text = text;
@@ -24,18 +34,12 @@ void Prompt::setControl(Hash control)
 	UI::_0xB5352B7494A08258(this->handle, control); // _UIPROMPT_SET_CONTROL_ACTION
 }
 
-Entity Prompt::getTargetEntity()
-{
-	return this->targetEntity;
-}
-
 void Prompt::setTargetEntity(Entity target)
 {
 	this->targetEntity = target;
 
 	if (!target)
 	{
-		// needs testing
 		UI::_0x2F11D3A254169EA4(this->handle, 0, 0);
 		return;
 	}
@@ -47,6 +51,11 @@ void Prompt::setTargetEntity(Entity target)
 	}
 }
 
+void Prompt::setPriority(int priority) 
+{
+	UI::_0xCA24F528D0D16289(handle, priority); // _UIPROMPT_SET_PRIORITY
+}
+
 bool Prompt::isActivatedByPlayer()
 {
 	if (!this->isEnabled)
@@ -54,13 +63,19 @@ bool Prompt::isActivatedByPlayer()
 		return false;
 	}
 
-	// Validate that this is the correct native
-	if (CONTROLS::IS_CONTROL_JUST_RELEASED(0, this->control))
-	{
-		return true;
-	}
+	return CONTROLS::IS_DISABLED_CONTROL_JUST_RELEASED(0, this->control);
+}
 
-	return false;
+void Prompt::show()
+{
+	isEnabled = true;
+	update();
+}
+
+void Prompt::hide()
+{
+	isEnabled = false;
+	update();
 }
 
 void Prompt::update()

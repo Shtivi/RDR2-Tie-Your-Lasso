@@ -7,12 +7,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AttachedRope.cpp" />
     <ClCompile Include="keyboard.cpp" />
     <ClCompile Include="Prompt.cpp" />
     <ClCompile Include="UserActions.cpp" />
     <ClCompile Include="LassoHandling.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="AttachedRopes.cpp" />
+    <ClCompile Include="AttachedRopesHandling.cpp" />
     <ClCompile Include="script.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -20,12 +21,13 @@
     <ClInclude Include="..\..\inc\enums.h" />
     <ClInclude Include="..\..\inc\natives.h" />
     <ClInclude Include="..\..\inc\types.h" />
+    <ClInclude Include="AttachedRope.h" />
     <ClInclude Include="keyboard.h" />
     <ClInclude Include="Prompt.h" />
     <ClInclude Include="UserActions.h" />
     <ClInclude Include="LassoHandling.h" />
     <ClInclude Include="Main.h" />
-    <ClInclude Include="AttachedRopes.h" />
+    <ClInclude Include="AttachedRopesHanding.h" />
     <ClInclude Include="script.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -53,7 +55,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <TargetExt>.asi</TargetExt>
-    <OutDir>bin\</OutDir>
+    <OutDir>D:\Program Files\Rockstar Games\Red Dead Redemption 2</OutDir>
     <IntDir>tmp\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -74,8 +76,6 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalOptions>..\..\lib\ScriptHookRDR2.lib %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalLibraryDirectories>
-      </AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>

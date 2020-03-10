@@ -1,14 +1,16 @@
 #pragma once
-//Natives
+// Natives
 #include "..\..\inc\natives.h"
 #include "..\..\inc\types.h"
 #include "..\..\inc\enums.h"
 #include "..\..\inc\main.h"
+#include "entity.h"
 #include "Math.h"
 
-//Scripts
+// Scripts
 #include "script.h"
 #include "keyboard.h"
+
 // Windows Header Files:
 #include <windows.h>
 #include <Mmsystem.h>
@@ -29,7 +31,9 @@
 #include "../../inc/MinHook/MinHook.h"
 #pragma comment(lib, "../../inc/MinHook/libMinHook.x64.lib")
 
-#include "LassoHandling.h"
-#include "AttachedRopes.h"
-#include "UserActions.h";
+#include "AttachedRope.h";
 #include "Prompt.h";
+
+#include "LassoHandling.h"
+#include "AttachedRopesHanding.h";
+#include "UserActions.h";
