@@ -12,6 +12,7 @@ using namespace std;
 
 void Initialize() 
 {
+	initActions();
 }
 
 void main()

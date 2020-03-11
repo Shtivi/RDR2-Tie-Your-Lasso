@@ -1,8 +1,15 @@
 #include "Main.h"
 
-Prompt promptAttachToGround("Attach To Ground", GAMEPLAY::GET_HASH_KEY("INPUT_LOOK_BEHIND"), SemiHold);
-Prompt promptAttachHogtied("Attach To Ground", GAMEPLAY::GET_HASH_KEY("INPUT_LOOK_BEHIND"), SemiHold);
-Prompt promptKick("Kick", GAMEPLAY::GET_HASH_KEY("INPUT_NEXT_CAMERA"), Hold);
+Prompt* promptAttachToGround;
+Prompt* promptAttachHogtied;
+Prompt* promptKick;
+
+void initActions()
+{
+	promptAttachToGround = new Prompt("Attach To Ground", GAMEPLAY::GET_HASH_KEY("INPUT_LOOK_BEHIND"), SemiHold);
+	promptAttachHogtied = new Prompt("Attach To Ground", GAMEPLAY::GET_HASH_KEY("INPUT_LOOK_BEHIND"), SemiHold);
+	promptKick = new Prompt("Kick", GAMEPLAY::GET_HASH_KEY("INPUT_NEXT_CAMERA"), Hold);
+}
 
 void handleActions()
 {
@@ -16,8 +23,8 @@ void handleActions()
 
 	if (lassoTarget != 0 && ENTITY::IS_ENTITY_A_PED(lassoTarget) && !PED::IS_PED_ON_MOUNT(player))
 	{
-		promptAttachToGround.show();
-		if (promptAttachToGround.isActivatedByPlayer())
+		promptAttachToGround->show();
+		if (promptAttachToGround->isActivatedByPlayer())
 		{
 			AttachedRope* rope = new AttachedRope(playerGroundPos, lassoTarget, "SKEL_NECK0", 0);
 			addRope(rope);
@@ -25,31 +32,31 @@ void handleActions()
 	}
 	else
 	{
-		promptAttachToGround.hide();
+		promptAttachToGround->hide();
 	}
 
 	if (PLAYER::GET_PLAYER_TARGET_ENTITY(PLAYER::PLAYER_ID(), &targetEntity))
 	{
 		if (ENTITY::IS_ENTITY_A_PED(targetEntity) && PED::IS_PED_HUMAN(targetEntity) && AI::GET_IS_TASK_ACTIVE(targetEntity, 399))
 		{
-			promptAttachHogtied.setTargetEntity(targetEntity);
-			promptAttachHogtied.show();
+			promptAttachHogtied->setTargetEntity(targetEntity);
+			promptAttachHogtied->show();
 			
 			targetPos = ENTITY::GET_ENTITY_COORDS(targetEntity, true, 0);
 			Vector3 targetGroundPos;
 			getGroundPos(targetPos, &targetGroundPos);
 
-			if (promptAttachHogtied.isActivatedByPlayer())
+			if (promptAttachHogtied->isActivatedByPlayer())
 			{
 				addRope(new AttachedRope(targetGroundPos, targetEntity, "SKEL_NECK0", 2.0f));
 			}
 
 			if (distanceBetweenEntities(targetEntity, player) <= 2)
 			{
-				promptKick.setTargetEntity(targetEntity);
-				promptKick.show();
+				promptKick->setTargetEntity(targetEntity);
+				promptKick->show();
 
-				if (promptKick.isActivatedByPlayer())
+				if (promptKick->isActivatedByPlayer())
 				{
 					const float FORCE_FACTOR = 2.5f;
 				
@@ -66,18 +73,18 @@ void handleActions()
 			}
 			else
 			{
-				promptKick.hide();
+				promptKick->hide();
 			}
 		}
 		else
 		{
-			promptKick.hide();
-			promptAttachHogtied.hide();
+			promptKick->hide();
+			promptAttachHogtied->hide();
 		}
 	}
 	else
 	{
-		promptAttachHogtied.hide();
-		promptKick.hide();
+		promptAttachHogtied->hide();
+		promptKick->hide();
 	}
 }
