@@ -1,43 +1,25 @@
 #include "Main.h"
 
-Prompt promptAttachToGround("Attach To Ground", GAMEPLAY::GET_HASH_KEY("INPUT_RELOAD"));
-Prompt promptPushPed("Kick ped", GAMEPLAY::GET_HASH_KEY("INPUT_INSPECT"));
+Prompt promptAttachToGround("Attach To Ground", GAMEPLAY::GET_HASH_KEY("INPUT_LOOK_BEHIND"), SemiHold);
+Prompt promptAttachHogtied("Attach To Ground", GAMEPLAY::GET_HASH_KEY("INPUT_LOOK_BEHIND"), SemiHold);
+Prompt promptKick("Kick", GAMEPLAY::GET_HASH_KEY("INPUT_NEXT_CAMERA"), Hold);
 
 void handleActions()
 {
 	Ped player = PLAYER::PLAYER_PED_ID();
-	Entity playerTargetEntity = 0;
+	Entity targetEntity;
 	Vector3 playerPos = ENTITY::GET_ENTITY_COORDS(player, true, 0);
-	Vector3 groundPos;
+	Vector3 playerGroundPos;
 	Vector3 targetPos;
-	float groundZ;
 
-	GAMEPLAY::GET_GROUND_Z_FOR_3D_COORD(playerPos.x, playerPos.y, playerPos.z, &groundZ, false);
-	groundPos.x = playerPos.x;
-	groundPos.y = playerPos.y;
-	groundPos.z = groundZ;
+	getGroundPos(playerPos, &playerGroundPos);
 
 	if (lassoTarget != 0 && ENTITY::IS_ENTITY_A_PED(lassoTarget) && !PED::IS_PED_ON_MOUNT(player))
 	{
-		targetPos = ENTITY::GET_ENTITY_COORDS(lassoTarget, true, 0);
-
-		/*if (GAMEPLAY::GET_DISTANCE_BETWEEN_COORDS(playerPos.x, playerPos.y, playerPos.z, targetPos.x, targetPos.y, targetPos.z, true) <= 3)
-		{
-			promptAttachToGround.setTargetEntity(lassoTarget);
-			promptAttachToGround.setPriority(1);
-
-		}
-		else
-		{
-			promptAttachToGround.setTargetEntity(NULL);
-			promptAttachToGround.setPriority(1);
-		}*/
-
 		promptAttachToGround.show();
-
 		if (promptAttachToGround.isActivatedByPlayer())
 		{
-			AttachedRope* rope = new AttachedRope(groundPos, lassoTarget, "SKEL_NECK0", 0);
+			AttachedRope* rope = new AttachedRope(playerGroundPos, lassoTarget, "SKEL_NECK0", 0);
 			addRope(rope);
 		}
 	}
@@ -46,22 +28,56 @@ void handleActions()
 		promptAttachToGround.hide();
 	}
 
-	Entity targetEntity;
 	if (PLAYER::GET_PLAYER_TARGET_ENTITY(PLAYER::PLAYER_ID(), &targetEntity))
 	{
 		if (ENTITY::IS_ENTITY_A_PED(targetEntity) && PED::IS_PED_HUMAN(targetEntity) && AI::GET_IS_TASK_ACTIVE(targetEntity, 399))
 		{
-			promptPushPed.setTargetEntity(targetEntity);
-			promptPushPed.setPriority(1);
-			promptPushPed.show();
+			promptAttachHogtied.setTargetEntity(targetEntity);
+			promptAttachHogtied.show();
+			
+			targetPos = ENTITY::GET_ENTITY_COORDS(targetEntity, true, 0);
+			Vector3 targetGroundPos;
+			getGroundPos(targetPos, &targetGroundPos);
+
+			if (promptAttachHogtied.isActivatedByPlayer())
+			{
+				addRope(new AttachedRope(targetGroundPos, targetEntity, "SKEL_NECK0", 2.0f));
+			}
+
+			if (distanceBetweenEntities(targetEntity, player) <= 2)
+			{
+				promptKick.setTargetEntity(targetEntity);
+				promptKick.show();
+
+				if (promptKick.isActivatedByPlayer())
+				{
+					const float FORCE_FACTOR = 2.5f;
+				
+					//Vector3 force = ENTITY::GET_ENTITY_FORWARD_VECTOR(player);
+				
+					float distance = max(distanceBetweenEntities(player, targetEntity), 1);
+					Vector3 force;
+					force.x = ((targetGroundPos.x - playerGroundPos.x) / distance) * FORCE_FACTOR;
+					force.y = ((targetGroundPos.y - playerGroundPos.y) / distance) * FORCE_FACTOR;
+					force.z = ((targetGroundPos.z - playerGroundPos.z) / distance) * FORCE_FACTOR;
+
+					ENTITY::APPLY_FORCE_TO_ENTITY(targetEntity, 1, force.x, force.y, force.z, 0, 0, 0, 0, false, true, true, false, true);
+				}
+			}
+			else
+			{
+				promptKick.hide();
+			}
 		}
 		else
 		{
-			promptPushPed.hide();
+			promptKick.hide();
+			promptAttachHogtied.hide();
 		}
 	}
 	else
 	{
-		promptPushPed.hide();
+		promptAttachHogtied.hide();
+		promptKick.hide();
 	}
 }

@@ -1,17 +1,29 @@
 #pragma once
 
+enum PromptMode
+{
+	Standard,
+	Hold,
+	SemiHold
+};
+
 class Prompt
 {
+	public:
+		int handle;
+
 	private: 
 		bool isEnabled;
-		int handle;
 		const char* text;
 		Hash control;
 		Entity targetEntity;
-
-	public: Prompt(const char* text, Hash control);
+		PromptMode mode;
+		bool semiHoldShouldReturn;
 
 	public: 
+		Prompt(const char* text, Hash control);
+		Prompt(const char* text, Hash control, PromptMode mode);
+
 		Entity getTargetEntity();
 		bool getIsEnabled();
 
@@ -19,6 +31,7 @@ class Prompt
 		void setControl(Hash control);
 		void setTargetEntity(Entity entity);
 		void setPriority(int priority);
+		void setMode(PromptMode mode);
 
 		bool isActivatedByPlayer();
 		void show();

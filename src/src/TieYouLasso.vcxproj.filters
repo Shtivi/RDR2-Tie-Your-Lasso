@@ -25,6 +25,9 @@
     <ClCompile Include="AttachedRopesHandling.cpp">
       <Filter>Src\AttachedRopes</Filter>
     </ClCompile>
+    <ClCompile Include="world.cpp">
+      <Filter>Src\World</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\inc\types.h">
@@ -63,6 +66,9 @@
     <ClInclude Include="AttachedRopesHanding.h">
       <Filter>Src\AttachedRopes</Filter>
     </ClInclude>
+    <ClInclude Include="world.h">
+      <Filter>Src\World</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="include">
@@ -85,6 +91,9 @@
     </Filter>
     <Filter Include="Src\Script">
       <UniqueIdentifier>{1ab8b354-9e05-4e09-af58-2ecd61348e89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\World">
+      <UniqueIdentifier>{6db80ad3-fbb5-4bb0-9a52-c14b20395c43}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

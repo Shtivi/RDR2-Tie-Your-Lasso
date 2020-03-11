@@ -1,19 +1,21 @@
 #include "Main.h"
 
 Prompt::Prompt(const char* text, Hash control)
+	: Prompt(text, control, Standard)
 {
-	this->text = text;
-	this->control = control;
-	this->isEnabled = false;
-	this->targetEntity = NULL;
-	this->handle = UI::_0x29FA7910726C3889(control, (Any*)UI::_CREATE_VAR_STRING(10, "LITERAL_STRING", text), 0, 0, 0, 0);
-	//this->handle = UI::_0x04F97DE45A519419(); // _UIPROMPT_REGISTER_BEGIN
-	//this->setControl(control);
-	//this->setText(text);
-	//this->setTargetEntity(NULL);
-	//UI::_0xF7AA2696A22AD8B9(this->handle); // _UIPROMPT_REGISTER_END
+}
 
-	//this->isEnabled = false;
+Prompt::Prompt(const char* text, Hash control, PromptMode mode)
+{
+	handle = UI::_0x04F97DE45A519419(); // _UIPROMPT_REGISTER_BEGIN
+	setControl(control);
+	setText(text);
+	setTargetEntity(NULL);
+	setMode(mode);
+	UI::_0xF7AA2696A22AD8B9(this->handle); // _UIPROMPT_REGISTER_END
+
+	semiHoldShouldReturn = false;
+	isEnabled = false;
 }
 
 Entity Prompt::getTargetEntity()
@@ -45,6 +47,7 @@ void Prompt::setTargetEntity(Entity target)
 
 	if (!target)
 	{
+
 		UI::_0x2F11D3A254169EA4(this->handle, 0, 0);
 		return;
 	}
@@ -61,6 +64,25 @@ void Prompt::setPriority(int priority)
 	UI::_0xCA24F528D0D16289(handle, priority); // _UIPROMPT_SET_PRIORITY
 }
 
+void Prompt::setMode(PromptMode mode)
+{
+	this->mode = mode;
+
+	switch (mode)
+	{
+	case Standard:
+		UI::_0xCC6656799977741B(handle, 1); // UIPROMOT_SET_STANDARD_MODE
+		break;
+
+	case Hold:
+		UI::_0x94073D5CA3F16B7B(handle, 1); // _UIPROMPT_SET_HOLD_MODE
+		break;
+	case SemiHold:
+		UI::_0x94073D5CA3F16B7B(handle, 1); // _UIPROMPT_SET_HOLD_MODE
+		break;
+	}
+}
+
 bool Prompt::isActivatedByPlayer()
 {
 	if (!this->isEnabled)
@@ -68,7 +90,31 @@ bool Prompt::isActivatedByPlayer()
 		return false;
 	}
 
-	return CONTROLS::IS_DISABLED_CONTROL_JUST_RELEASED(0, this->control);
+	//return CONTROLS::IS_DISABLED_CONTROL_JUST_RELEASED(0, this->control);
+	//return CONTROLS::IS_CONTROL_JUST_PRESSED(0, this->control);
+
+	switch (mode)
+	{
+	case Standard:
+		return UI::_0xC92AC953F0A982AE(handle, 0); // _UIPROMPT_HAS_STANDARD_MODE_COMPLETED
+	case Hold:
+		return UI::_0xE0F65F0640EF0617(handle); // _UIPROMPT_HAS_HOLD_MODE_COMPLETED
+	case SemiHold:
+		if (UI::_0xE0F65F0640EF0617(handle))
+		{
+			if (semiHoldShouldReturn == true)
+			{
+				return false;
+			}
+
+			semiHoldShouldReturn = true;
+			return true;
+		}
+		else
+		{
+			semiHoldShouldReturn = false;
+		}
+	}
 }
 
 void Prompt::show()

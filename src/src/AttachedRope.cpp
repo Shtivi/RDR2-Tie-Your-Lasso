@@ -1,7 +1,7 @@
 #include "Main.h";
 
 AttachedRope::AttachedRope(Vector3 mapPosition, Entity entity, const char* bone, float length) :
-	AttachedRope(entity, createMapProp("p_shotGlass01x", mapPosition), bone, NULL, 0)
+	AttachedRope(entity, createMapProp("p_shotGlass01x", mapPosition), bone, NULL, length)
 {
 	isAttachedToMap = true;
 }
@@ -26,6 +26,31 @@ AttachedRope::AttachedRope(Entity entity1, Entity entity2, const char* bone1, co
 
 	this->isAttachedToMap = false;
 	this->isEntityHanging = false;
+}
+
+bool AttachedRope::getIsAttachedToMap()
+{
+	return isAttachedToMap;
+}
+
+bool AttachedRope::getIsEntityHanging()
+{
+	return isEntityHanging;
+}
+
+Entity AttachedRope::getEntity1()
+{
+	return entity1;
+}
+
+Entity AttachedRope::getEntity2()
+{
+	return entity2;
+}
+
+bool AttachedRope::isExist()
+{
+	ROPE::DOES_ROPE_EXIST((Object*)ropeId);
 }
 
 int AttachedRope::update()

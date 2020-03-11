@@ -31,6 +31,7 @@
 #include "../../inc/MinHook/MinHook.h"
 #pragma comment(lib, "../../inc/MinHook/libMinHook.x64.lib")
 
+#include "world.h";
 #include "AttachedRope.h";
 #include "Prompt.h";
 
