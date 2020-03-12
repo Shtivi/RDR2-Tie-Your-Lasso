@@ -6,7 +6,5 @@
 
 #pragma once
 
-
-
 void ScriptMain();
 extern int RDR2selectedPlayer;

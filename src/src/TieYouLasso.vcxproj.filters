@@ -4,9 +4,6 @@
     <ClCompile Include="LassoHandling.cpp">
       <Filter>Src\Lasso</Filter>
     </ClCompile>
-    <ClCompile Include="UserActions.cpp">
-      <Filter>Src\Actions</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Src\Script</Filter>
     </ClCompile>
@@ -28,6 +25,21 @@
     <ClCompile Include="world.cpp">
       <Filter>Src\World</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerActionsHandling.cpp">
+      <Filter>Src\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="AttachLassoController.cpp">
+      <Filter>Src\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseActionsController.cpp">
+      <Filter>Src\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="AttachHogtiedController.cpp">
+      <Filter>Src\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="KickPedController.cpp">
+      <Filter>Src\Actions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\inc\types.h">
@@ -48,9 +60,6 @@
     <ClInclude Include="LassoHandling.h">
       <Filter>Src\Lasso</Filter>
     </ClInclude>
-    <ClInclude Include="UserActions.h">
-      <Filter>Src\Actions</Filter>
-    </ClInclude>
     <ClInclude Include="script.h">
       <Filter>Src\Script</Filter>
     </ClInclude>
@@ -68,6 +77,12 @@
     </ClInclude>
     <ClInclude Include="world.h">
       <Filter>Src\World</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerActionsHandling.h">
+      <Filter>Src\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionControllers.h">
+      <Filter>Src\Actions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
