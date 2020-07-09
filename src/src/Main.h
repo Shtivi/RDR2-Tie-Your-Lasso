@@ -33,6 +33,7 @@
 
 #include "world.h";
 #include "AttachedRope.h";
+#include "Stopwatch.h";
 #include "Prompt.h";
 #include "LassoHandling.h"
 #include "AttachedRopesHanding.h";

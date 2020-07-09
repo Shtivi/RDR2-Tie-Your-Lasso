@@ -3,6 +3,7 @@
 BaseActionsController::BaseActionsController()
 {
 	isInitialized = false;
+	prompt = NULL;
 }
 
 void BaseActionsController::update()

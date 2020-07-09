@@ -41,5 +41,8 @@ void AttachHogtiedController::execute()
 	Vector3 targetGroundPos;
 	getGroundPos(targetPos, &targetGroundPos);
 
-	addRope(new AttachedRope(targetGroundPos, currentTarget, "SKEL_NECK0", 2.0f));
+	addRope(new AttachedRope(targetGroundPos, currentTarget, "SKEL_NECK0", 3.0f));
+	PED::SET_ENABLE_HANDCUFFS(lassoTarget, 1, 0);
+	WEAPON::REMOVE_ALL_PED_WEAPONS(lassoTarget, 0, 0);
+	PED::SET_BLOCKING_OF_NON_TEMPORARY_EVENTS(lassoTarget, 1);
 }

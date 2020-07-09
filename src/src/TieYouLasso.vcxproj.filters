@@ -40,6 +40,18 @@
     <ClCompile Include="KickPedController.cpp">
       <Filter>Src\Actions</Filter>
     </ClCompile>
+    <ClCompile Include="Math.cpp">
+      <Filter>Src\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="AttachPickedUpController.cpp">
+      <Filter>Src\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="GameStopwatch.cpp">
+      <Filter>Src\Script\Stopwatch</Filter>
+    </ClCompile>
+    <ClCompile Include="Stopwatch.cpp">
+      <Filter>Src\Script\Stopwatch</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\inc\types.h">
@@ -84,6 +96,9 @@
     <ClInclude Include="ActionControllers.h">
       <Filter>Src\Actions</Filter>
     </ClInclude>
+    <ClInclude Include="Stopwatch.h">
+      <Filter>Src\Script\Stopwatch</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="include">
@@ -109,6 +124,9 @@
     </Filter>
     <Filter Include="Src\World">
       <UniqueIdentifier>{6db80ad3-fbb5-4bb0-9a52-c14b20395c43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Script\Stopwatch">
+      <UniqueIdentifier>{1c184575-0720-41a2-9eb6-e3c77343c25e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

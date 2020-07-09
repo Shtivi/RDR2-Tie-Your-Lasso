@@ -22,7 +22,7 @@ AttachedRope::AttachedRope(Entity entity1, Entity entity2, const char* bone1, co
 	this->ropeId = ROPE::ADD_ROPE(pos1.x, pos1.y, pos1.z, 0, 0, 0, length, 14, length, 0, 1.0f, 0, 1, true, 1.25f, true, 0, 0);
 	ROPE::_0x462FF2A432733A44(ropeId, entity1, entity2, 0, 0, 0, 0, 0, 0, (Any*)bone1, (Any*)bone2);
 	ROPE::ACTIVATE_PHYSICS(ropeId);
-	ROPE::_0x3C6490D940FF5D0B(ropeId, 0, 0, length, 0);
+	ROPE::_0x3C6490D940FF5D0B(ropeId, 0, (Any*)"noose01x_Rope_03", length, 0);
 
 	this->isAttachedToMap = false;
 	this->isEntityHanging = false;

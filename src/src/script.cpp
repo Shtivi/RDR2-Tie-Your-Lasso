@@ -15,6 +15,8 @@ void Initialize()
 	initActions();
 }
 
+//Ped ped = NULL;
+
 void main()
 {
 	Initialize();
@@ -24,6 +26,8 @@ void main()
 		updateLasso();
 		handleActions();
 		UpdateRopes();
+
+		
 
 		WAIT(0);
 	}

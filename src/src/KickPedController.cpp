@@ -53,7 +53,7 @@ void KickPedController::execute()
 	Vector3 force;
 	force.x = ((targetGroundPos.x - playerGroundPos.x) / distance) * KICK_FORCE_FACTOR;
 	force.y = ((targetGroundPos.y - playerGroundPos.y) / distance) * KICK_FORCE_FACTOR;
-	force.z = ((targetGroundPos.z - playerGroundPos.z) / distance) * KICK_FORCE_FACTOR;
+	force.z = ((targetGroundPos.z - playerGroundPos.z) / distance) * KICK_FORCE_FACTOR * 3;
 
 	ENTITY::APPLY_FORCE_TO_ENTITY(currentTarget, 1, force.x, force.y, force.z, 0, 0, 0, 0, false, true, true, false, true);
 }

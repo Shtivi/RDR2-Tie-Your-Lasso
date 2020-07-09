@@ -7,6 +7,7 @@ void initActions()
 	actionControllers.push_back(new AttachLassoController());
 	actionControllers.push_back(new AttachHogtiedController());
 	actionControllers.push_back(new KickPedController());
+	actionControllers.push_back(new AttachPickedUpController());
 }
 
 void handleActions()
