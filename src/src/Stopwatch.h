@@ -17,6 +17,7 @@ public:
 	void start(tm startTime);
 	void start(time_t startTime);
 	void stop();
+	bool isStarted();
 	double getElapsedSeconds();
 	double getElapsedHours();
 

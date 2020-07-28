@@ -19,6 +19,8 @@ AttachedRope::AttachedRope(Entity entity1, Entity entity2, const char* bone1, co
 	this->entity1 = entity1;
 	this->entity2 = entity2;
 	this->ropeLength = length;
+	this->bone1 = bone1;
+	this->bone2 = bone2;
 	this->ropeId = ROPE::ADD_ROPE(pos1.x, pos1.y, pos1.z, 0, 0, 0, length, 14, length, 0, 1.0f, 0, 1, true, 1.25f, true, 0, 0);
 	ROPE::_0x462FF2A432733A44(ropeId, entity1, entity2, 0, 0, 0, 0, 0, 0, (Any*)bone1, (Any*)bone2);
 	ROPE::ACTIVATE_PHYSICS(ropeId);

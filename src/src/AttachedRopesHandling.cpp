@@ -2,11 +2,24 @@
 
 std::vector<AttachedRope*> attachedRopes;
 
+Stopwatch ropesUpdateStopwatch;
+double nextTickIn = 0;
+
 void UpdateRopes() 
 {
-	int wait = 0;
-	std::vector<AttachedRope*>::iterator it;
+	if (ropesUpdateStopwatch.isStarted())
+	{
+		if (ropesUpdateStopwatch.getElapsedSeconds() < nextTickIn)
+		{
+			return;
+		}
+		else 
+		{
+			ropesUpdateStopwatch.stop();
+		}
+	}
 
+	std::vector<AttachedRope*>::iterator it;
 	for (it = attachedRopes.begin(); it != attachedRopes.end(); ++it) 
 	{
 		if (!(*it)->isExist())
@@ -15,10 +28,11 @@ void UpdateRopes()
 			continue;
 		}
 
-		wait = max(wait, (*it)->update());
+		nextTickIn = max(nextTickIn, (*it)->update());
 	}
 
-	WAIT(wait);
+	nextTickIn = nextTickIn / 1000;
+	ropesUpdateStopwatch.start();
 }
 
 void addRope(AttachedRope* rope)
