@@ -29,15 +29,12 @@ void main()
 
 		if (IsKeyJustUp(VK_KEY_Z))
 		{
-			Ped player = PLAYER::PLAYER_PED_ID();
-			//CASH::PLAYER_ADD_CASH(8000, 15000);
+			//Ped player = PLAYER::PLAYER_PED_ID();
 			//Vector3 pos = add(&ENTITY::GET_ENTITY_COORDS(player, 1, 0), &multiply(&ENTITY::GET_ENTITY_FORWARD_VECTOR(player), 8));
 			//getGroundPos(pos, &pos);
-			//createProp("s_ufo02x", pos);
-
-			/*Ped ped = createPed("G_M_M_UniBanditos_01", pos);
-			PED::SET_BLOCKING_OF_NON_TEMPORARY_EVENTS(ped, 1);
-			DECORATOR::DECOR_SET_INT(ped, "honor_override", 0);*/
+			//Ped ped = createPed("G_M_M_UniBanditos_01", pos);
+			//PED::SET_BLOCKING_OF_NON_TEMPORARY_EVENTS(ped, 1);
+			//DECORATOR::DECOR_SET_INT(ped, "honor_override", 0);
 			//Vector3 propPos = PED::GET_PED_BONE_COORDS(ped, 14283, 0, 0, 0);
 			//Vector3 propPos = pos;
 			//Object prop = createProp("noose01x_Rope_03", propPos);

@@ -23,8 +23,7 @@ bool AttachPickedUpController::isAbleToExecute()
 		return false;
 	}
 
-	if (PED::IS_PED_HUMAN(targetEntity) &&
-		(AI::GET_IS_TASK_ACTIVE(targetEntity, 399) || ENTITY::IS_ENTITY_DEAD(targetEntity)))
+	if (PED::IS_PED_HUMAN(targetEntity))
 	{
 		currentTarget = targetEntity;
 		return true;
