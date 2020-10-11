@@ -1,7 +1,6 @@
 #include "Main.h"
 
 std::vector<AttachedRope*> attachedRopes;
-
 Stopwatch ropesUpdateStopwatch;
 double nextTickIn = 0;
 
@@ -24,7 +23,6 @@ void UpdateRopes()
 	{
 		if (!(*it)->isExist())
 		{
-			attachedRopes.erase(it);
 			continue;
 		}
 
@@ -56,4 +54,27 @@ bool doesEntityAttachedToRope(Entity entity)
 
 		return curr->getEntity1() == entity || curr->getEntity2() == entity;
 	}
+}
+
+AttachedRope* getClosestRopeWithin(Vector3 position, float radius) {
+	std::vector<AttachedRope*>::iterator it;
+	AttachedRope* curr;
+	Vector3 ropeBase;
+	float currDistance;
+	AttachedRope* best = NULL;
+	float bestDistance = radius;
+
+	for (it = attachedRopes.begin(); it != attachedRopes.end(); ++it)
+	{
+		curr = *it;
+		Vector3 ropeBase = ENTITY::GET_ENTITY_COORDS(curr->getEntity2(), 1, 0);
+		currDistance = get_distance(&ropeBase, &position);
+
+		if (currDistance <= radius && currDistance <= bestDistance) {
+			best = *it;
+			bestDistance = currDistance;
+		}
+	}
+
+	return best;
 }

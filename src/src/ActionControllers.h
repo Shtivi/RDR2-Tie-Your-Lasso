@@ -1,13 +1,20 @@
 #pragma once
 
+enum ActivationType {
+	TAP,
+	HOLD
+};
+
 class BaseActionsController
 {
 private:
 	Prompt* prompt;
 	bool isInitialized;
+	ActivationType activationType;
+	bool isExecuting;
 
 public:
-	BaseActionsController();
+	BaseActionsController(ActivationType activationType = ActivationType::TAP);
 
 	void update();
 
@@ -16,6 +23,7 @@ protected:
 	virtual bool isAbleToExecute() = 0;
 	virtual void preparePrompt(Prompt* prompt);
 	virtual void execute() = 0;
+	virtual void stop();
 
 private:
 	void setPrompt(Prompt* prompt);
@@ -73,4 +81,18 @@ private:
 	bool isAbleToExecute();
 	void preparePrompt(Prompt* prompt);
 	void execute();
+};
+
+class WindRopeController : public BaseActionsController
+{
+public:
+	WindRopeController();
+
+private:
+	AttachedRope* rope;
+
+	Prompt* createActionPrompt();
+	bool isAbleToExecute();
+	void execute();
+	void stop();
 };

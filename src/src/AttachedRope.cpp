@@ -28,6 +28,7 @@ AttachedRope::AttachedRope(Entity entity1, Entity entity2, const char* bone1, co
 
 	this->isAttachedToMap = false;
 	this->isEntityHanging = false;
+	this->isWinding = false;
 }
 
 bool AttachedRope::getIsAttachedToMap()
@@ -52,11 +53,47 @@ Entity AttachedRope::getEntity2()
 
 bool AttachedRope::isExist()
 {
-	ROPE::DOES_ROPE_EXIST((Object*)ropeId);
+	return ROPE::GET_ROPE_VERTEX_COUNT(ropeId) > 0;
+}
+
+
+void AttachedRope::startWinding() {
+	if (!isWinding && canWind()) 
+	{
+		ROPE::START_ROPE_WINDING(this->ropeId);
+		PED::SET_PED_TO_RAGDOLL(entity1, 10000, 10000, 0, false, false, false);
+		isWinding = true;
+	}
+}
+
+void AttachedRope::stopWinding() 
+{
+	ROPE::STOP_ROPE_WINDING(this->ropeId);
+	isWinding = false;
+}
+
+void AttachedRope::startUnwinding() 
+{
+	ROPE::START_ROPE_UNWINDING_FRONT(this->ropeId);
+}
+
+void AttachedRope::stopUnwinding()
+{
+	ROPE::STOP_ROPE_UNWINDING_FRONT(this->ropeId);
+}
+
+bool AttachedRope::canWind() 
+{
+	return isExist() && distanceBetweenEntities(entity1, entity2) >= 2.0f;
 }
 
 int AttachedRope::update()
 {
+	if (!isExist()) 
+	{
+		return 0;
+	}
+
 	int wait = 100;
 	float heightAboveGround;
 	int currHealth;
@@ -66,7 +103,6 @@ int AttachedRope::update()
 	{
 		return 0;
 	}
-
 
 	if (ENTITY::DOES_ENTITY_EXIST(entity1) &&
 		ENTITY::IS_ENTITY_A_PED(entity1))
@@ -93,9 +129,13 @@ int AttachedRope::update()
 		if (isEntityHanging)
 		{
 			currHealth = ENTITY::GET_ENTITY_HEALTH(ped);
-			PED::SET_PED_TO_RAGDOLL(ped, 1000, 1000, 0, false, false, false);
+			PED::SET_PED_TO_RAGDOLL(ped, 10000, 10000, 0, false, false, false);
 			ENTITY::SET_ENTITY_HEALTH(ped, max(currHealth - 1, 0), 0);
 		}
+	}
+
+	if (isWinding && !canWind()) {
+		stopWinding();
 	}
 
 	return wait;

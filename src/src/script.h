@@ -8,3 +8,5 @@
 
 void ScriptMain();
 extern int RDR2selectedPlayer;
+
+void debug(const char* text);
