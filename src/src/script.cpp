@@ -27,10 +27,14 @@ void main()
 		handleActions();
 		UpdateRopes();
 
+		if (PED::_0xB65A4DAB460A19BD(PLAYER::PLAYER_PED_ID())) {
+			debug("has lassoed");
+		}
+
 		if (IsKeyJustUp(VK_KEY_Z))
 		{
 			//Ped player = PLAYER::PLAYER_PED_ID();
-			//Vector3 pos = add(&ENTITY::GET_ENTITY_COORDS(player, 1, 0), &multiply(&ENTITY::GET_ENTITY_FORWARD_VECTOR(player), 8));
+			//Vector3 pos = add(&ENTITY::GET_ENTITY_COORDS(player, 1, 0), &multiply(&ENTITY::GET_ENTITY_FORWARD_VECTOR(player), 5));
 			//getGroundPos(pos, &pos);
 			//Ped ped = createPed("G_M_M_UniBanditos_01", pos);
 			//PED::SET_BLOCKING_OF_NON_TEMPORARY_EVENTS(ped, 1);
@@ -50,4 +54,8 @@ void ScriptMain()
 {
 	srand(GetTickCount());
 	main();
+}
+
+void debug(const char* text) {
+	UI::DRAW_TEXT((char*)UI::_CREATE_VAR_STRING(10, "LITERAL_STRING", text), 0, 0);
 }
