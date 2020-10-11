@@ -58,7 +58,7 @@ bool AttachedRope::isExist()
 
 
 void AttachedRope::startWinding() {
-	if (!isWinding) 
+	if (!isWinding && canWind()) 
 	{
 		ROPE::START_ROPE_WINDING(this->ropeId);
 		isWinding = true;
@@ -79,6 +79,11 @@ void AttachedRope::startUnwinding()
 void AttachedRope::stopUnwinding()
 {
 	ROPE::STOP_ROPE_UNWINDING_FRONT(this->ropeId);
+}
+
+bool AttachedRope::canWind() 
+{
+	return (distanceBetweenEntities(entity1, entity2) >= 2.0f);
 }
 
 int AttachedRope::update()
@@ -124,10 +129,8 @@ int AttachedRope::update()
 		}
 	}
 
-	if (isWinding) {
-		if (distanceBetweenEntities(entity1, entity2) < 2.0f) {
-			stopWinding();
-		}
+	if (isWinding && !canWind()) {
+		stopWinding();
 	}
 
 	return wait;

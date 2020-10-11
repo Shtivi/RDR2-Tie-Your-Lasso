@@ -27,6 +27,7 @@ public:
 	void stopWinding();
 	void startUnwinding();
 	void stopUnwinding();
+	bool canWind();
 	int update();
 
 private:
