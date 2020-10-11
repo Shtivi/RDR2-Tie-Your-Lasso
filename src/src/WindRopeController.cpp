@@ -16,7 +16,7 @@ bool WindRopeController::isAbleToExecute()
 	Ped player = PLAYER::PLAYER_PED_ID();
 	Vector3 playerPos = ENTITY::GET_ENTITY_COORDS(player, 1, 0);
 	rope = getClosestRopeWithin(playerPos, 1.5f);
-	return rope != NULL;
+	return rope != NULL && rope->canWind();
 }
 
 void WindRopeController::execute()

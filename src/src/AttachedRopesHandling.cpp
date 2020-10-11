@@ -23,7 +23,6 @@ void UpdateRopes()
 	{
 		if (!(*it)->isExist())
 		{
-			attachedRopes.erase(it);
 			continue;
 		}
 

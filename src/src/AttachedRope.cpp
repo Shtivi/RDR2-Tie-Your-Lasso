@@ -53,7 +53,7 @@ Entity AttachedRope::getEntity2()
 
 bool AttachedRope::isExist()
 {
-	ROPE::DOES_ROPE_EXIST((Object*)ropeId);
+	return ROPE::GET_ROPE_VERTEX_COUNT(ropeId) > 0;
 }
 
 
@@ -61,6 +61,7 @@ void AttachedRope::startWinding() {
 	if (!isWinding && canWind()) 
 	{
 		ROPE::START_ROPE_WINDING(this->ropeId);
+		PED::SET_PED_TO_RAGDOLL(entity1, 10000, 10000, 0, false, false, false);
 		isWinding = true;
 	}
 }
@@ -83,11 +84,16 @@ void AttachedRope::stopUnwinding()
 
 bool AttachedRope::canWind() 
 {
-	return (distanceBetweenEntities(entity1, entity2) >= 2.0f);
+	return isExist() && distanceBetweenEntities(entity1, entity2) >= 2.0f;
 }
 
 int AttachedRope::update()
 {
+	if (!isExist()) 
+	{
+		return 0;
+	}
+
 	int wait = 100;
 	float heightAboveGround;
 	int currHealth;
@@ -97,6 +103,10 @@ int AttachedRope::update()
 	{
 		return 0;
 	}
+
+
+
+	//debug(std::to_string(ROPE::DOES_ROPE_EXIST(&ropeId)).c_str());
 
 
 	if (ENTITY::DOES_ENTITY_EXIST(entity1) &&
@@ -124,7 +134,7 @@ int AttachedRope::update()
 		if (isEntityHanging)
 		{
 			currHealth = ENTITY::GET_ENTITY_HEALTH(ped);
-			PED::SET_PED_TO_RAGDOLL(ped, 1000, 1000, 0, false, false, false);
+			PED::SET_PED_TO_RAGDOLL(ped, 10000, 10000, 0, false, false, false);
 			ENTITY::SET_ENTITY_HEALTH(ped, max(currHealth - 1, 0), 0);
 		}
 	}
