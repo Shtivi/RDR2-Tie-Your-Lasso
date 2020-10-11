@@ -15,8 +15,6 @@ void Initialize()
 	initActions();
 }
 
-Ped ped = NULL;
-
 void main()
 {
 	Initialize();
@@ -29,25 +27,17 @@ void main()
 
 		if (IsKeyJustUp(VK_KEY_Z))
 		{
-			Ped player = PLAYER::PLAYER_PED_ID();
-			Vector3 pos = add(&ENTITY::GET_ENTITY_COORDS(player, 1, 0), &multiply(&ENTITY::GET_ENTITY_FORWARD_VECTOR(player), 5));
-			getGroundPos(pos, &pos);
-			ped = createPed("G_M_M_UniBanditos_01", pos);
-			PED::SET_BLOCKING_OF_NON_TEMPORARY_EVENTS(ped, 1);
-			DECORATOR::DECOR_SET_INT(ped, "honor_override", 0);
+			//Ped player = PLAYER::PLAYER_PED_ID();
+			//Vector3 pos = add(&ENTITY::GET_ENTITY_COORDS(player, 1, 0), &multiply(&ENTITY::GET_ENTITY_FORWARD_VECTOR(player), 5));
+			//getGroundPos(pos, &pos);
+			//Ped ped = createPed("G_M_M_UniBanditos_01", pos);
+			//PED::SET_BLOCKING_OF_NON_TEMPORARY_EVENTS(ped, 1);
+			//DECORATOR::DECOR_SET_INT(ped, "honor_override", 0);
 			//Vector3 propPos = PED::GET_PED_BONE_COORDS(ped, 14283, 0, 0, 0);
 			//Vector3 propPos = pos;
 			//Object prop = createProp("noose01x_Rope_03", propPos);
 			//ENTITY::ATTACH_ENTITY_TO_ENTITY_PHYSICALLY(ped, prop, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 999999, 1, 0, 1, 1, 2, 0, 0, 0);
 			//ENTITY::ATTACH_ENTITY_TO_ENTITY(ped, prop, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0);
-		}
-
-		if (IsKeyDown(VK_KEY_X))
-		{
-			if (ped) {
-				PED::SET_PED_TO_RAGDOLL(ped, 10000, 10000, 0, false, false, false);
-
-			}
 		}
 
 		WAIT(0);

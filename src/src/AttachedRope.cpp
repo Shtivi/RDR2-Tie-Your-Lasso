@@ -104,11 +104,6 @@ int AttachedRope::update()
 		return 0;
 	}
 
-
-
-	//debug(std::to_string(ROPE::DOES_ROPE_EXIST(&ropeId)).c_str());
-
-
 	if (ENTITY::DOES_ENTITY_EXIST(entity1) &&
 		ENTITY::IS_ENTITY_A_PED(entity1))
 	{
