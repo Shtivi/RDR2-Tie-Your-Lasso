@@ -11,6 +11,7 @@ private:
 	float ropeLength;
 	bool isAttachedToMap;
 	bool isEntityHanging;
+	bool isWinding;
 
 public:
 	AttachedRope(Vector3 mapPosition, Entity entity, const char* bone, float length);
@@ -21,7 +22,11 @@ public:
 	bool isExist();
 	Entity getEntity1();
 	Entity getEntity2();
-
+	
+	void startWinding();
+	void stopWinding();
+	void startUnwinding();
+	void stopUnwinding();
 	int update();
 
 private:

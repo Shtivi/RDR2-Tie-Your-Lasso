@@ -19,6 +19,8 @@ void Initialize()
 
 void main()
 {
+	AttachedRope* windingRope = NULL;
+
 	Initialize();
 
 	while (true)

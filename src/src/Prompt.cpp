@@ -117,6 +117,10 @@ bool Prompt::isActivatedByPlayer()
 	}
 }
 
+bool Prompt::isControlPressed() {
+	return CONTROLS::IS_DISABLED_CONTROL_PRESSED(0, control);
+}
+
 void Prompt::show()
 {
 	isEnabled = true;

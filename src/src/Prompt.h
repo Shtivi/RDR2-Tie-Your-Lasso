@@ -32,6 +32,7 @@ class Prompt
 		void setTargetEntity(Entity entity);
 		void setPriority(int priority);
 		void setMode(PromptMode mode);
+		bool isControlPressed();
 
 		bool isActivatedByPlayer();
 		void show();

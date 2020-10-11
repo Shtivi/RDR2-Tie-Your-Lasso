@@ -24,6 +24,7 @@
     <ClCompile Include="AttachedRopesHandling.cpp" />
     <ClCompile Include="script.cpp" />
     <ClCompile Include="Stopwatch.cpp" />
+    <ClCompile Include="WindRopeController.cpp" />
     <ClCompile Include="world.cpp" />
   </ItemGroup>
   <ItemGroup>

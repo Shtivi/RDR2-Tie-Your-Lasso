@@ -55,6 +55,9 @@
     <ClCompile Include="LassoHandlingV2.cpp">
       <Filter>Src\Lasso</Filter>
     </ClCompile>
+    <ClCompile Include="WindRopeController.cpp">
+      <Filter>Src\Actions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\inc\types.h">
