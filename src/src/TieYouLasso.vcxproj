@@ -15,6 +15,7 @@
     <ClCompile Include="GameStopwatch.cpp" />
     <ClCompile Include="keyboard.cpp" />
     <ClCompile Include="KickPedController.cpp" />
+    <ClCompile Include="LassoHandlingV2.cpp" />
     <ClCompile Include="Math.cpp" />
     <ClCompile Include="Prompt.cpp" />
     <ClCompile Include="PlayerActionsHandling.cpp" />

@@ -19,7 +19,7 @@ bool AttachHogtiedController::isAbleToExecute()
 	if (PLAYER::GET_PLAYER_TARGET_ENTITY(PLAYER::PLAYER_ID(), &targetEntity) &&
 		ENTITY::IS_ENTITY_A_PED(targetEntity) && 
 		PED::IS_PED_HUMAN(targetEntity) && 
-		AI::GET_IS_TASK_ACTIVE(targetEntity, 399))
+		AI::GET_IS_TASK_ACTIVE(targetEntity, 400))
 	{
 		currentTarget = targetEntity;
 		return true;

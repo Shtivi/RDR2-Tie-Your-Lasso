@@ -52,6 +52,9 @@
     <ClCompile Include="Stopwatch.cpp">
       <Filter>Src\Script\Stopwatch</Filter>
     </ClCompile>
+    <ClCompile Include="LassoHandlingV2.cpp">
+      <Filter>Src\Lasso</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\inc\types.h">
