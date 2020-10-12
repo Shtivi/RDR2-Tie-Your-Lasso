@@ -16,3 +16,4 @@ This mod allows you to hitch your lasso, along with the peds tied to it, to the 
 - Press the key ("Look Back" key) when on foot to hitch the lasso to the ground.
 - After you hogtie a npc, get close to him and then you can attach him to the ground (without lassoing it). You're also able to give him a little push.
 - It's also possible to attach the ped you carry to the ground.
+- After attaching a ped to the ground, you can wind the rope by standing near it and pressing E.
