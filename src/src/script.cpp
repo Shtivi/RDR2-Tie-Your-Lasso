@@ -21,7 +21,6 @@ void main()
 
 	while (true)
 	{
-		updateLasso();
 		handleActions();
 		UpdateRopes();
 
