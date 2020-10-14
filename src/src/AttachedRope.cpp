@@ -129,7 +129,7 @@ int AttachedRope::update()
 		if (isEntityHanging)
 		{
 			currHealth = ENTITY::GET_ENTITY_HEALTH(ped);
-			PED::SET_PED_TO_RAGDOLL(ped, 10000, 10000, 0, false, false, false);
+			PED::SET_PED_TO_RAGDOLL(ped, 10000000, 10000000, 0, false, false, false);
 			ENTITY::SET_ENTITY_HEALTH(ped, max(currHealth - 1, 0), 0);
 		}
 	}

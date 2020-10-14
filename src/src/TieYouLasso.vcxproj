@@ -32,9 +32,13 @@
     <ClInclude Include="..\..\inc\enums.h" />
     <ClInclude Include="..\..\inc\natives.h" />
     <ClInclude Include="..\..\inc\types.h" />
-    <ClInclude Include="ActionControllers.h" />
+    <ClInclude Include="BaseActionsController.h" />
     <ClInclude Include="AttachedRope.h" />
+    <ClInclude Include="AttachHogtiedController.h" />
+    <ClInclude Include="AttachLassoController.h" />
+    <ClInclude Include="AttachPickedUpController.h" />
     <ClInclude Include="keyboard.h" />
+    <ClInclude Include="KickPedController.h" />
     <ClInclude Include="Prompt.h" />
     <ClInclude Include="PlayerActionsHandling.h" />
     <ClInclude Include="LassoHandling.h" />
@@ -42,6 +46,7 @@
     <ClInclude Include="AttachedRopesHanding.h" />
     <ClInclude Include="script.h" />
     <ClInclude Include="Stopwatch.h" />
+    <ClInclude Include="WindRopeController.h" />
     <ClInclude Include="world.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

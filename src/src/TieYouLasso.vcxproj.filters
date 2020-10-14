@@ -99,11 +99,26 @@
     <ClInclude Include="PlayerActionsHandling.h">
       <Filter>Src\Actions</Filter>
     </ClInclude>
-    <ClInclude Include="ActionControllers.h">
-      <Filter>Src\Actions</Filter>
-    </ClInclude>
     <ClInclude Include="Stopwatch.h">
       <Filter>Src\Script\Stopwatch</Filter>
+    </ClInclude>
+    <ClInclude Include="AttachLassoController.h">
+      <Filter>Src\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="KickPedController.h">
+      <Filter>Src\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="AttachHogtiedController.h">
+      <Filter>Src\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="AttachPickedUpController.h">
+      <Filter>Src\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="WindRopeController.h">
+      <Filter>Src\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseActionsController.h">
+      <Filter>Src\Actions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
