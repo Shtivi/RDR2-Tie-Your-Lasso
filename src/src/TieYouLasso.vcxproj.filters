@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="LassoHandling.cpp">
-      <Filter>Src\Lasso</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Src\Script</Filter>
     </ClCompile>
@@ -52,9 +49,6 @@
     <ClCompile Include="Stopwatch.cpp">
       <Filter>Src\Script\Stopwatch</Filter>
     </ClCompile>
-    <ClCompile Include="LassoHandlingV2.cpp">
-      <Filter>Src\Lasso</Filter>
-    </ClCompile>
     <ClCompile Include="WindRopeController.cpp">
       <Filter>Src\Actions</Filter>
     </ClCompile>
@@ -74,9 +68,6 @@
     </ClInclude>
     <ClInclude Include="Main.h">
       <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="LassoHandling.h">
-      <Filter>Src\Lasso</Filter>
     </ClInclude>
     <ClInclude Include="script.h">
       <Filter>Src\Script</Filter>
@@ -99,11 +90,26 @@
     <ClInclude Include="PlayerActionsHandling.h">
       <Filter>Src\Actions</Filter>
     </ClInclude>
-    <ClInclude Include="ActionControllers.h">
-      <Filter>Src\Actions</Filter>
-    </ClInclude>
     <ClInclude Include="Stopwatch.h">
       <Filter>Src\Script\Stopwatch</Filter>
+    </ClInclude>
+    <ClInclude Include="AttachLassoController.h">
+      <Filter>Src\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="KickPedController.h">
+      <Filter>Src\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="AttachHogtiedController.h">
+      <Filter>Src\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="AttachPickedUpController.h">
+      <Filter>Src\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="WindRopeController.h">
+      <Filter>Src\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseActionsController.h">
+      <Filter>Src\Actions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -112,9 +118,6 @@
     </Filter>
     <Filter Include="Src">
       <UniqueIdentifier>{99988ac4-ab5d-4a8e-ad13-6426aa838402}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Src\Lasso">
-      <UniqueIdentifier>{dcb89a57-955d-426c-ba6b-b21a3029ac38}</UniqueIdentifier>
     </Filter>
     <Filter Include="Src\Actions">
       <UniqueIdentifier>{a42d84bc-a9ac-4542-b8d2-614ebde654fb}</UniqueIdentifier>

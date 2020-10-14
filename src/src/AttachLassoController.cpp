@@ -3,6 +3,7 @@
 AttachLassoController::AttachLassoController()
 	: BaseActionsController()
 {
+	lassoTarget = NULL;
 }
 
 Prompt* AttachLassoController::createActionPrompt()
@@ -13,9 +14,17 @@ Prompt* AttachLassoController::createActionPrompt()
 bool AttachLassoController::isAbleToExecute()
 {
 	Ped player = PLAYER::PLAYER_PED_ID();
-	Vector3 playerPos = ENTITY::GET_ENTITY_COORDS(player, true, 0);
-	Vector3 playerGroundPos;
-	getGroundPos(playerPos, &playerGroundPos);
+	Hash playerCurrWeapon;
+
+	if (WEAPON::GET_CURRENT_PED_WEAPON(player, &playerCurrWeapon, true, 0, false) &&
+		playerCurrWeapon == GAMEPLAY::GET_HASH_KEY("WEAPON_LASSO"))
+	{
+		lassoTarget = PED::_0xB65A4DAB460A19BD(PLAYER::PLAYER_PED_ID()); // _GET_LASSO_TARGET
+	}
+	else 
+	{
+		lassoTarget = NULL;
+	}
 
 	return lassoTarget != 0 && ENTITY::IS_ENTITY_A_PED(lassoTarget) && !PED::IS_PED_ON_MOUNT(player);
 }
