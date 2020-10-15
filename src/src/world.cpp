@@ -98,3 +98,15 @@ Ped findCarriedPedBy(Ped carrier)
 
 	return NULL;
 }
+
+void getGroundPos(Vector3* originalPos)
+{
+	getGroundPos(*originalPos, originalPos);
+}
+
+Vector3 getGroundPos(Vector3 originalPos)
+{
+	float groundZ;
+	GAMEPLAY::GET_GROUND_Z_FOR_3D_COORD(originalPos.x, originalPos.y, originalPos.z, &groundZ, false);
+	return toVector3(originalPos.x, originalPos.y, groundZ);
+}

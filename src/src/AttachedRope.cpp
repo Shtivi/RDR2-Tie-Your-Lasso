@@ -41,12 +41,12 @@ bool AttachedRope::getIsEntityHanging()
 	return isEntityHanging;
 }
 
-Entity AttachedRope::getEntity1()
+Entity AttachedRope::getAttached()
 {
 	return entity1;
 }
 
-Entity AttachedRope::getEntity2()
+Entity AttachedRope::getBase()
 {
 	return entity2;
 }

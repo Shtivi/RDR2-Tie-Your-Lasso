@@ -52,7 +52,7 @@ bool doesEntityAttachedToRope(Entity entity)
 			return false;
 		}
 
-		return curr->getEntity1() == entity || curr->getEntity2() == entity;
+		return curr->getAttached() == entity || curr->getBase() == entity;
 	}
 }
 
@@ -67,7 +67,7 @@ AttachedRope* getClosestRopeWithin(Vector3 position, float radius) {
 	for (it = attachedRopes.begin(); it != attachedRopes.end(); ++it)
 	{
 		curr = *it;
-		Vector3 ropeBase = ENTITY::GET_ENTITY_COORDS(curr->getEntity2(), 1, 0);
+		Vector3 ropeBase = ENTITY::GET_ENTITY_COORDS(curr->getBase(), 1, 0);
 		currDistance = distanceBetween(ropeBase, position);
 
 		if (currDistance <= radius && currDistance <= bestDistance) {

@@ -20,8 +20,8 @@ public:
 	bool getIsAttachedToMap();
 	bool getIsEntityHanging();
 	bool isExist();
-	Entity getEntity1();
-	Entity getEntity2();
+	Entity getAttached();
+	Entity getBase();
 	
 	void startWinding();
 	void stopWinding();

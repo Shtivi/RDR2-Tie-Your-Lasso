@@ -17,6 +17,7 @@
     <ClCompile Include="keyboard.cpp" />
     <ClCompile Include="KickPedController.cpp" />
     <ClCompile Include="Math.cpp" />
+    <ClCompile Include="MultiVertexRope.cpp" />
     <ClCompile Include="Prompt.cpp" />
     <ClCompile Include="PlayerActionsHandling.cpp" />
     <ClCompile Include="main.cpp" />
@@ -39,6 +40,7 @@
     <ClInclude Include="HangPedController.h" />
     <ClInclude Include="keyboard.h" />
     <ClInclude Include="KickPedController.h" />
+    <ClInclude Include="MultiVertexRope.h" />
     <ClInclude Include="Prompt.h" />
     <ClInclude Include="PlayerActionsHandling.h" />
     <ClInclude Include="Main.h" />

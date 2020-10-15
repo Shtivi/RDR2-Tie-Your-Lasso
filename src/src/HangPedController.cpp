@@ -28,7 +28,7 @@ bool HangPedController::isAbleToExecute()
 	RaycastResult ray = raycast(playerPos, getUpVector(player), 10, RaycastIntersectionOptions::Map);
 	
 	float dist = distance(playerPos, ray.hitPos);
-	if (dist < 0.8f || dist > 3)
+	if (dist < 0.8f || dist > 10)
 	{
 		reset();
 		return false;
@@ -46,10 +46,11 @@ void HangPedController::preparePrompt(Prompt* prompt)
 
 void HangPedController::execute()
 {
-	Ped player = PLAYER::PLAYER_PED_ID();
 	Vector3 playerPos = ENTITY::GET_ENTITY_COORDS(player, 1, 0);
 	float length = distance(hangFrom, victim) - 0.15f;
-	addRope(new AttachedRope(hangFrom, victim, "SKEL_NECK0", length));
+
+	MultiVertexRope* rope = new MultiVertexRope(new AttachedRope(hangFrom, victim, "SKEL_NECK0", length));
+	rope->pinTo(getGroundPos(playerPos));
 }
 
 void HangPedController::reset()

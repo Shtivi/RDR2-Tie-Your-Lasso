@@ -31,3 +31,5 @@ Object createProp(char* model, Vector3 position, float heading = 0, bool isStati
 RaycastResult raycast(Vector3 source, Vector3 direction, float maxDist, RaycastIntersectionOptions intersectionOptions = Everything);
 tm getGameTime();
 Ped findCarriedPedBy(Ped carrier);
+void getGroundPos(Vector3* position);
+Vector3 getGroundPos(Vector3 originalPos);
