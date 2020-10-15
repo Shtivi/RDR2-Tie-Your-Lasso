@@ -11,9 +11,16 @@ Prompt* AttachLassoController::createActionPrompt()
 	return new Prompt("Attach To Ground", GAMEPLAY::GET_HASH_KEY("INPUT_LOOK_BEHIND"), SemiHold);
 }
 
+void AttachLassoController::preparePrompt(Prompt* prompt)
+{
+	if (distanceBetweenEntities(player, lassoTarget) < 3.1f)
+	{
+		prompt->setTargetEntity(lassoTarget);
+	}
+}
+
 bool AttachLassoController::isAbleToExecute()
 {
-	Ped player = PLAYER::PLAYER_PED_ID();
 	Hash playerCurrWeapon;
 
 	if (WEAPON::GET_CURRENT_PED_WEAPON(player, &playerCurrWeapon, true, 0, false) &&
@@ -31,7 +38,6 @@ bool AttachLassoController::isAbleToExecute()
 
 void AttachLassoController::execute()
 {
-	Ped player = PLAYER::PLAYER_PED_ID();
 	Vector3 playerPos = ENTITY::GET_ENTITY_COORDS(player, true, 0);
 	Vector3 playerGroundPos;
 	getGroundPos(playerPos, &playerGroundPos);

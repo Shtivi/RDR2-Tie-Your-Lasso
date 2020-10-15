@@ -11,5 +11,6 @@ public:
 private:
 	Prompt* createActionPrompt();
 	bool isAbleToExecute();
+	void preparePrompt(Prompt* prompt);
 	void execute();
 };

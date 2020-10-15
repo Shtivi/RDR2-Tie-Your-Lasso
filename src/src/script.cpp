@@ -10,8 +10,11 @@
 #include <string>
 using namespace std;
 
+Ped player;
+
 void Initialize() 
 {
+	player = PLAYER::PLAYER_PED_ID();
 	initActions();
 }
 
@@ -74,4 +77,12 @@ void debug(Vector3 pos) {
 	stringstream str;
 	str << pos.x << ", " << pos.y << ", " << pos.z;
 	debug(str.str());
+}
+
+void debug(float f) {
+	debug(to_string(f));
+}
+
+void debug(int n) {
+	debug(to_string(n));
 }

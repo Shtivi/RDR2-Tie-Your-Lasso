@@ -14,3 +14,5 @@ extern int RDR2selectedPlayer;
 void debug(const char* text);
 void debug(string text);
 void debug(Vector3 position);
+void debug(float f);
+void debug(int n);
