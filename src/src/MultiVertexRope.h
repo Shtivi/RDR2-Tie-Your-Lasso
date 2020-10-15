@@ -2,7 +2,7 @@
 
 using namespace std;
 
-class MultiVertexRope
+class MultiVertexRope : public Rope
 {
 private:
 	vector<AttachedRope*> ropes;
@@ -10,8 +10,13 @@ private:
 public:
 	MultiVertexRope(AttachedRope* base);
 
-	MultiVertexRope* pinTo(Vector3 position);
+	Entity getBase();
+	Entity getAttached();
+	bool isExist();
+	bool canWind();
 	void startWinding();
 	void stopWinding();
-	void update();
+	int update();
+
+	void pinTo(Vector3 position);
 };

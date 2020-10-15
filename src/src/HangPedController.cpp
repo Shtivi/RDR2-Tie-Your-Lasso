@@ -51,6 +51,7 @@ void HangPedController::execute()
 
 	MultiVertexRope* rope = new MultiVertexRope(new AttachedRope(hangFrom, victim, "SKEL_NECK0", length));
 	rope->pinTo(getGroundPos(playerPos));
+	addRope(rope);
 }
 
 void HangPedController::reset()

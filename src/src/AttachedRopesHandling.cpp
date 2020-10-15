@@ -1,6 +1,6 @@
 #include "Main.h"
 
-std::vector<AttachedRope*> attachedRopes;
+std::vector<Rope*> attachedRopes;
 Stopwatch ropesUpdateStopwatch;
 double nextTickIn = 0;
 
@@ -18,7 +18,7 @@ void UpdateRopes()
 		}
 	}
 
-	std::vector<AttachedRope*>::iterator it;
+	std::vector<Rope*>::iterator it;
 	for (it = attachedRopes.begin(); it != attachedRopes.end(); ++it) 
 	{
 		if (!(*it)->isExist())
@@ -33,15 +33,15 @@ void UpdateRopes()
 	ropesUpdateStopwatch.start();
 }
 
-void addRope(AttachedRope* rope)
+void addRope(Rope* rope)
 {
 	attachedRopes.push_back(rope);
 }
 
 bool doesEntityAttachedToRope(Entity entity)
 {
-	std::vector<AttachedRope*>::iterator it;
-	AttachedRope* curr;
+	std::vector<Rope*>::iterator it;
+	Rope* curr;
 
 	for (it = attachedRopes.begin(); it != attachedRopes.end(); ++it)
 	{
@@ -56,12 +56,12 @@ bool doesEntityAttachedToRope(Entity entity)
 	}
 }
 
-AttachedRope* getClosestRopeWithin(Vector3 position, float radius) {
-	std::vector<AttachedRope*>::iterator it;
-	AttachedRope* curr;
+Rope* getClosestRopeWithin(Vector3 position, float radius) {
+	std::vector<Rope*>::iterator it;
+	Rope* curr;
 	Vector3 ropeBase;
 	float currDistance;
-	AttachedRope* best = NULL;
+	Rope* best = NULL;
 	float bestDistance = radius;
 
 	for (it = attachedRopes.begin(); it != attachedRopes.end(); ++it)

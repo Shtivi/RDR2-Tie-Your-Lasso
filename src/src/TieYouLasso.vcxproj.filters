@@ -123,6 +123,9 @@
     <ClInclude Include="MultiVertexRope.h">
       <Filter>Src\Ropes</Filter>
     </ClInclude>
+    <ClInclude Include="Rope.h">
+      <Filter>Src\Ropes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="include">

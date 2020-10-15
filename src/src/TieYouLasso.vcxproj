@@ -45,6 +45,7 @@
     <ClInclude Include="PlayerActionsHandling.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="AttachedRopesHanding.h" />
+    <ClInclude Include="Rope.h" />
     <ClInclude Include="script.h" />
     <ClInclude Include="Stopwatch.h" />
     <ClInclude Include="WindRopeController.h" />

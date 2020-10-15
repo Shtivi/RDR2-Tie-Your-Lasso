@@ -37,6 +37,7 @@ using namespace std;
 
 #include "world.h";
 #include "Stopwatch.h";
+#include "Rope.h";
 #include "AttachedRope.h";
 #include "MultiVertexRope.h";
 #include "Prompt.h";
