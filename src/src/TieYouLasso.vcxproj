@@ -13,6 +13,7 @@
     <ClCompile Include="AttachPickedUpController.cpp" />
     <ClCompile Include="BaseActionsController.cpp" />
     <ClCompile Include="GameStopwatch.cpp" />
+    <ClCompile Include="HangPedController.cpp" />
     <ClCompile Include="keyboard.cpp" />
     <ClCompile Include="KickPedController.cpp" />
     <ClCompile Include="Math.cpp" />
@@ -35,6 +36,7 @@
     <ClInclude Include="AttachHogtiedController.h" />
     <ClInclude Include="AttachLassoController.h" />
     <ClInclude Include="AttachPickedUpController.h" />
+    <ClInclude Include="HangPedController.h" />
     <ClInclude Include="keyboard.h" />
     <ClInclude Include="KickPedController.h" />
     <ClInclude Include="Prompt.h" />

@@ -78,3 +78,23 @@ RaycastResult raycast(Vector3 source, Vector3 direction, float maxDist, RaycastI
 	SHAPETEST::GET_SHAPE_TEST_RESULT(rayHandle, (BOOL*)&result.didHit, &result.hitPos, &result.normal, &result.hitEntity);
 	return result;
 }
+
+Ped findCarriedPedBy(Ped carrier)
+{
+	int nearbyEntities[5 * 2 + 2];
+	Ped targetEntity = NULL;
+
+	nearbyEntities[0] = 5;
+	int n = PED::GET_PED_NEARBY_PEDS(carrier, (int*)&nearbyEntities, -1, -1);
+	for (int i = 0; i < n; i++)
+	{
+		if (ENTITY::IS_ENTITY_A_PED(nearbyEntities[i]) &&
+			ENTITY::DOES_ENTITY_EXIST(nearbyEntities[i]) &&
+			ENTITY::IS_ENTITY_ATTACHED_TO_ENTITY(carrier, nearbyEntities[i]))
+		{
+			return nearbyEntities[i];
+		}
+	}
+
+	return NULL;
+}

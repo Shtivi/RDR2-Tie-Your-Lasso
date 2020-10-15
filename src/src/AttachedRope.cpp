@@ -56,13 +56,16 @@ bool AttachedRope::isExist()
 	return ROPE::GET_ROPE_VERTEX_COUNT(ropeId) > 0;
 }
 
-
 void AttachedRope::startWinding() {
 	if (!isWinding && canWind()) 
 	{
 		ROPE::START_ROPE_WINDING(this->ropeId);
-		PED::SET_PED_TO_RAGDOLL(entity1, 10000, 10000, 0, false, false, false);
 		isWinding = true;
+
+		if (ENTITY::IS_ENTITY_A_PED(entity1)) 
+		{
+			PED::SET_PED_TO_RAGDOLL(entity1, 10000, 10000, 0, false, false, false);
+		}
 	}
 }
 

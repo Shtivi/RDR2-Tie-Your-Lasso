@@ -151,5 +151,9 @@ Vector3 toVector3(float x, float y, float z)
 }
 
 float distance(Vector3 a, Vector3 b) {
-	return get_distance(&a, &b);
+	return distanceBetween(a, b);
+}
+
+float distance(Vector3 pos, Entity entity) {
+	return distance(ENTITY::GET_ENTITY_COORDS(entity, 1, 0), pos);
 }

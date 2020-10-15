@@ -52,6 +52,9 @@
     <ClCompile Include="WindRopeController.cpp">
       <Filter>Src\Actions</Filter>
     </ClCompile>
+    <ClCompile Include="HangPedController.cpp">
+      <Filter>Src\Actions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\inc\types.h">
@@ -109,6 +112,9 @@
       <Filter>Src\Actions</Filter>
     </ClInclude>
     <ClInclude Include="BaseActionsController.h">
+      <Filter>Src\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="HangPedController.h">
       <Filter>Src\Actions</Filter>
     </ClInclude>
   </ItemGroup>

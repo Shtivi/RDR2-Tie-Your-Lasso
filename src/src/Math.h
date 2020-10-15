@@ -18,6 +18,7 @@ Vector3 getUpVector(Entity entity);
 Vector3 getRightVector(Entity entity);
 Vector3 toVector3(float x, float y, float z);
 float distance(Vector3 a, Vector3 b);
+float distance(Vector3 pos, Entity entity);
 
 Vector3 operator+(Vector3 const& v, Vector3 const& u);
 Vector3 operator*(Vector3 const& u, float a);

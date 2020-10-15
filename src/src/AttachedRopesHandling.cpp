@@ -68,7 +68,7 @@ AttachedRope* getClosestRopeWithin(Vector3 position, float radius) {
 	{
 		curr = *it;
 		Vector3 ropeBase = ENTITY::GET_ENTITY_COORDS(curr->getEntity2(), 1, 0);
-		currDistance = get_distance(&ropeBase, &position);
+		currDistance = distanceBetween(ropeBase, position);
 
 		if (currDistance <= radius && currDistance <= bestDistance) {
 			best = *it;

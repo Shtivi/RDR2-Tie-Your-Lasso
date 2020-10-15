@@ -30,3 +30,4 @@ Ped createPed(const char* model, Vector3 pos);
 Object createProp(char* model, Vector3 position, float heading = 0, bool isStatic = false, bool isVisible = true);
 RaycastResult raycast(Vector3 source, Vector3 direction, float maxDist, RaycastIntersectionOptions intersectionOptions = Everything);
 tm getGameTime();
+Ped findCarriedPedBy(Ped carrier);
