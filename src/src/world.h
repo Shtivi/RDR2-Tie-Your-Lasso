@@ -33,3 +33,6 @@ tm getGameTime();
 Ped findCarriedPedBy(Ped carrier);
 void getGroundPos(Vector3* position);
 Vector3 getGroundPos(Vector3 originalPos);
+Vector3 getRandomPositionInRange(Vector3 source, int radius);
+Vector3 getRandomPedPositionInRange(Vector3 source, int radius);
+Vector3 playerPos();

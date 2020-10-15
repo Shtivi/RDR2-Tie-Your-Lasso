@@ -46,11 +46,10 @@ void HangPedController::preparePrompt(Prompt* prompt)
 
 void HangPedController::execute()
 {
-	Vector3 playerPos = ENTITY::GET_ENTITY_COORDS(player, 1, 0);
-	float length = distance(hangFrom, victim) - 0.15f;
-
+	Vector3 playerPos = getGroundPos(ENTITY::GET_ENTITY_COORDS(player, 1, 0));
+	float length = distance(hangFrom, victim) + 1.f;
 	MultiVertexRope* rope = new MultiVertexRope(new AttachedRope(hangFrom, victim, "SKEL_NECK0", length));
-	rope->pinTo(getGroundPos(playerPos));
+	rope->pinTo(getGroundPos(playerPos + (ENTITY::GET_ENTITY_FORWARD_VECTOR(player) * 3)));
 	addRope(rope);
 }
 

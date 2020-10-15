@@ -15,6 +15,7 @@ private:
 
 public:
 	AttachedRope(Vector3 mapPosition, Entity entity, const char* bone, float length);
+	AttachedRope(Entity entity, Vector3 mapPosition);
 	AttachedRope(Entity entity, Entity base, const char* bone1, const char* bone2, float length);
 
 	bool getIsAttachedToMap();

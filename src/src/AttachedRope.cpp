@@ -6,6 +6,12 @@ AttachedRope::AttachedRope(Vector3 mapPosition, Entity entity, const char* bone,
 	isAttachedToMap = true;
 }
 
+AttachedRope::AttachedRope(Entity entity, Vector3 mapPosition) :
+	AttachedRope(entity, createMapProp("p_shotGlass01x", mapPosition), NULL, NULL, 0)
+{
+	isAttachedToMap = true;
+}
+
 AttachedRope::AttachedRope(Entity entity1, Entity entity2, const char* bone1, const char* bone2, float length)
 {
 	Vector3 pos1 = ENTITY::GET_ENTITY_COORDS(entity1, true, 0);

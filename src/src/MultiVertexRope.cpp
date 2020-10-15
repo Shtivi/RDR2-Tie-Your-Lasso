@@ -17,18 +17,28 @@ Entity MultiVertexRope::getAttached()
 
 bool MultiVertexRope::isExist()
 {
-	return ropes.front()->isExist();
+	vector<AttachedRope*>::iterator ropesItr = ropes.begin();
+	while (ropesItr != ropes.end())
+	{
+		if (!(*ropesItr)->isExist())
+		{
+			return false;
+		}
+		ropesItr++;
+	}
+
+	return true;
 }
 
 bool MultiVertexRope::canWind()
-{
+{	
 	return ropes.front()->canWind();
 }
 
 void MultiVertexRope::pinTo(Vector3 pos)
 {
 	AttachedRope* lastRope = ropes.back();
-	AttachedRope* rope = new AttachedRope(pos, lastRope->getBase(), NULL, 0);
+	AttachedRope* rope = new AttachedRope(lastRope->getBase(), pos);
 	ropes.push_back(rope);
 }
 

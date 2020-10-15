@@ -29,7 +29,6 @@ void main()
 
 		if (IsKeyJustUp(VK_KEY_Z))
 		{
-			Ped player = PLAYER::PLAYER_PED_ID();
 			Vector3 pos = add(&ENTITY::GET_ENTITY_COORDS(player, 1, 0), &multiply(&ENTITY::GET_ENTITY_FORWARD_VECTOR(player), 5));
 			getGroundPos(pos, &pos);
 			Ped ped = createPed("G_M_M_UniBanditos_01", pos);
@@ -42,17 +41,21 @@ void main()
 		}
 
 		if (IsKeyJustUp(VK_KEY_X)) {
-			Ped player = PLAYER::PLAYER_PED_ID();
-			Vector3 startPos = ENTITY::GET_ENTITY_COORDS(player, 1, 0);
-			RaycastResult ray = raycast(startPos, getUpVector(player), 10, RaycastIntersectionOptions::Map);
-			
-			if (ray.didHit) {
-				debug(to_string(distance(startPos, ray.hitPos)));
-			}
-			else 
-			{
-				debug("didnt hit");
-			}
+			//Ped player = PLAYER::PLAYER_PED_ID();
+			//Vector3 startPos = ENTITY::GET_ENTITY_COORDS(player, 1, 0);
+			//RaycastResult ray = raycast(startPos, getUpVector(player), 10, RaycastIntersectionOptions::Map);
+			//
+			//if (ray.didHit) {
+			//	debug(to_string(distance(startPos, ray.hitPos)));
+			//}
+			//else 
+			//{
+			//	debug("didnt hit");
+			//}
+			Vector3 propPos = getRandomPositionInRange(playerPos(), 3);
+			debug(propPos);
+			//Vector3 propPos = playerPos() + (ENTITY::GET_ENTITY_FORWARD_VECTOR(player) * 5);
+			Object prop = createProp("p_bodyparthead01x", propPos);
 		}
 
 		WAIT(0);

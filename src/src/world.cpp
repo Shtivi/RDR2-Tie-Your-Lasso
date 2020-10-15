@@ -110,3 +110,27 @@ Vector3 getGroundPos(Vector3 originalPos)
 	GAMEPLAY::GET_GROUND_Z_FOR_3D_COORD(originalPos.x, originalPos.y, originalPos.z, &groundZ, false);
 	return toVector3(originalPos.x, originalPos.y, groundZ);
 }
+
+Vector3 getRandomPositionInRange(Vector3 center, int radius)
+{
+	int x = rndInt((int)center.x - radius, (int)center.x + radius + 1);
+	int topOrBottom = rndInt(0, 2) == 1 ? 1 : -1;
+	double y = topOrBottom * sqrt(pow(radius, 2) - pow(x - center.x, 2)) + center.y;
+
+	Vector3 output;
+	output.x = x;
+	output.y = (float)y;
+	return getGroundPos(output);
+}
+
+Vector3 getRandomPedPositionInRange(Vector3 source, int radius)
+{
+	Vector3 position = getRandomPositionInRange(source, radius);
+	PATHFIND::GET_SAFE_COORD_FOR_PED(position.x, position.y, position.z, true, &position, 16);
+	return position;
+}
+
+Vector3 playerPos()
+{
+	return ENTITY::GET_ENTITY_COORDS(player, 1, 0);
+}
