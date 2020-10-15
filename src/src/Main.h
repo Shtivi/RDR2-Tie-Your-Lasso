@@ -1,4 +1,8 @@
 #pragma once
+using namespace std;
+
+#include <string>
+
 // Natives
 #include "..\..\inc\natives.h"
 #include "..\..\inc\types.h"
@@ -37,5 +41,5 @@
 #include "Prompt.h";
 #include "LassoHandling.h"
 #include "AttachedRopesHanding.h";
-#include "ActionControllers.h";
+#include "BaseActionsController.h";
 #include "PlayerActionsHandling.h";
