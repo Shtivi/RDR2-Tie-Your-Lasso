@@ -11,6 +11,7 @@ void initActions()
 	actionControllers.push_back(new WindRopeController());
 	actionControllers.push_back(new HangPedController());
 	actionControllers.push_back(new StowBodyController());
+	actionControllers.push_back(new UnwindRopeController());
 }
 
 void handleActions()

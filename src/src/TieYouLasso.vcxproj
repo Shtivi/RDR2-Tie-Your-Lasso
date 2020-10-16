@@ -25,6 +25,7 @@
     <ClCompile Include="script.cpp" />
     <ClCompile Include="Stopwatch.cpp" />
     <ClCompile Include="StowBodyController.cpp" />
+    <ClCompile Include="UnwindRopeController.cpp" />
     <ClCompile Include="Vehicles.cpp" />
     <ClCompile Include="WindRopeController.cpp" />
     <ClCompile Include="world.cpp" />
@@ -51,6 +52,7 @@
     <ClInclude Include="script.h" />
     <ClInclude Include="Stopwatch.h" />
     <ClInclude Include="StowBodyController.h" />
+    <ClInclude Include="UnwindRopeController.h" />
     <ClInclude Include="Vehicles.h" />
     <ClInclude Include="WindRopeController.h" />
     <ClInclude Include="world.h" />
