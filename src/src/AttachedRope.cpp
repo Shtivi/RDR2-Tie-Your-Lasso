@@ -6,6 +6,12 @@ AttachedRope::AttachedRope(Vector3 mapPosition, Entity entity, const char* bone,
 	isAttachedToMap = true;
 }
 
+AttachedRope::AttachedRope(Entity entity, Vector3 mapPosition) :
+	AttachedRope(entity, createMapProp("p_shotGlass01x", mapPosition), NULL, NULL, 0)
+{
+	isAttachedToMap = true;
+}
+
 AttachedRope::AttachedRope(Entity entity1, Entity entity2, const char* bone1, const char* bone2, float length)
 {
 	Vector3 pos1 = ENTITY::GET_ENTITY_COORDS(entity1, true, 0);
@@ -41,12 +47,12 @@ bool AttachedRope::getIsEntityHanging()
 	return isEntityHanging;
 }
 
-Entity AttachedRope::getEntity1()
+Entity AttachedRope::getAttached()
 {
 	return entity1;
 }
 
-Entity AttachedRope::getEntity2()
+Entity AttachedRope::getBase()
 {
 	return entity2;
 }
@@ -56,13 +62,16 @@ bool AttachedRope::isExist()
 	return ROPE::GET_ROPE_VERTEX_COUNT(ropeId) > 0;
 }
 
-
 void AttachedRope::startWinding() {
 	if (!isWinding && canWind()) 
 	{
 		ROPE::START_ROPE_WINDING(this->ropeId);
-		PED::SET_PED_TO_RAGDOLL(entity1, 10000, 10000, 0, false, false, false);
 		isWinding = true;
+
+		if (ENTITY::IS_ENTITY_A_PED(entity1)) 
+		{
+			PED::SET_PED_TO_RAGDOLL(entity1, 5000, 5000, 1, false, false, false);
+		}
 	}
 }
 

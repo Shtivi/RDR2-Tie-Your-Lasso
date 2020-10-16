@@ -16,7 +16,7 @@ Prompt* AttachPickedUpController::createActionPrompt()
 bool AttachPickedUpController::isAbleToExecute()
 {
 	Ped player = PLAYER::PLAYER_PED_ID();
-	Ped targetEntity = findCarriedPed();
+	Ped targetEntity = findCarriedPedBy(player);
 
 	if (!targetEntity)
 	{
@@ -46,27 +46,5 @@ void AttachPickedUpController::execute()
 	Vector3 targetGroundPos;
 	getGroundPos(targetPos, &targetGroundPos);
 
-	addRope(new AttachedRope(targetGroundPos, currentTarget, "SKEL_NECK0", 3.0f));
-}
-
-Ped AttachPickedUpController::findCarriedPed()
-{
-	int nearbyEntities[5 * 2 + 2];
-	Ped player = PLAYER::PLAYER_PED_ID();
-	Ped targetEntity = NULL;
-
-	nearbyEntities[0] = 5;
-	int n = PED::GET_PED_NEARBY_PEDS(PLAYER::PLAYER_PED_ID(), (int*)&nearbyEntities, -1, -1);
-	for (int i = 0; i < n; i++)
-	{
-		if (ENTITY::IS_ENTITY_A_PED(nearbyEntities[i]) && 
-			ENTITY::DOES_ENTITY_EXIST(nearbyEntities[i]) && 
-			ENTITY::IS_ENTITY_ATTACHED_TO_ENTITY(player, nearbyEntities[i]))
-		{
-			return nearbyEntities[i];
-
-		}
-	}
-
-	return NULL;
+	addRope(new AttachedRope(targetGroundPos, currentTarget, "SKEL_NECK0", 4.0f));
 }

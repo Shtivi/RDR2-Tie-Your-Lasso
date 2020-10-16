@@ -13,15 +13,19 @@
     <ClCompile Include="AttachPickedUpController.cpp" />
     <ClCompile Include="BaseActionsController.cpp" />
     <ClCompile Include="GameStopwatch.cpp" />
+    <ClCompile Include="HangPedController.cpp" />
     <ClCompile Include="keyboard.cpp" />
     <ClCompile Include="KickPedController.cpp" />
     <ClCompile Include="Math.cpp" />
+    <ClCompile Include="MultiVertexRope.cpp" />
     <ClCompile Include="Prompt.cpp" />
     <ClCompile Include="PlayerActionsHandling.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="AttachedRopesHandling.cpp" />
     <ClCompile Include="script.cpp" />
     <ClCompile Include="Stopwatch.cpp" />
+    <ClCompile Include="StowBodyController.cpp" />
+    <ClCompile Include="Vehicles.cpp" />
     <ClCompile Include="WindRopeController.cpp" />
     <ClCompile Include="world.cpp" />
   </ItemGroup>
@@ -35,14 +39,19 @@
     <ClInclude Include="AttachHogtiedController.h" />
     <ClInclude Include="AttachLassoController.h" />
     <ClInclude Include="AttachPickedUpController.h" />
+    <ClInclude Include="HangPedController.h" />
     <ClInclude Include="keyboard.h" />
     <ClInclude Include="KickPedController.h" />
+    <ClInclude Include="MultiVertexRope.h" />
     <ClInclude Include="Prompt.h" />
     <ClInclude Include="PlayerActionsHandling.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="AttachedRopesHanding.h" />
+    <ClInclude Include="Rope.h" />
     <ClInclude Include="script.h" />
     <ClInclude Include="Stopwatch.h" />
+    <ClInclude Include="StowBodyController.h" />
+    <ClInclude Include="Vehicles.h" />
     <ClInclude Include="WindRopeController.h" />
     <ClInclude Include="world.h" />
   </ItemGroup>

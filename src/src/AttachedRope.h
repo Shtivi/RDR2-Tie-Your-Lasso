@@ -1,6 +1,6 @@
 #pragma once
 
-class AttachedRope
+class AttachedRope : public Rope
 {
 private:
 	int ropeId;
@@ -15,13 +15,14 @@ private:
 
 public:
 	AttachedRope(Vector3 mapPosition, Entity entity, const char* bone, float length);
-	AttachedRope(Entity entity1, Entity entity2, const char* bone1, const char* bone2, float length);
+	AttachedRope(Entity entity, Vector3 mapPosition);
+	AttachedRope(Entity entity, Entity base, const char* bone1, const char* bone2, float length);
 
 	bool getIsAttachedToMap();
 	bool getIsEntityHanging();
 	bool isExist();
-	Entity getEntity1();
-	Entity getEntity2();
+	Entity getAttached();
+	Entity getBase();
 	
 	void startWinding();
 	void stopWinding();

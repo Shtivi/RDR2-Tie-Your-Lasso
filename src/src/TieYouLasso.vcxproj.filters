@@ -14,10 +14,10 @@
       <Filter>Src\Prompt</Filter>
     </ClCompile>
     <ClCompile Include="AttachedRope.cpp">
-      <Filter>Src\AttachedRopes</Filter>
+      <Filter>Src\Ropes</Filter>
     </ClCompile>
     <ClCompile Include="AttachedRopesHandling.cpp">
-      <Filter>Src\AttachedRopes</Filter>
+      <Filter>Src\Ropes</Filter>
     </ClCompile>
     <ClCompile Include="world.cpp">
       <Filter>Src\World</Filter>
@@ -52,6 +52,18 @@
     <ClCompile Include="WindRopeController.cpp">
       <Filter>Src\Actions</Filter>
     </ClCompile>
+    <ClCompile Include="HangPedController.cpp">
+      <Filter>Src\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiVertexRope.cpp">
+      <Filter>Src\Ropes</Filter>
+    </ClCompile>
+    <ClCompile Include="Vehicles.cpp">
+      <Filter>Src\World\Vehicles</Filter>
+    </ClCompile>
+    <ClCompile Include="StowBodyController.cpp">
+      <Filter>Src\Actions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\inc\types.h">
@@ -79,10 +91,10 @@
       <Filter>Src\Prompt</Filter>
     </ClInclude>
     <ClInclude Include="AttachedRope.h">
-      <Filter>Src\AttachedRopes</Filter>
+      <Filter>Src\Ropes</Filter>
     </ClInclude>
     <ClInclude Include="AttachedRopesHanding.h">
-      <Filter>Src\AttachedRopes</Filter>
+      <Filter>Src\Ropes</Filter>
     </ClInclude>
     <ClInclude Include="world.h">
       <Filter>Src\World</Filter>
@@ -111,6 +123,21 @@
     <ClInclude Include="BaseActionsController.h">
       <Filter>Src\Actions</Filter>
     </ClInclude>
+    <ClInclude Include="HangPedController.h">
+      <Filter>Src\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiVertexRope.h">
+      <Filter>Src\Ropes</Filter>
+    </ClInclude>
+    <ClInclude Include="Rope.h">
+      <Filter>Src\Ropes</Filter>
+    </ClInclude>
+    <ClInclude Include="Vehicles.h">
+      <Filter>Src\World\Vehicles</Filter>
+    </ClInclude>
+    <ClInclude Include="StowBodyController.h">
+      <Filter>Src\Actions</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="include">
@@ -121,9 +148,6 @@
     </Filter>
     <Filter Include="Src\Actions">
       <UniqueIdentifier>{a42d84bc-a9ac-4542-b8d2-614ebde654fb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Src\AttachedRopes">
-      <UniqueIdentifier>{f9123656-93e1-4279-9c47-af84e66142b9}</UniqueIdentifier>
     </Filter>
     <Filter Include="Src\Prompt">
       <UniqueIdentifier>{733612d0-6ed0-48b3-bea5-e46a72eb43ff}</UniqueIdentifier>
@@ -136,6 +160,12 @@
     </Filter>
     <Filter Include="Src\Script\Stopwatch">
       <UniqueIdentifier>{1c184575-0720-41a2-9eb6-e3c77343c25e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Ropes">
+      <UniqueIdentifier>{f9123656-93e1-4279-9c47-af84e66142b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\World\Vehicles">
+      <UniqueIdentifier>{53d50ef4-e6f2-4818-a7c7-079e1082e49a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

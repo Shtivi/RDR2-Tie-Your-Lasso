@@ -6,7 +6,7 @@ public:
 	WindRopeController();
 
 private:
-	AttachedRope* rope;
+	Rope* rope;
 
 	Prompt* createActionPrompt();
 	bool isAbleToExecute();

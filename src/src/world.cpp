@@ -78,3 +78,166 @@ RaycastResult raycast(Vector3 source, Vector3 direction, float maxDist, RaycastI
 	SHAPETEST::GET_SHAPE_TEST_RESULT(rayHandle, (BOOL*)&result.didHit, &result.hitPos, &result.normal, &result.hitEntity);
 	return result;
 }
+
+Ped findCarriedPedBy(Ped carrier)
+{
+	return PED::_0xD806CD2A4F2C2996(carrier);
+
+	//int nearbyEntities[5 * 2 + 2];
+	//Ped targetEntity = NULL;
+
+	//nearbyEntities[0] = 5;
+	//int n = PED::GET_PED_NEARBY_PEDS(carrier, (int*)&nearbyEntities, -1, -1);
+	//for (int i = 0; i < n; i++)
+	//{
+	//	if (ENTITY::IS_ENTITY_A_PED(nearbyEntities[i]) &&
+	//		ENTITY::DOES_ENTITY_EXIST(nearbyEntities[i]) &&
+	//		ENTITY::IS_ENTITY_ATTACHED_TO_ENTITY(carrier, nearbyEntities[i]))
+	//	{
+	//		return nearbyEntities[i];
+	//	}
+	//}
+
+	//return NULL;
+}
+
+void getGroundPos(Vector3* originalPos)
+{
+	getGroundPos(*originalPos, originalPos);
+}
+
+Vector3 getGroundPos(Vector3 originalPos)
+{
+	float groundZ;
+	GAMEPLAY::GET_GROUND_Z_FOR_3D_COORD(originalPos.x, originalPos.y, originalPos.z, &groundZ, false);
+	return toVector3(originalPos.x, originalPos.y, groundZ);
+}
+
+Vector3 getRandomPositionInRange(Vector3 center, int radius)
+{
+	int x = rndInt((int)center.x - radius, (int)center.x + radius + 1);
+	int topOrBottom = rndInt(0, 2) == 1 ? 1 : -1;
+	double y = topOrBottom * sqrt(pow(radius, 2) - pow(x - center.x, 2)) + center.y;
+
+	Vector3 output;
+	output.x = x;
+	output.y = (float)y;
+	return getGroundPos(output);
+}
+
+Vector3 getRandomPedPositionInRange(Vector3 source, int radius)
+{
+	Vector3 position = getRandomPositionInRange(source, radius);
+	PATHFIND::GET_SAFE_COORD_FOR_PED(position.x, position.y, position.z, true, &position, 16);
+	return position;
+}
+
+Vector3 playerPos()
+{
+	return ENTITY::GET_ENTITY_COORDS(player, 1, 0);
+}
+
+float getModelLength(Hash model)
+{
+	Vector3 front, back;
+	GAMEPLAY::GET_MODEL_DIMENSIONS(model, &front, &back);
+	float length = get_vector_length(front - back);
+	return length;
+}
+
+Vector3 getRelativeEntityCoords(Entity entity, int offsetFromCenter)
+{
+	float length = getModelLength(ENTITY::GET_ENTITY_MODEL(entity));
+	Vector3 entityPos = ENTITY::GET_ENTITY_COORDS(entity, 1, 0);
+	Vector3 forwardVec = ENTITY::GET_ENTITY_FORWARD_VECTOR(entity);
+	
+	return entityPos + forwardVec * offsetFromCenter * (length / 4);
+}
+
+Vehicle getClosestVehicle(Ped around)
+{
+	int nearbyEntities[5 * 2 + 2];
+	nearbyEntities[0] = 5;
+	int n = PED::GET_PED_NEARBY_VEHICLES(around, (int*)&nearbyEntities);
+
+	if (n == 0)
+	{
+		return NULL;
+	}
+
+	Vehicle best = nearbyEntities[0];
+	float bestDistance = distanceBetweenEntities(around, best);
+
+	for (int i = 0; i < n; i++)
+	{
+		float dist = distanceBetweenEntities(around, nearbyEntities[i]);
+		if (ENTITY::DOES_ENTITY_EXIST(nearbyEntities[i]) && dist < bestDistance)
+		{
+			best = nearbyEntities[i];
+			bestDistance = dist;
+		}
+	}
+
+	return best;
+}
+
+Vector3 entityPos(Entity entity)
+{
+	return ENTITY::GET_ENTITY_COORDS(entity, 1, 0);
+}
+
+float calculateHeadingToPosition(Entity entity, Vector3 dest)
+{
+	float entityHeading = ENTITY::GET_ENTITY_HEADING(entity);
+	float angle = angleBetweenVectors(entityPos(entity), dest);
+	return entityHeading - angle;
+}
+
+Ped findHogtiedTargetEntity()
+{
+	Entity targetEntity = NULL;
+	Ped asPed;
+	
+	if (!PLAYER::GET_PLAYER_TARGET_ENTITY(PLAYER::PLAYER_ID(), &targetEntity))
+	{
+		return false;
+	}
+
+	if (ENTITY::IS_ENTITY_A_PED(targetEntity) &&
+		PED::IS_PED_HUMAN(targetEntity) &&
+		AI::GET_IS_TASK_ACTIVE(targetEntity, 400))
+	{
+		return (Ped)targetEntity;
+	}
+
+	return false;
+}
+
+Ped getClosestPed(Ped around)
+{
+	int nearbyEntities[5 * 2 + 2];
+	Ped targetEntity = NULL;
+
+	nearbyEntities[0] = 5;
+	int n = PED::GET_PED_NEARBY_PEDS(around, (int*)&nearbyEntities, -1, -1);
+
+	if (n == 0)
+	{
+		return NULL;
+	}
+
+	Ped best = nearbyEntities[0];
+	float bestDistance = distanceBetweenEntities(around, best);
+
+	for (int i = 0; i < n; i++)
+	{
+		float dist = distanceBetweenEntities(around, nearbyEntities[i]);
+		if (ENTITY::DOES_ENTITY_EXIST(nearbyEntities[i]) && dist < bestDistance)
+		{
+			best = nearbyEntities[i];
+			bestDistance = dist;
+		}
+	}
+
+	return best;
+}

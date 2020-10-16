@@ -16,3 +16,6 @@ void debug(string text);
 void debug(Vector3 position);
 void debug(float f);
 void debug(int n);
+void debug(bool b);
+const char* to_string(Vector3 position);
+void showSubtitle(const char* text);
