@@ -35,9 +35,14 @@ void main()
 			PED::SET_BLOCKING_OF_NON_TEMPORARY_EVENTS(ped, 1);
 			DECORATOR::DECOR_SET_INT(ped, "honor_override", 0);
 			//Vector3 propPos = PED::GET_PED_BONE_COORDS(ped, 14283, 0, 0, 0);
-			//Object prop = createProp("p_cs_nooseshort01x", propPos);
-			//ENTITY::ATTACH_ENTITY_TO_ENTITY_PHYSICALLY(ped, prop, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 999999, 1, 0, 1, 1, 2, 0, 0, 0);
-			//ENTITY::ATTACH_ENTITY_TO_ENTITY(ped, prop, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0);
+			//Vector3 boneOffset = entityPos(ped) - propPos;
+			//Object prop = createProp("s_ropehogtiehands01x", propPos);
+			//ENTITY::SET_ENTITY_ROTATION(prop, 0, 100, 1000, 2, 1);
+			//ENTITY::ATTACH_ENTITY_TO_ENTITY(prop, ped, 0, 8, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0);
+			//ENTITY::ATTACH_ENTITY_TO_ENTITY_PHYSICALLY(ped, prop, ENTITY::GET_ENTITY_BONE_INDEX_BY_NAME(ped, "SKEL_NECK0"), 0, 0, 0, 0, 0, 0, 0, 0, 100, 1000, 9999999, false, 0, 0, 0, 2, 0, 0, 0);
+			// s_ropehogtiehandsmedium01x_a
+			// p_ropewall01x
+			// p_cs_fusespool01x
 		}
 
 		if (IsKeyJustUp(VK_KEY_X)) {
@@ -52,10 +57,18 @@ void main()
 			//{
 			//	debug("didnt hit");
 			//}
-			Vector3 propPos = getRandomPositionInRange(playerPos(), 3);
-			debug(propPos);
-			//Vector3 propPos = playerPos() + (ENTITY::GET_ENTITY_FORWARD_VECTOR(player) * 5);
-			Object prop = createProp("p_bodyparthead01x", propPos);
+
+			//ENTITY::DETACH_ENTITY(findCarriedPedBy(player), 0, 0);
+
+			Vector3 propPos = playerPos() + (ENTITY::GET_ENTITY_FORWARD_VECTOR(player) * 5);
+			Object prop = createProp("s_ropehogtiehands01x", propPos, 0, true);
+			Vector3 rot = ENTITY::GET_ENTITY_ROTATION(prop, 2);
+			
+			ENTITY::SET_ENTITY_ROTATION(prop, 0, 100, 1000, 2, 1);
+
+			//Vehicle x = createVehicle(VehicleHash::WagonWork01X, getGroundPos(playerPos() + (ENTITY::GET_ENTITY_FORWARD_VECTOR(player) * 8)), ENTITY::GET_ENTITY_HEADING(player));
+			//WAIT(1000);
+			//VEHICLE::SET_VEHICLE_DOOR_OPEN(x, 0, 0, 1);
 		}
 
 		WAIT(0);
@@ -88,4 +101,22 @@ void debug(float f) {
 
 void debug(int n) {
 	debug(to_string(n));
+}
+
+void debug(bool b) {
+	debug(to_string(b));
+}
+
+void showSubtitle(const char* text)
+{
+	UILOG::_0xFA233F8FE190514C((Any*)UI::_CREATE_VAR_STRING(10, "LITERAL_STRING", text)); // _UILOG_SET_CACHED_OBJECTIVE
+	UILOG::_0xE9990552DEC71600(); // _UILOG_PRINT_CACHED_OBJECTIVE
+	UILOG::_0xDFF0D417277B41F8(); // _UILOG_CLEAR_CACHED_OBJECTIVE
+}
+
+const char* to_string(Vector3 position)
+{
+	stringstream str;
+	str << position.x << ", " << position.y << ", " << position.z;
+	return str.str().c_str();
 }

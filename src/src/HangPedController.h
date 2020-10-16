@@ -8,6 +8,7 @@ public:
 private:
 	Ped victim;
 	Vector3 hangFrom;
+	bool shouldDrop;
 
 	Prompt* createActionPrompt();
 	bool isAbleToExecute();

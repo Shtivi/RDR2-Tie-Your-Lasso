@@ -70,7 +70,7 @@ void AttachedRope::startWinding() {
 
 		if (ENTITY::IS_ENTITY_A_PED(entity1)) 
 		{
-			PED::SET_PED_TO_RAGDOLL(entity1, 10000, 10000, 0, false, false, false);
+			PED::SET_PED_TO_RAGDOLL(entity1, 5000, 5000, 1, false, false, false);
 		}
 	}
 }

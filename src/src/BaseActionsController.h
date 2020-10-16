@@ -35,3 +35,4 @@ private:
 #include "AttachPickedUpController.h";
 #include "WindRopeController.h";
 #include "HangPedController.h";
+#include "StowBodyController.h";

@@ -24,6 +24,7 @@ enum RaycastIntersectionOptions
 
 extern Ped player;
 
+Vector3 entityPos(Entity entity);
 void getGroundPos(Vector3 originalPos, Vector3* outPos);
 float distanceBetweenEntities(Entity entity1, Entity entity2);
 Ped createPed(const char* model, Vector3 pos);
@@ -36,3 +37,9 @@ Vector3 getGroundPos(Vector3 originalPos);
 Vector3 getRandomPositionInRange(Vector3 source, int radius);
 Vector3 getRandomPedPositionInRange(Vector3 source, int radius);
 Vector3 playerPos();
+float getModelLength(Hash model);
+Vector3 getRelativeEntityCoords(Entity entity, int offsetFromCenter = 0);
+Ped getClosestPed(Ped around);
+Vehicle getClosestVehicle(Ped around);
+float calculateHeadingToPosition(Entity entity, Vector3 dest);
+Ped findHogtiedTargetEntity();

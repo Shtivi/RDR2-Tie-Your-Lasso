@@ -16,29 +16,13 @@ bool WindRopeController::isAbleToExecute()
 	Ped player = PLAYER::PLAYER_PED_ID();
 	Vector3 playerPos = ENTITY::GET_ENTITY_COORDS(player, 1, 0);
 
-	if (findCarriedPedBy(player)) 
+	if (findCarriedPedBy(player) || PED::IS_PED_ON_MOUNT(player)) 
 	{
 		return false;
 	}
 
 	rope = getClosestRopeWithin(playerPos, 1.5f);
 	return rope != NULL && rope->canWind();
-}
-
-void WindRopeController::preparePrompt(Prompt* prompt)
-{
-	//debug(distanceBetweenEntities(rope->getBase(), rope->getAttached()));
-	//if (distanceBetweenEntities(rope->getBase(), rope->getAttached()) < 3)
-	//{
-	//	debug("prompt");
-	//	prompt->setTargetEntity(rope->getAttached());
-	//	prompt->setControl(GAMEPLAY::GET_HASH_KEY("INPUT_NEXT_CAMERA"));
-	//}
-	//else
-	//{
-	//	prompt->setTargetEntity(NULL);
-	//	prompt->setControl(GAMEPLAY::GET_HASH_KEY("INPUT_SURRENDER"));
-	//}
 }
 
 void WindRopeController::execute()

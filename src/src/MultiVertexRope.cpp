@@ -32,6 +32,11 @@ bool MultiVertexRope::isExist()
 
 bool MultiVertexRope::canWind()
 {	
+	if (!isExist())
+	{
+		return false;
+	}
+
 	return ropes.front()->canWind();
 }
 
