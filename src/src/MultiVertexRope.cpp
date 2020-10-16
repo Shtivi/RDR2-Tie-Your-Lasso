@@ -40,10 +40,26 @@ bool MultiVertexRope::canWind()
 	return ropes.front()->canWind();
 }
 
+bool MultiVertexRope::canUnwind()
+{
+	return ropes.front()->canUnwind();
+}
+
+void MultiVertexRope::startUnwinding()
+{
+	ropes.front()->startUnwinding();
+}
+
+void MultiVertexRope::stopUnwinding()
+{
+	ropes.front()->stopUnwinding();
+}
+
 void MultiVertexRope::pinTo(Vector3 pos)
 {
 	AttachedRope* lastRope = ropes.back();
-	AttachedRope* rope = new AttachedRope(lastRope->getBase(), pos);
+	AttachedRope* rope = new AttachedRope(lastRope->getBase(), pos, "p_ropewall01x");
+	ENTITY::SET_ENTITY_ROTATION(rope->getBase(), 90, 0, 90, 2, 1);
 	ropes.push_back(rope);
 }
 

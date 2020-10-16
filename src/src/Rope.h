@@ -9,5 +9,8 @@ public:
 	virtual bool canWind() = 0;
 	virtual void startWinding() = 0;
 	virtual void stopWinding() = 0;
+	virtual bool canUnwind() = 0;
+	virtual void startUnwinding() = 0;
+	virtual void stopUnwinding() = 0;
 	virtual int update() = 0;
 };

@@ -6,8 +6,8 @@ AttachedRope::AttachedRope(Vector3 mapPosition, Entity entity, const char* bone,
 	isAttachedToMap = true;
 }
 
-AttachedRope::AttachedRope(Entity entity, Vector3 mapPosition) :
-	AttachedRope(entity, createMapProp("p_shotGlass01x", mapPosition), NULL, NULL, 0)
+AttachedRope::AttachedRope(Entity entity, Vector3 mapPosition, const char* objectName) :
+	AttachedRope(entity, createMapProp((char*)objectName, mapPosition), NULL, NULL, 0)
 {
 	isAttachedToMap = true;
 }
@@ -27,7 +27,7 @@ AttachedRope::AttachedRope(Entity entity1, Entity entity2, const char* bone1, co
 	this->ropeLength = length;
 	this->bone1 = bone1;
 	this->bone2 = bone2;
-	this->ropeId = ROPE::ADD_ROPE(pos1.x, pos1.y, pos1.z, 0, 0, 0, length, 14, length, 0, 1.0f, 0, 1, true, 1.25f, true, 0, 0);
+	this->ropeId = ROPE::ADD_ROPE(pos1.x, pos1.y, pos1.z, 0, 0, 0, length, 14, length + 3, 1.0f, 1.0f, 0, 1, true, 1.25f, true, 0, 0);
 	ROPE::_0x462FF2A432733A44(ropeId, entity1, entity2, 0, 0, 0, 0, 0, 0, (Any*)bone1, (Any*)bone2);
 	ROPE::ACTIVATE_PHYSICS(ropeId);
 	ROPE::_0x3C6490D940FF5D0B(ropeId, 0, (Any*)"noose01x_Rope_03", length, 0);
@@ -35,6 +35,7 @@ AttachedRope::AttachedRope(Entity entity1, Entity entity2, const char* bone1, co
 	this->isAttachedToMap = false;
 	this->isEntityHanging = false;
 	this->isWinding = false;
+	this->isUnwinding = false;
 }
 
 bool AttachedRope::getIsAttachedToMap()
@@ -66,6 +67,7 @@ void AttachedRope::startWinding() {
 	if (!isWinding && canWind()) 
 	{
 		ROPE::START_ROPE_WINDING(this->ropeId);
+		stopUnwinding();
 		isWinding = true;
 
 		if (ENTITY::IS_ENTITY_A_PED(entity1)) 
@@ -83,18 +85,30 @@ void AttachedRope::stopWinding()
 
 void AttachedRope::startUnwinding() 
 {
-	ROPE::START_ROPE_UNWINDING_FRONT(this->ropeId);
+	if (!isUnwinding && canUnwind())
+	{
+		ROPE::START_ROPE_UNWINDING_FRONT(this->ropeId);
+		stopWinding();
+		isUnwinding = true;
+	}
 }
 
 void AttachedRope::stopUnwinding()
 {
 	ROPE::STOP_ROPE_UNWINDING_FRONT(this->ropeId);
+	isUnwinding = false;
 }
 
 bool AttachedRope::canWind() 
 {
-	return isExist() && distanceBetweenEntities(entity1, entity2) >= 2.0f;
+	return isExist() && distanceBetweenEntities(entity1, entity2) >= 1.0f;
 }
+
+bool AttachedRope::canUnwind()
+{
+	return isExist();
+}
+
 
 int AttachedRope::update()
 {
@@ -145,6 +159,11 @@ int AttachedRope::update()
 
 	if (isWinding && !canWind()) {
 		stopWinding();
+	}
+
+	if (isUnwinding && !canUnwind())
+	{
+		stopUnwinding();
 	}
 
 	return wait;

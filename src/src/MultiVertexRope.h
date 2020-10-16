@@ -16,6 +16,9 @@ public:
 	bool canWind();
 	void startWinding();
 	void stopWinding();
+	bool canUnwind();
+	void startUnwinding();
+	void stopUnwinding();
 	int update();
 
 	void pinTo(Vector3 position);
