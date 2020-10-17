@@ -27,7 +27,7 @@ AttachedRope::AttachedRope(Entity entity1, Entity entity2, const char* bone1, co
 	this->ropeLength = length;
 	this->bone1 = bone1;
 	this->bone2 = bone2;
-	this->ropeId = ROPE::ADD_ROPE(pos1.x, pos1.y, pos1.z, 0, 0, 0, length, 14, length + 3, 1.0f, 1.0f, 0, 1, true, 1.25f, true, 0, 0);
+	this->ropeId = ROPE::ADD_ROPE(pos1.x, pos1.y, pos1.z, 0, 0, 0, length, 14, length + 5, 1.0f, 1.0f, 0, 1, true, 1.25f, true, 0, 0);
 	ROPE::_0x462FF2A432733A44(ropeId, entity1, entity2, 0, 0, 0, 0, 0, 0, (Any*)bone1, (Any*)bone2);
 	ROPE::ACTIVATE_PHYSICS(ropeId);
 	ROPE::_0x3C6490D940FF5D0B(ropeId, 0, (Any*)"noose01x_Rope_03", length, 0);
@@ -174,6 +174,7 @@ Object AttachedRope::createMapProp(char* model, Vector3 position)
 	Object prop = OBJECT::CREATE_OBJECT(GAMEPLAY::GET_HASH_KEY(model), position.x, position.y, position.z, false, false, true, 0, 0);
 	ENTITY::FREEZE_ENTITY_POSITION(prop, true);
 	ENTITY::SET_ENTITY_VISIBLE(prop, true);
+	OBJECT::PLACE_OBJECT_ON_GROUND_PROPERLY(prop, 0);
 
 	return prop;
 }

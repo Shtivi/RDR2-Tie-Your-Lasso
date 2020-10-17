@@ -29,12 +29,11 @@ void main()
 
 		if (IsKeyJustUp(VK_KEY_Z))
 		{
-			Vector3 pos = add(&ENTITY::GET_ENTITY_COORDS(player, 1, 0), &multiply(&ENTITY::GET_ENTITY_FORWARD_VECTOR(player), 5));
-			getGroundPos(pos, &pos);
-			Ped ped = createPed("G_M_M_UniBanditos_01", pos);
+			//Vector3 pos = add(&ENTITY::GET_ENTITY_COORDS(player, 1, 0), &multiply(&ENTITY::GET_ENTITY_FORWARD_VECTOR(player), 5));
+			//getGroundPos(pos, &pos);
+			//Ped ped = createPed("G_M_M_UniBanditos_01", pos);
 			//PED::SET_BLOCKING_OF_NON_TEMPORARY_EVENTS(ped, 1);
-			DECORATOR::DECOR_SET_INT(ped, "honor_override", 0);
-			AI::_0x42AC6401ABB8C7E5(ped, 0, 0);
+			//DECORATOR::DECOR_SET_INT(ped, "honor_override", 0);
 			//Vector3 propPos = PED::GET_PED_BONE_COORDS(ped, 14283, 0, 0, 0);
 			//Vector3 boneOffset = entityPos(ped) - propPos;
 			//Object prop = createProp("s_ropehogtiehands01x", propPos);
@@ -61,11 +60,11 @@ void main()
 
 			//ENTITY::DETACH_ENTITY(findCarriedPedBy(player), 0, 0);
 
-			Vector3 propPos = playerPos() + (ENTITY::GET_ENTITY_FORWARD_VECTOR(player) * 5);
-			Object prop = createProp("p_ropewall01x", propPos, 0, true);
-			Vector3 rot = ENTITY::GET_ENTITY_ROTATION(prop, 2);
+			//Vector3 propPos = playerPos() + (ENTITY::GET_ENTITY_FORWARD_VECTOR(player) * 5);
+			//Object prop = createProp("p_ropewall01x", propPos, 0, true);
+			//Vector3 rot = ENTITY::GET_ENTITY_ROTATION(prop, 2);
 			//OBJECT::PLACE_OBJECT_ON_GROUND_PROPERLY(prop, 0);
-			ENTITY::SET_ENTITY_ROTATION(prop, 90, 0, 90, 2, 1);
+			//ENTITY::SET_ENTITY_ROTATION(prop, 90, 0, 90, 2, 1);
 
 			//Vehicle x = createVehicle(VehicleHash::WagonWork01X, getGroundPos(playerPos() + (ENTITY::GET_ENTITY_FORWARD_VECTOR(player) * 8)), ENTITY::GET_ENTITY_HEADING(player));
 			//WAIT(1000);

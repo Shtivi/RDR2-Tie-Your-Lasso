@@ -59,32 +59,44 @@ void HangPedController::preparePrompt(Prompt* prompt)
 
 void HangPedController::execute()
 {
-	Vector3 pinTo = getGroundPos(playerPos() + (ENTITY::GET_ENTITY_FORWARD_VECTOR(player) * 4));
+	Vector3* pinTo = getSafeCoordForPed(playerPos() + (ENTITY::GET_ENTITY_FORWARD_VECTOR(player) * 4));
+	Vector3 placeOn = playerPos();
+	if (!pinTo)
+	{
+		pinTo = &placeOn;
+	}
 
 	AI::TASK_SET_BLOCKING_OF_NON_TEMPORARY_EVENTS(victim, 1);
 	WEAPON::REMOVE_ALL_PED_WEAPONS(victim, 0, 0);
 
-	Vector3 placeOn = playerPos();
 	Object seq;
 	AI::OPEN_SEQUENCE_TASK(&seq);
 	if (shouldDrop)
 	{
 		AI::_0xC7F0B43DCDC57E3D(0, victim, placeOn.x, placeOn.y, placeOn.z, 10.0f, 1);
 	}
-	AI::TASK_GO_STRAIGHT_TO_COORD(0, pinTo.x, pinTo.y, pinTo.z, 1, 5000, calculateHeadingToPosition(player, entityPos(victim)), 0, 0);
+	AI::TASK_GO_STRAIGHT_TO_COORD(0, pinTo->x, pinTo->y, pinTo->z, 1, 5000, calculateHeadingToPosition(player, entityPos(victim)), 0, 0);
 	AI::TASK_TURN_PED_TO_FACE_ENTITY(0, victim, 1000, 0, 0, 0);
 	AI::CLEAR_PED_TASKS(0, 0, 0);
 	AI::CLOSE_SEQUENCE_TASK(seq);
 	AI::TASK_PERFORM_SEQUENCE(player, seq);
 
-	WAIT(2000);
+	if (shouldDrop)
+	{
+		WAIT(2000);
+	} 
+	else
+	{
+		WAIT(500);
+	}
+
 	CAM::DO_SCREEN_FADE_OUT(300);
-	WAIT(1000);
+	WAIT(2000);
 	AI::CLEAR_PED_TASKS_IMMEDIATELY(victim, 0, 0);
 
 	float length = distance(hangFrom, victim);
 	MultiVertexRope* rope = new MultiVertexRope(new AttachedRope(hangFrom, victim, "SKEL_NECK0", length));
-	rope->pinTo(pinTo);
+	rope->pinTo(*pinTo);
 	addRope(rope);
 
 	CAM::DO_SCREEN_FADE_IN(300);

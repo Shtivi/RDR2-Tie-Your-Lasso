@@ -1,6 +1,7 @@
 #include "Main.h";
 
 UnwindRopeController::UnwindRopeController()
+	: BaseActionsController(ActivationType::HOLD)
 {
 	rope = NULL;
 }

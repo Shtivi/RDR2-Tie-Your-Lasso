@@ -43,3 +43,4 @@ Ped getClosestPed(Ped around);
 Vehicle getClosestVehicle(Ped around);
 float calculateHeadingToPosition(Entity entity, Vector3 dest);
 Ped findHogtiedTargetEntity();
+Vector3* getSafeCoordForPed(Vector3 destination);

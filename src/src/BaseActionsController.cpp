@@ -29,6 +29,7 @@ void BaseActionsController::update()
 	}
 	else
 	{
+		prompt->setTargetEntity(NULL);
 		prompt->hide();
 	}
 
