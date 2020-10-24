@@ -252,3 +252,53 @@ Vector3* getSafeCoordForPed(Vector3 destination)
 
 	return out;
 }
+
+//void playAnimation(Entity entity, const char* animName, const char* animDict, bool loop, bool stayInAnim)
+//{
+//	if (!STREAMING::HAS_ANIM_DICT_LOADED((char*)animDict))
+//	{
+//		STREAMING::REQUEST_ANIM_DICT((char*)animDict);
+//	}
+//	
+//	Stopwatch stopwatch;
+//	stopwatch.start();
+//	while (!STREAMING::HAS_ANIM_DICT_LOADED((char*)animDict) && stopwatch.getElapsedSeconds() <= 1)
+//	{
+//		WAIT(25);
+//	}
+//
+//	ENTITY::PLAY_ENTITY_ANIM(entity, (char*)animName, (char*)animDict, 1.f, loop, stayInAnim, 0, 0, 0);
+//}
+
+void playAnimation(Ped ped, const char* animName, const char* animDict, int duration, float blendInSpeed, float blendOutSpeed, int flags)
+{
+	if (!STREAMING::HAS_ANIM_DICT_LOADED((char*)animDict))
+	{
+		STREAMING::REQUEST_ANIM_DICT((char*)animDict);
+	}
+
+	Stopwatch stopwatch;
+	stopwatch.start();
+	while (!STREAMING::HAS_ANIM_DICT_LOADED((char*)animDict) && stopwatch.getElapsedSeconds() <= 1)
+	{
+		STREAMING::REQUEST_ANIM_DICT((char*)animDict);
+		WAIT(25);
+	}
+
+	AI::TASK_PLAY_ANIM(ped, (char*)animDict, (char*)animName, blendInSpeed, blendOutSpeed, duration, flags, 0, 0, 0, 0, 0, 0);
+}
+
+void loadImap(Hash imapHash)
+{
+	if (!STREAMING::_0xD779B9B910BD3B7C(imapHash))
+	{
+		STREAMING::_0x59767C5A7A9AE6DA(imapHash);
+	}
+}
+
+void loadInteriorSet(Interior interior, const char* setName)
+{
+	if (!INTERIOR::_IS_INTERIOR_PROP_ENABLED(interior, (char*) setName)) {
+		INTERIOR::_ENABLE_INTERIOR_PROP(interior, (char*) setName, 1);
+	}
+}

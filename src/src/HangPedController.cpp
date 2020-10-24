@@ -38,6 +38,11 @@ bool HangPedController::isAbleToExecute()
 		victim = carriedPed;
 	}
 
+	if (!PED::IS_PED_HUMAN(victim))
+	{
+		return false;
+	}
+
 	Vector3 playerPos = ENTITY::GET_ENTITY_COORDS(player, 1, 0);
 	RaycastResult ray = raycast(playerPos, getUpVector(player), 10, RaycastIntersectionOptions::Map);
 	
@@ -103,8 +108,6 @@ void HangPedController::execute()
 	WAIT(1000);
 
 	AI::TASK_STAND_STILL(victim, -1);
-	PED::SET_ENABLE_BOUND_ANKLES(victim, 0);
-	PED::SET_ENABLE_HANDCUFFS(victim, 1, 0);
 }
 
 void HangPedController::reset()

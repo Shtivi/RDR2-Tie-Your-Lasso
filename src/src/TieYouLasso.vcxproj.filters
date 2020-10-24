@@ -67,6 +67,9 @@
     <ClCompile Include="UnwindRopeController.cpp">
       <Filter>Src\Actions</Filter>
     </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Src\World</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\inc\types.h">
@@ -143,6 +146,9 @@
     </ClInclude>
     <ClInclude Include="UnwindRopeController.h">
       <Filter>Src\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Src\World</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

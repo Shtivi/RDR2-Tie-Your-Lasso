@@ -45,7 +45,6 @@ void AttachLassoController::execute()
 	AttachedRope* rope = new AttachedRope(playerGroundPos, lassoTarget, "SKEL_NECK0", 0);
 	addRope(rope);
 
-	PED::SET_ENABLE_HANDCUFFS(lassoTarget, 1, 0);
 	AI::CLEAR_PED_TASKS(lassoTarget, 0, 0);
 	WEAPON::REMOVE_ALL_PED_WEAPONS(lassoTarget, 0, 0);
 	AI::TASK_STAND_STILL(lassoTarget, -1);

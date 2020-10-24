@@ -17,6 +17,7 @@ Vector3 cross(Vector3 left, Vector3 right);
 float dotProduct(Vector3 a, Vector3 b);
 Vector3 getUpVector(Entity entity);
 Vector3 getRightVector(Entity entity);
+Vector3 getForwardVector(Entity entity);
 Vector3 toVector3(float x, float y, float z);
 float distance(Vector3 a, Vector3 b);
 float distance(Vector3 pos, Entity entity);
