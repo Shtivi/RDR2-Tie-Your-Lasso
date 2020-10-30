@@ -70,7 +70,7 @@ void AttachedRope::startWinding() {
 		stopUnwinding();
 		isWinding = true;
 
-		if (ENTITY::IS_ENTITY_A_PED(entity1)) 
+		if (ENTITY::IS_ENTITY_A_PED(entity1) && !isEntityHanging) 
 		{
 			PED::SET_PED_TO_RAGDOLL(entity1, 5000, 5000, 1, false, false, false);
 		}
@@ -141,18 +141,20 @@ int AttachedRope::update()
 		if (isEntityHanging && heightAboveGround < HANGING_TRESHOLD)
 		{
 			isEntityHanging = false;
+			AI::CLEAR_PED_TASKS(ped, 0, 0);
 			wait = 500;
 		}
 
 		if (!isEntityHanging && heightAboveGround >= HANGING_TRESHOLD)
 		{
 			isEntityHanging = true;
+			AI::CLEAR_PED_TASKS_IMMEDIATELY(ped, 0, 0);
+			playAnimation(ped, "lasso_neck", "ai_ragdoll@lasso", -1, 1, -1, 2065);
 		}
 
 		if (isEntityHanging)
 		{
 			currHealth = ENTITY::GET_ENTITY_HEALTH(ped);
-			PED::SET_PED_TO_RAGDOLL(ped, 10000000, 10000000, 0, false, false, false);
 			ENTITY::SET_ENTITY_HEALTH(ped, max(currHealth - 1, 0), 0);
 		}
 	}

@@ -44,3 +44,6 @@ Vehicle getClosestVehicle(Ped around);
 float calculateHeadingToPosition(Entity entity, Vector3 dest);
 Ped findHogtiedTargetEntity();
 Vector3* getSafeCoordForPed(Vector3 destination);
+void playAnimation(Ped ped, const char* animName, const char* animDict, int duration = -1, float blendInSpeed = 8.0f, float blendOutSpeed = -8.0f, int flags = 0);
+void loadImap(Hash imapHash);
+void loadInteriorSet(Interior interior, const char* setName);

@@ -100,6 +100,11 @@ float angleBetweenVectors(Vector3 a, Vector3 b)
 	return acos(mult / (aLength * bLength));
 }
 
+Vector3 getForwardVector(Entity entity)
+{
+	return ENTITY::GET_ENTITY_FORWARD_VECTOR(entity);
+}
+
 Vector3 getUpVector(Entity entity)
 {
 	return cross(getRightVector(entity), ENTITY::GET_ENTITY_FORWARD_VECTOR(entity));
