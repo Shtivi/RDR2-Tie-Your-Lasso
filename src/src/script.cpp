@@ -12,38 +12,10 @@ using namespace std;
 
 Ped player;
 
-void mooonshineInterior();
-void shadieBelleInterior();
-
 void Initialize() 
 {
 	player = PLAYER::PLAYER_PED_ID();
 	initActions();
-}
-
-struct SpeechArgs
-{
-	alignas(8) char* speechName;
-	alignas(8) char* voiceName;
-	alignas(8) int unk1;
-	alignas(8) int unk2;
-	alignas(8) int ped;
-	alignas(8) int unk3;
-	alignas(8) int unk4;
-};
-
-void playAmbientSpeech(Ped ped, char* speechName, char* voice = NULL)
-{
-	SpeechArgs args;
-	args.speechName = speechName;
-	args.voiceName = voice;
-	args.unk1 = 1;
-	args.unk2 = 1744022339;
-	args.unk3 = 1;
-	args.unk4 = 1;
-	args.ped = ped;
-
-	invoke<BOOL>(0x8E04FEDD28D42462, ped, &args);
 }
 
 void main()
@@ -54,15 +26,6 @@ void main()
 	{
 		handleActions();
 		UpdateRopes();
-
-		Entity targetEntity;
-		if (PLAYER::GET_PLAYER_TARGET_ENTITY(PLAYER::PLAYER_ID(), &targetEntity) && ENTITY::IS_ENTITY_A_PED(targetEntity))
-		{
-			if (ENTITY::GET_ENTITY_MODEL(targetEntity) == 3915992895)
-			{
-				debug("clerk");
-			}
-		}
 
 		if (IsKeyJustUp(VK_KEY_Z))
 		{
@@ -107,7 +70,9 @@ void main()
 
 		if (IsKeyJustUp(VK_KEY_X)) 
 		{
-			//shadieBelleInterior();
+			//Vector3 pos = add(&ENTITY::GET_ENTITY_COORDS(player, 1, 0), &multiply(&ENTITY::GET_ENTITY_FORWARD_VECTOR(player), 13));
+			//getGroundPos(pos, &pos);
+			//createVehicle(VehicleHash::ChuckWagon002X, pos, ENTITY::GET_ENTITY_HEADING(player));
 		}
 
 		WAIT(0);
@@ -158,108 +123,4 @@ const char* to_string(Vector3 position)
 	stringstream str;
 	str << position.x << ", " << position.y << ", " << position.z;
 	return str.str().c_str();
-}
-
-void mooonshineInterior() 
-{
-	Vector3 pos = toVector3(-1090.7846679688, 711.73596191406, 83.230895996094);
-	Interior i = INTERIOR::GET_INTERIOR_AT_COORDS(pos.x, pos.y, pos.z);
-
-	if (!INTERIOR::IS_VALID_INTERIOR(i)) {
-		showSubtitle("invalid");
-		return;
-	}
-
-	int imaps[] = { 0x03422619 , 0x11844778 };
-	for (int i = 0; i < 2; i++)
-	{
-		loadImap(imaps[i]);
-	}
-
-	char* sets[] = {
-		"mp006_mshine_band1",
-		"mp006_mshine_band1b",
-		"mp006_mshine_band1c",
-		"mp006_mshine_band2",
-		"mp006_mshine_bar_benchAndFrame",
-		"mp006_mshine_dressing_1",
-		"mp006_mshine_dressing_2",
-		"mp006_mshine_dressing_3",
-		"mp006_mshine_dressing_4",
-		"mp006_mshine_dressing_5",
-		"mp006_mshine_hidden_door_open",
-		"mp006_mshine_location1",
-		"mp006_mshine_location2",
-		"mp006_mshine_location3",
-		"mp006_mshine_location4",
-		"mp006_mshine_location5",
-		"mp006_mshine_shelfwall1",
-		"mp006_mshine_pic_08",
-		"mp006_mshine_shelfwall2"
-	};
-
-	for (int i = 0; i < 19; i++)
-	{
-		loadInteriorSet(i, sets[i]);
-	}
-}
-
-void shadieBelleInterior() {
-	Vector3 pos = toVector3(1906.472f, -1862.567f, 46.362f);
-	Interior interior = INTERIOR::GET_INTERIOR_AT_COORDS(pos.x, pos.y, pos.z);
-	showSubtitle(to_string(interior).c_str());
-	if (INTERIOR::IS_VALID_INTERIOR(interior))
-	{
-		int imaps[] = {
-			1155877447,
-			928165666,
-			2048341166,
-			-414377604,
-			-109593135,
-			990134505,
-			1279910772
-		};
-
-		for (int i = 0; i < 7; i++)
-		{
-			loadImap(imaps[i]);
-		}
-
-		char* sets[] = {
-			"shb_p_ammo03",
-			"shb_p_ammo02",
-			"shb_p_ammo01",
-			"shb_arthurpickup_bookforage",
-			"shb_arthurpickup_bookhunting",
-			"shb_p_industry_outro",
-			"shb_p_mansion_00",
-			"shb_p_mansion_01",
-			"shb_p_mansion_02",
-			"shb_p_mansion_03",
-			"shb_p_mansion_04",
-			"shb_p_mansion_05",
-			"shb_p_mansion_bosb",
-			"shb_p_mansion_fasttravel",
-			"shb_p_mansion_pulp_eden",
-			"shb_p_mansion_pulp_inferno",
-			"shb_upg_arthur_chest",
-			"shb_upg_arthur_rug",
-			"shb_upg_arthur_table",
-			"shb_upg_john_rug",
-			"shb_upg_skull_gator",
-			"shb_upg_skull_ram",
-
-		};
-
-		for (int i = 0; i < 22; i++)
-		{
-			loadInteriorSet(interior, sets[i]);
-		}
-
-		ENTITY::SET_ENTITY_COORDS(player, pos.x, pos.y, pos.z, 1, 1, 1, 0);
-	}
-	else
-	{
-		showSubtitle("invalid");
-	}
 }

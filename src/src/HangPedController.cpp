@@ -47,7 +47,7 @@ bool HangPedController::isAbleToExecute()
 	RaycastResult ray = raycast(playerPos, getUpVector(player), 10, RaycastIntersectionOptions::Map);
 	
 	float dist = distance(playerPos, ray.hitPos) + 0.1f;
-	if (dist < 0.8f || dist > 10)
+	if (dist < 0.8f || dist > 3)
 	{
 		reset();
 		return false;
@@ -99,7 +99,7 @@ void HangPedController::execute()
 	WAIT(2000);
 	AI::CLEAR_PED_TASKS_IMMEDIATELY(victim, 0, 0);
 
-	float length = distance(hangFrom, victim);
+	float length = distance(hangFrom, victim) + 0.25f;
 	MultiVertexRope* rope = new MultiVertexRope(new AttachedRope(hangFrom, victim, "SKEL_NECK0", length));
 	rope->pinTo(*pinTo);
 	addRope(rope);
