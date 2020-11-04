@@ -71,10 +71,10 @@ float get_distance(Vector3* pointA, Vector3* pointB) {
 	return(float)sqrt(sum_2 + z_ba);
 }
 
-float get_vector_length(Vector3* vector) {
-	double x = (double)vector->x;
-	double y = (double)vector->y;
-	double z = (double)vector->z;
+float get_vector_length(Vector3 vector) {
+	double x = (double)vector.x;
+	double y = (double)vector.y;
+	double z = (double)vector.z;
 	return(float)sqrt(x * x + y * y + z * z);
 }
 
@@ -85,6 +85,24 @@ Vector3 cross(Vector3 left, Vector3 right)
 	result.y = left.z * right.x - left.x * right.z;
 	result.z = left.x * right.y - left.y * right.x;
 	return result;
+}
+
+float dotProduct(Vector3 a, Vector3 b)
+{
+	return a.x * b.x + a.y * b.y + a.z * b.z;
+}
+
+float angleBetweenVectors(Vector3 a, Vector3 b)
+{
+	float aLength = get_vector_length(a);
+	float bLength = get_vector_length(b);
+	float mult = dotProduct(a, b);
+	return acos(mult / (aLength * bLength));
+}
+
+Vector3 getForwardVector(Entity entity)
+{
+	return ENTITY::GET_ENTITY_FORWARD_VECTOR(entity);
 }
 
 Vector3 getUpVector(Entity entity)
@@ -151,5 +169,9 @@ Vector3 toVector3(float x, float y, float z)
 }
 
 float distance(Vector3 a, Vector3 b) {
-	return get_distance(&a, &b);
+	return distanceBetween(a, b);
+}
+
+float distance(Vector3 pos, Entity entity) {
+	return distance(ENTITY::GET_ENTITY_COORDS(entity, 1, 0), pos);
 }

@@ -1,9 +1,9 @@
 #pragma once
 
-class WindRopeController : public BaseActionsController
+class UnwindRopeController : public BaseActionsController
 {
 public:
-	WindRopeController();
+	UnwindRopeController();
 
 private:
 	Rope* rope;

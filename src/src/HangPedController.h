@@ -1,15 +1,18 @@
 #pragma once
 
-class AttachPickedUpController : public BaseActionsController
+class HangPedController : public BaseActionsController
 {
 public:
-	AttachPickedUpController();
+	HangPedController();
 
 private:
-	Ped currentTarget;
+	Ped victim;
+	Vector3 hangFrom;
+	bool shouldDrop;
 
 	Prompt* createActionPrompt();
 	bool isAbleToExecute();
 	void preparePrompt(Prompt* prompt);
 	void execute();
+	void reset();
 };

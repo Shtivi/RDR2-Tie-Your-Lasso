@@ -36,8 +36,12 @@ using namespace std;
 #pragma comment(lib, "../../inc/MinHook/libMinHook.x64.lib")
 
 #include "world.h";
+#include "Camera.h";
+#include "Vehicles.h";
 #include "Stopwatch.h";
+#include "Rope.h";
 #include "AttachedRope.h";
+#include "MultiVertexRope.h";
 #include "Prompt.h";
 #include "LassoHandling.h"
 #include "AttachedRopesHanding.h";
