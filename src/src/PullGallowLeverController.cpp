@@ -7,7 +7,7 @@ PullGallowLeverController::PullGallowLeverController() : BaseActionsController()
 
 Prompt* PullGallowLeverController::createActionPrompt()
 {
-	return new Prompt("Pull Lever", GAMEPLAY::GET_HASH_KEY("INPUT_RELOAD"), PromptMode::SemiHold);
+	return new Prompt("Push Lever", GAMEPLAY::GET_HASH_KEY("INPUT_RELOAD"), PromptMode::SemiHold);
 }
 
 bool PullGallowLeverController::isAbleToExecute()
@@ -22,11 +22,11 @@ void PullGallowLeverController::preparePrompt(Prompt* prompt)
 {
 	if (gallows->isLeverPulled())
 	{
-		prompt->setText("Reset");
+		prompt->setText("Pull Back");
 	}
 	else
 	{
-		prompt->setText("Pull Lever");
+		prompt->setText("Push Lever");
 	}
 }
 

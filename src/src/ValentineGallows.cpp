@@ -2,7 +2,10 @@
 
 ValentineGallows::ValentineGallows() : Gallow(
 	toVector3(-315.075, 730.922, 119.411),
-	vector<Vector3>{toVector3(-313.787, 728.843, 119.473), toVector3(-314.639, 733.692, 119.473f)} )
+	vector<Vector3>{toVector3(-313.787, 728.843, 119.473), toVector3(-314.639, 733.692, 119.473f)},
+	2371225963,
+	"pull_lever_front_trapdoor_val"
+	)
 {
 }
 

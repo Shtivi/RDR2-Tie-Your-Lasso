@@ -82,6 +82,9 @@
     <ClCompile Include="StandardGallows.cpp">
       <Filter>Src\World\Gallows</Filter>
     </ClCompile>
+    <ClCompile Include="StDanisGallows.cpp">
+      <Filter>Src\World\Gallows</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\inc\types.h">
@@ -172,6 +175,9 @@
       <Filter>Src\World\Gallows</Filter>
     </ClInclude>
     <ClInclude Include="ValentineGallows.h">
+      <Filter>Src\World\Gallows</Filter>
+    </ClInclude>
+    <ClInclude Include="StDanisGallows.h">
       <Filter>Src\World\Gallows</Filter>
     </ClInclude>
   </ItemGroup>
