@@ -27,13 +27,34 @@ void main()
 		handleActions();
 		UpdateRopes();
 
+		//Entity temp;
+		//PLAYER::GET_ENTITY_PLAYER_IS_FREE_AIMING_AT(PLAYER::PLAYER_ID(), &temp);
+		//if (temp) {
+
+		//debug(entityPos(temp));
+		//}
+
 		if (IsKeyJustUp(VK_KEY_Z))
 		{
-			//Vector3 pos = add(&ENTITY::GET_ENTITY_COORDS(player, 1, 0), &multiply(&ENTITY::GET_ENTITY_FORWARD_VECTOR(player), 13));
-			//getGroundPos(pos, &pos);
-			//Ped ped = createPed("G_M_M_UniBanditos_01", pos);
-			//PED::SET_BLOCKING_OF_NON_TEMPORARY_EVENTS(ped, 1);
+			//Entity lever;
+			//PLAYER::GET_ENTITY_PLAYER_IS_FREE_AIMING_AT(PLAYER::PLAYER_ID(), &lever);
+			//showSubtitle(to_string(ENTITY::GET_ENTITY_MODEL(lever)).c_str());
+			//if (lever) {
+			//	if (!STREAMING::HAS_ANIM_DICT_LOADED((char*)"script_re@public_hanging@lever"))
+			//	{
+			//		STREAMING::REQUEST_ANIM_DICT((char*)"script_re@public_hanging@lever");
+			//	}
+			//	ENTITY::PLAY_ENTITY_ANIM(lever, "pull_lever_deputy_trapdoor_val", "script_re@public_hanging@lever", 1000.0f, false, true, true, 0.28f, 32768);
+			//}
+			//else {
+			//	lever = NULL;
+			//}
+			//WAIT(2000);
+			//PED::_0x7ABBD9E449E0DB00(ped, 0);
 			//DECORATOR::DECOR_SET_INT(ped, "honor_override", 0);
+			//DECORATOR::DECOR_SET_INT(ped, "loot_item_type1", -963759116);
+			//DECORATOR::DECOR_SET_INT(ped, "loot_item_amt1", 1);
+			//DECORATOR::DECOR_SET_INT(ped, "loot_item_model1", 0);
 
 			//Vector3 propPos = PED::GET_PED_BONE_COORDS(ped, 14283, 0, 0, 0);
 			//Vector3 boneOffset = entityPos(ped) - propPos;
@@ -66,14 +87,87 @@ void main()
 			//playAnimation(ped, "gen_shelf_r_c_alden", "script_proc@robberies@coach@rhodes", 20000);
 			//playAnimation(ped2, "gen_shelf_r_b_player", "script_proc@robberies@coach@rhodes", 10000);
 			//playAmbientSpeech(player, "VOCAL_FX_BUY_RESPONSE", "0507_U_M_M_VHTSTATIONCLERK_01");
+			//showSubtitle(to_string(GAMEPLAY::GET_HASH_KEY("s_gallowlevernbx01x")).c_str());
+			/*RaycastResult ray = raycast(entityPos(player), getForwardVector(player), 10, RaycastIntersectionOptions::Everything);
+			if (ray.hitEntity && distance(entityPos(player), ray.hitPos) <= 10) {
+				if (ENTITY::GET_ENTITY_MODEL(ray.hitEntity) == GAMEPLAY::GET_HASH_KEY("s_gallowlevernbx01x")) {
+					showSubtitle("playing");
+					if (!STREAMING::HAS_ANIM_DICT_LOADED((char*)"script_re@public_hanging@lever"))
+					{
+						STREAMING::REQUEST_ANIM_DICT((char*)"script_re@public_hanging@lever");
+					}
+					ENTITY::PLAY_ENTITY_ANIM(ray.hitEntity, "push_lever_deputy_lever", "script_re@public_hanging@lever", 1000.0f, false, true, true, 0.28f, 32768);
+				}
+				else {
+					showSubtitle(to_string(ENTITY::GET_ENTITY_MODEL(ray.hitEntity)).c_str());
+				}
+			}
+			else {
+				showSubtitle("no hit");
+			}*/
+
+			//Entity lever;
+			//PLAYER::GET_ENTITY_PLAYER_IS_FREE_AIMING_AT(PLAYER::PLAYER_ID(), &lever);
+			//if (lever && ENTITY::GET_ENTITY_MODEL(lever) == GAMEPLAY::GET_HASH_KEY("s_gallowlevernbx01x")) {
+			//	showSubtitle("playing");
+			//	if (!STREAMING::HAS_ANIM_DICT_LOADED((char*)"script_re@public_hanging@lever"))
+			//	{
+			//		STREAMING::REQUEST_ANIM_DICT((char*)"script_re@public_hanging@lever");
+			//	}
+			//	ENTITY::PLAY_ENTITY_ANIM(lever, "push_lever_deputy_lever", "script_re@public_hanging@lever", 1000.0f, false, true, true, 0.28f, 32768);
+			//}
+			//else {
+			//	lever = NULL;
+			//	showSubtitle("not a lever");
+			//}
+
+
 		}
 
 		if (IsKeyJustUp(VK_KEY_X)) 
+
 		{
+			Vector3 pos = add(&ENTITY::GET_ENTITY_COORDS(player, 1, 0), &multiply(&ENTITY::GET_ENTITY_FORWARD_VECTOR(player), 5));
+			getGroundPos(pos, &pos);
+			Ped ped = createPed("G_M_M_UniBanditos_01", pos);
+			PED::SET_BLOCKING_OF_NON_TEMPORARY_EVENTS(ped, 1);
+			ENTITY::SET_ENTITY_AS_NO_LONGER_NEEDED(&ped);
+			//Vector3 pos = add(&ENTITY::GET_ENTITY_COORDS(player, 1, 0), &multiply(&ENTITY::GET_ENTITY_FORWARD_VECTOR(player), 1));
+			//getGroundPos(pos, &pos);
+			//Object obj = createProp("s_gallowlevernbx01x", pos);
+			//WAIT(1000);
+			//playEntityAnimation(obj, "push_lever_deputy_lever", "script_re@public_hanging@lever", 4000.0f, false, false, 0.28f, 32768);
+			//playAnimation(player, "push_behind_quick", "script_re@public_hanging@lever", 4000);
+			//1666207837
+			//vLocal_1051 = { 2688.435f, -1113.967f, 51.049f };
+			//if (!STREAMING::HAS_MODEL_LOADED(-1923741333))
+			//{
+			//	STREAMING::REQUEST_MODEL(-1923741333, false);
+			//}
+			//RaycastResult ray = raycast(toVector3(-315.222f, 733.837f, 117.955f), toVector3(0, 0, 1), 10);
+			//if (ray.hitEntity) {
+			//	showSubtitle(to_string(ENTITY::GET_ENTITY_MODEL(ray.hitEntity)).c_str());
+			//}
+			//else {
+			//	showSubtitle("no hit");
+			//}
+			//int obj = ENTITY::GET_OBJECT_INDEX_FROM_ENTITY_INDEX(ENTITY::_0x4735E2A4BB83D9DA(e));
+			//showSubtitle(to_string(ENTITY::_0x4735E2A4BB83D9DA(e)).c_str());
+			//if (!STREAMING::HAS_ANIM_DICT_LOADED((char*)"script_re@public_hanging@lever"))
+			//{
+			//	STREAMING::REQUEST_ANIM_DICT((char*)"script_re@public_hanging@lever");
+			//}
+			//ENTITY::PLAY_ENTITY_ANIM(obj, "pull_lever_deputy_trapdoor_std", "script_re@public_hanging@lever", 1000.0f, false, true, true, 0.28f, 32768);
 			//Vector3 pos = add(&ENTITY::GET_ENTITY_COORDS(player, 1, 0), &multiply(&ENTITY::GET_ENTITY_FORWARD_VECTOR(player), 13));
 			//getGroundPos(pos, &pos);
+			//createProp("p_trapdoor02x", pos);
+			//playAnimation(player, "push_back_unarmed", "script_re@public_hanging@lever", 4000);
+
+			//playAnimation(player, "enter_lever_pull_forward_john", "script_story@fin2@ig@ig4_hang_cleet", 3000);
+
 			//createVehicle(VehicleHash::ChuckWagon002X, pos, ENTITY::GET_ENTITY_HEADING(player));
 		}
+
 
 		WAIT(0);
 	}

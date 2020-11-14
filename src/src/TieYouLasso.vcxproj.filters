@@ -70,6 +70,15 @@
     <ClCompile Include="Camera.cpp">
       <Filter>Src\World</Filter>
     </ClCompile>
+    <ClCompile Include="PullGallowLeverController.cpp">
+      <Filter>Src\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="Gallow.cpp">
+      <Filter>Src\World\Gallows</Filter>
+    </ClCompile>
+    <ClCompile Include="ValentineGallows.cpp">
+      <Filter>Src\World\Gallows</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\inc\types.h">
@@ -150,6 +159,18 @@
     <ClInclude Include="Camera.h">
       <Filter>Src\World</Filter>
     </ClInclude>
+    <ClInclude Include="PullGallowLeverController.h">
+      <Filter>Src\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="Gallow.h">
+      <Filter>Src\World\Gallows</Filter>
+    </ClInclude>
+    <ClInclude Include="StandardGallows.h">
+      <Filter>Src\World\Gallows</Filter>
+    </ClInclude>
+    <ClInclude Include="ValentineGallows.h">
+      <Filter>Src\World\Gallows</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="include">
@@ -178,6 +199,9 @@
     </Filter>
     <Filter Include="Src\World\Vehicles">
       <UniqueIdentifier>{53d50ef4-e6f2-4818-a7c7-079e1082e49a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\World\Gallows">
+      <UniqueIdentifier>{09d7a543-8706-4e68-888d-110eae103125}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

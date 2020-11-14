@@ -13,6 +13,7 @@
     <ClCompile Include="AttachPickedUpController.cpp" />
     <ClCompile Include="BaseActionsController.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Gallow.cpp" />
     <ClCompile Include="GameStopwatch.cpp" />
     <ClCompile Include="HangPedController.cpp" />
     <ClCompile Include="keyboard.cpp" />
@@ -23,10 +24,12 @@
     <ClCompile Include="PlayerActionsHandling.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="AttachedRopesHandling.cpp" />
+    <ClCompile Include="PullGallowLeverController.cpp" />
     <ClCompile Include="script.cpp" />
     <ClCompile Include="Stopwatch.cpp" />
     <ClCompile Include="StowBodyController.cpp" />
     <ClCompile Include="UnwindRopeController.cpp" />
+    <ClCompile Include="ValentineGallows.cpp" />
     <ClCompile Include="Vehicles.cpp" />
     <ClCompile Include="WindRopeController.cpp" />
     <ClCompile Include="world.cpp" />
@@ -42,6 +45,7 @@
     <ClInclude Include="AttachLassoController.h" />
     <ClInclude Include="AttachPickedUpController.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Gallow.h" />
     <ClInclude Include="HangPedController.h" />
     <ClInclude Include="keyboard.h" />
     <ClInclude Include="KickPedController.h" />
@@ -50,11 +54,14 @@
     <ClInclude Include="PlayerActionsHandling.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="AttachedRopesHanding.h" />
+    <ClInclude Include="PullGallowLeverController.h" />
     <ClInclude Include="Rope.h" />
     <ClInclude Include="script.h" />
+    <ClInclude Include="StandardGallows.h" />
     <ClInclude Include="Stopwatch.h" />
     <ClInclude Include="StowBodyController.h" />
     <ClInclude Include="UnwindRopeController.h" />
+    <ClInclude Include="ValentineGallows.h" />
     <ClInclude Include="Vehicles.h" />
     <ClInclude Include="WindRopeController.h" />
     <ClInclude Include="world.h" />

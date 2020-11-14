@@ -253,22 +253,14 @@ Vector3* getSafeCoordForPed(Vector3 destination)
 	return out;
 }
 
-//void playAnimation(Entity entity, const char* animName, const char* animDict, bool loop, bool stayInAnim)
-//{
-//	if (!STREAMING::HAS_ANIM_DICT_LOADED((char*)animDict))
-//	{
-//		STREAMING::REQUEST_ANIM_DICT((char*)animDict);
-//	}
-//	
-//	Stopwatch stopwatch;
-//	stopwatch.start();
-//	while (!STREAMING::HAS_ANIM_DICT_LOADED((char*)animDict) && stopwatch.getElapsedSeconds() <= 1)
-//	{
-//		WAIT(25);
-//	}
-//
-//	ENTITY::PLAY_ENTITY_ANIM(entity, (char*)animName, (char*)animDict, 1.f, loop, stayInAnim, 0, 0, 0);
-//}
+void playEntityAnimation(Entity entity, const char* animName, const char* animDict, float duration, bool loop, bool stayInAnim, float delta, int bitset ) {
+	if (!STREAMING::HAS_ANIM_DICT_LOADED((char*)animDict))
+	{
+		STREAMING::REQUEST_ANIM_DICT((char*)animDict);
+	}
+
+	ENTITY::PLAY_ENTITY_ANIM(entity, (char*)animName, (char*)animDict, duration, loop, stayInAnim, 1, delta, bitset);
+}
 
 void playAnimation(Ped ped, const char* animName, const char* animDict, int duration, float blendInSpeed, float blendOutSpeed, int flags)
 {
