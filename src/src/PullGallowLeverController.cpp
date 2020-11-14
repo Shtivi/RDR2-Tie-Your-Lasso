@@ -2,6 +2,7 @@
 
 PullGallowLeverController::PullGallowLeverController() : BaseActionsController() 
 {
+	gallows = NULL;
 }
 
 Prompt* PullGallowLeverController::createActionPrompt()
@@ -12,20 +13,33 @@ Prompt* PullGallowLeverController::createActionPrompt()
 bool PullGallowLeverController::isAbleToExecute()
 {
 	Vector3 playerPos = entityPos(player);
-	Gallow* valentineGallows = new ValentineGallows();
+	gallows = Gallow::fromPosition(playerPos);
 
-	if (distance(playerPos, valentineGallows->getPosition()) < 1.5f) 
+	return gallows != NULL;
+}
+
+void PullGallowLeverController::preparePrompt(Prompt* prompt)
+{
+	if (gallows->isLeverPulled())
 	{
-		return true;
+		prompt->setText("Reset");
 	}
-
-	return false;
+	else
+	{
+		prompt->setText("Pull Lever");
+	}
 }
 
 void PullGallowLeverController::execute()
 {
-	Gallow* valentineGallows = new ValentineGallows();
-	valentineGallows->pullLever(player);
+	if (gallows->isLeverPulled())
+	{
+		gallows->reset(player);
+	}
+	else 
+	{
+		gallows->pullLever(player);
+	}
 	//RaycastResult ray = raycast(toVector3(-315.222f, 733.837f, 117.955f), toVector3(0, 0, 1), 10);
 	//Entity trapdoor = ray.hitEntity;
 

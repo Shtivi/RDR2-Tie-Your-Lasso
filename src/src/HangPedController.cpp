@@ -80,9 +80,6 @@ void HangPedController::execute()
 	{
 		AI::_0xC7F0B43DCDC57E3D(0, victim, placeOn.x, placeOn.y, placeOn.z, 10.0f, 1);
 	}
-	//AI::TASK_GO_STRAIGHT_TO_COORD(0, pinTo->x, pinTo->y, pinTo->z, 1, 5000, calculateHeadingToPosition(player, entityPos(victim)), 0, 0);
-	//AI::TASK_TURN_PED_TO_FACE_ENTITY(0, victim, 1000, 0, 0, 0);
-	//AI::CLEAR_PED_TASKS(0, 0, 0);
 	AI::CLOSE_SEQUENCE_TASK(seq);
 	AI::TASK_PERFORM_SEQUENCE(player, seq);
 
@@ -99,7 +96,7 @@ void HangPedController::execute()
 	WAIT(2000);
 	AI::CLEAR_PED_TASKS_IMMEDIATELY(victim, 0, 0);
 
-	float length = distance(hangFrom, victim) + 1.25f;
+	float length = distance(hangFrom, victim) + 1.0f;
 	MultiVertexRope* rope = new MultiVertexRope(new AttachedRope(hangFrom, victim, "SKEL_NECK0", length));
 	rope->pinTo(*pinTo);
 	addRope(rope);
@@ -108,6 +105,7 @@ void HangPedController::execute()
 	WAIT(1000);
 
 	AI::TASK_STAND_STILL(victim, -1);
+	PED::SET_BLOCKING_OF_NON_TEMPORARY_EVENTS(victim, true);
 	PED::SET_ENABLE_HANDCUFFS(victim, true, 0);
 }
 

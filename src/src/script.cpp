@@ -106,16 +106,19 @@ void main()
 				showSubtitle("no hit");
 			}*/
 
-			//Entity lever;
-			//PLAYER::GET_ENTITY_PLAYER_IS_FREE_AIMING_AT(PLAYER::PLAYER_ID(), &lever);
-			//if (lever && ENTITY::GET_ENTITY_MODEL(lever) == GAMEPLAY::GET_HASH_KEY("s_gallowlevernbx01x")) {
-			//	showSubtitle("playing");
-			//	if (!STREAMING::HAS_ANIM_DICT_LOADED((char*)"script_re@public_hanging@lever"))
-			//	{
-			//		STREAMING::REQUEST_ANIM_DICT((char*)"script_re@public_hanging@lever");
-			//	}
-			//	ENTITY::PLAY_ENTITY_ANIM(lever, "push_lever_deputy_lever", "script_re@public_hanging@lever", 1000.0f, false, true, true, 0.28f, 32768);
-			//}
+			Entity lever;
+			PLAYER::GET_ENTITY_PLAYER_IS_FREE_AIMING_AT(PLAYER::PLAYER_ID(), &lever);
+			if (lever) {
+
+				if (!STREAMING::HAS_ANIM_DICT_LOADED((char*)"script_re@public_hanging@lever"))
+				{
+					STREAMING::REQUEST_ANIM_DICT((char*)"script_re@public_hanging@lever");
+				}
+				showSubtitle("playing");
+				playEntityAnimation(lever, "pull_lever_deputy_trapdoor_val", "script_re@public_hanging@lever", 1000, false, true, 0.28f, 32768);
+				WAIT(5000);
+				ENTITY::STOP_ENTITY_ANIM(lever, "pull_lever_deputy_trapdoor_val", "script_re@public_hanging@lever", 0);
+			}
 			//else {
 			//	lever = NULL;
 			//	showSubtitle("not a lever");
@@ -167,6 +170,23 @@ void main()
 
 			//createVehicle(VehicleHash::ChuckWagon002X, pos, ENTITY::GET_ENTITY_HEADING(player));
 		}
+
+		/*RaycastResult ray = raycast(entityPos(player) + getUpVector(player) * 0.2f, getForwardVector(player), 10);
+		debug( (int)ENTITY::GET_ENTITY_MODEL(ray.hitEntity) );*/
+		Entity lever;
+		PLAYER::GET_ENTITY_PLAYER_IS_FREE_AIMING_AT(PLAYER::PLAYER_ID(), &lever);
+		if (lever) {
+			debug((int)ENTITY::GET_ENTITY_MODEL(lever));
+			//debug(entityPos(lever));
+			//if (IsKeyJustUp(VK_KEY_Z)) {
+			//	showSubtitle(to_string((int)ENTITY::GET_ENTITY_MODEL(lever)).c_str());
+			//}
+		}
+
+		//debug(getForwardVector(player));
+
+		//RaycastResult ray = raycast(entityPos(player), getUpVector(player) * -1, 10, Everything, player);
+		//debug(ENTITY::GET_ENTITY_HEIGHT_ABOVE_GROUND(player));
 
 
 		WAIT(0);

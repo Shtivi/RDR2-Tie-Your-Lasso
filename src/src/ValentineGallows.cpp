@@ -2,21 +2,26 @@
 
 ValentineGallows::ValentineGallows() : Gallow(
 	toVector3(-315.075, 730.922, 119.411),
-	vector<Vector3>{toVector3(-315.222f, 733.837f, 117.955f), toVector3(-313.989, 729.185, 117.951f)} )
+	vector<Vector3>{toVector3(-313.787, 728.843, 119.473), toVector3(-314.639, 733.692, 119.473f)} )
 {
 }
 
-void ValentineGallows::playTrapdoorAnimation(Entity trapdoor)
+char* ValentineGallows::getLeverAnimationName()
 {
-	playEntityAnimation(trapdoor, "pull_lever_front_trapdoor_val", "script_re@public_hanging@lever", 1000, false, true, 0.28f, 32768);
+	return "push_lever_deputy_lever";
 }
 
-void ValentineGallows::playLeverAnimation(Entity lever)
+char* ValentineGallows::getLeverPulllAnimationName()
 {
-	playEntityAnimation(lever, "push_lever_deputy_lever", "script_re@public_hanging@lever", 1000.0f, false, true, 0.28f, 32768);
+	return "push_behind_quick";
 }
 
-void ValentineGallows::playLeverPullAnimation(Ped executioner)
+char* ValentineGallows::getTrapdoorAnimationName()
 {
-	playAnimation(player, "push_behind_quick", "script_re@public_hanging@lever", 4000);
+	return "pull_lever_front_trapdoor_val";
+}
+
+int ValentineGallows::getTrapdoorModel()
+{
+	return 2371225963;
 }

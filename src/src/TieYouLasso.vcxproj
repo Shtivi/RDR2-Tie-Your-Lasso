@@ -26,6 +26,7 @@
     <ClCompile Include="AttachedRopesHandling.cpp" />
     <ClCompile Include="PullGallowLeverController.cpp" />
     <ClCompile Include="script.cpp" />
+    <ClCompile Include="StandardGallows.cpp" />
     <ClCompile Include="Stopwatch.cpp" />
     <ClCompile Include="StowBodyController.cpp" />
     <ClCompile Include="UnwindRopeController.cpp" />

@@ -70,11 +70,19 @@ tm getGameTime()
 	return gameTime;
 }
 
-RaycastResult raycast(Vector3 source, Vector3 direction, float maxDist, RaycastIntersectionOptions intersectionOptions)
+RaycastResult raycast(Vector3 source, Vector3 direction, float maxDist, RaycastIntersectionOptions intersectionOptions, Entity ignore)
 {
 	RaycastResult result;
-	Vector3 target = add(&source, &multiply(&direction, maxDist));
-	int rayHandle = SHAPETEST::_START_SHAPE_TEST_RAY(source.x, source.y, source.z, target.x, target.y, target.z, intersectionOptions, 0, 7);
+	Vector3 target = source + direction * maxDist;
+	int rayHandle = SHAPETEST::_START_SHAPE_TEST_RAY(source.x, source.y, source.z, target.x, target.y, target.z, intersectionOptions, ignore, 7);
+	SHAPETEST::GET_SHAPE_TEST_RESULT(rayHandle, (BOOL*)&result.didHit, &result.hitPos, &result.normal, &result.hitEntity);
+	return result;
+}
+
+RaycastResult raycastRadius(Vector3 source, Vector3 target, float radius, RaycastIntersectionOptions flags)
+{
+	RaycastResult result;
+	int rayHandle = SHAPETEST::START_SHAPE_TEST_CAPSULE(source.x, source.y, source.z, target.x, target.y, target.z, radius, flags, 0, 7);
 	SHAPETEST::GET_SHAPE_TEST_RESULT(rayHandle, (BOOL*)&result.didHit, &result.hitPos, &result.normal, &result.hitEntity);
 	return result;
 }

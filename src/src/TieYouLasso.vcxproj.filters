@@ -79,6 +79,9 @@
     <ClCompile Include="ValentineGallows.cpp">
       <Filter>Src\World\Gallows</Filter>
     </ClCompile>
+    <ClCompile Include="StandardGallows.cpp">
+      <Filter>Src\World\Gallows</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\inc\types.h">

@@ -8,7 +8,8 @@ public:
 	ValentineGallows();
 
 private:
-	void playTrapdoorAnimation(Entity trapdoor);
-	void playLeverAnimation(Entity lever);
-	void playLeverPullAnimation(Ped executioner);
+	char* getLeverAnimationName();
+	char* getLeverPulllAnimationName();
+	char* getTrapdoorAnimationName();
+	int getTrapdoorModel();
 };

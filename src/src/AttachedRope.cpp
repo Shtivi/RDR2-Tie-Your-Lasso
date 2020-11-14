@@ -137,28 +137,18 @@ int AttachedRope::update()
 			return 0;
 		}
 
-		RaycastResult ray = raycast(entityPos(ped), getUpVector(ped) * -1, 10);
-		bool isEntityOnGallowsTrapdoor = ray.hitEntity && distanceBetweenEntities(ped, ray.hitEntity) <= 1.5 && ENTITY::GET_ENTITY_MODEL(ray.hitEntity) == 2371225963;
+		RaycastResult ray = raycast(entityPos(ped), getUpVector(ped) * -1, 10, Everything, ped);
+		float heightAboveGround = distance(entityPos(ped), ray.hitPos);
 
-		heightAboveGround = ENTITY::GET_ENTITY_HEIGHT_ABOVE_GROUND(ped);
-		if (isEntityHanging && heightAboveGround < HANGING_TRESHOLD && isEntityOnGallowsTrapdoor)
+		if (isEntityHanging && heightAboveGround < HANGING_TRESHOLD)
 		{
 			isEntityHanging = false;
-			AI::CLEAR_PED_TASKS(ped, 0, 0);
 			wait = 500;
 		}
 
-		if (!isEntityHanging && heightAboveGround >= HANGING_TRESHOLD && !isEntityOnGallowsTrapdoor)
+		if (!isEntityHanging && heightAboveGround >= HANGING_TRESHOLD)
 		{
 			isEntityHanging = true;
-			//if (AI::GET_IS_TASK_ACTIVE(ped, 400)) {
-			//	PED::SET_PED_TO_RAGDOLL(ped, 2000, 2000, 0, 0, 0, 0);
-			//}
-			//else 
-			//{
-			//	AI::CLEAR_PED_TASKS_IMMEDIATELY(ped, 0, 0);
-			//	playAnimation(ped, "lasso_neck", "ai_ragdoll@lasso", -1, 1, -1, 2065);
-			//}
 		}
 
 		if (isEntityHanging)
@@ -167,8 +157,6 @@ int AttachedRope::update()
 			currHealth = ENTITY::GET_ENTITY_HEALTH(ped);
 			ENTITY::SET_ENTITY_HEALTH(ped, max(currHealth - 1, 0), 0);
 		}
-
-		debug(isEntityHanging);
 	}
 
 	if (isWinding && !canWind()) {
