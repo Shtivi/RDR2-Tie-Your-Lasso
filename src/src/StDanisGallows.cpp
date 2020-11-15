@@ -1,6 +1,6 @@
 #include "Main.h"
 
-StDanisGallows::StDanisGallows() : Gallow(
+StDanisGallows::StDanisGallows() : Gallows(
 	toVector3(2691, -1113.49, 51.8719),
 	vector<Vector3>{toVector3(2688.43, -1113.97, 51.849)},
 	-1666207837,

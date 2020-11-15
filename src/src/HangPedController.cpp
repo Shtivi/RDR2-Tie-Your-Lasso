@@ -74,12 +74,14 @@ void HangPedController::execute()
 	AI::TASK_SET_BLOCKING_OF_NON_TEMPORARY_EVENTS(victim, 1);
 	WEAPON::REMOVE_ALL_PED_WEAPONS(victim, 0, 0);
 
+	Vector3 goTo = playerPos() + getForwardVector(player) * 2;
 	Object seq;
 	AI::OPEN_SEQUENCE_TASK(&seq);
 	if (shouldDrop)
 	{
 		AI::_0xC7F0B43DCDC57E3D(0, victim, placeOn.x, placeOn.y, placeOn.z, 10.0f, 1);
 	}
+	AI::TASK_GO_STRAIGHT_TO_COORD(0, goTo.x, goTo.y, goTo.z, 1, 2500, ENTITY::GET_ENTITY_HEADING(player), 0, 0);
 	AI::CLOSE_SEQUENCE_TASK(seq);
 	AI::TASK_PERFORM_SEQUENCE(player, seq);
 
@@ -100,13 +102,13 @@ void HangPedController::execute()
 	MultiVertexRope* rope = new MultiVertexRope(new AttachedRope(hangFrom, victim, "SKEL_NECK0", length));
 	rope->pinTo(*pinTo);
 	addRope(rope);
+	AI::TASK_STAND_STILL(victim, -1);
+	ENTITY::SET_ENTITY_COORDS(victim, placeOn.x, placeOn.y, placeOn.z, 1, 1, 1, false);
+	PED::SET_BLOCKING_OF_NON_TEMPORARY_EVENTS(victim, true);
+	PED::SET_ENABLE_HANDCUFFS(victim, true, 0);
 
 	CAM::DO_SCREEN_FADE_IN(300);
 	WAIT(1000);
-
-	AI::TASK_STAND_STILL(victim, -1);
-	PED::SET_BLOCKING_OF_NON_TEMPORARY_EVENTS(victim, true);
-	PED::SET_ENABLE_HANDCUFFS(victim, true, 0);
 }
 
 void HangPedController::reset()

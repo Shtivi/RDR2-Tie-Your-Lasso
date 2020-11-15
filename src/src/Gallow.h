@@ -5,7 +5,7 @@ enum GallowsLeverMode {
 	Pull
 };
 
-class Gallow 
+class Gallows 
 {
 private:
 	Vector3 leverPosition;
@@ -15,12 +15,13 @@ private:
 	GallowsLeverMode leverMode;
 
 public:
-	static Gallow* fromPosition(Vector3 position);
+	static Gallows* fromPosition(Vector3 position);
 
-	Gallow(Vector3 leverPosition, vector<Vector3> trapdoorPositions, int trapdoorModel, char* trapdoorAnimation, GallowsLeverMode leverMode = Push);
+	Gallows(Vector3 leverPosition, vector<Vector3> trapdoorPositions, int trapdoorModel, char* trapdoorAnimation, GallowsLeverMode leverMode = Push);
 	void pullLever(Ped executioner);
 	void reset(Ped executioner);
 	bool isLeverPulled();
+	GallowsLeverMode getLeverMode();
 	Vector3 getPosition();
 
 protected:
@@ -34,8 +35,9 @@ protected:
 	virtual char* getLeverAnimationName();
 	virtual char* getLeverPulllAnimationName();
 	virtual int getTrapdoorModel();
+
+private: 
+	void getToLever(Entity executioner);
 };
 
-#include "StandardGallows.h"
-#include "ValentineGallows.h"
 #include "StDanisGallows.h"

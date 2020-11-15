@@ -6,7 +6,7 @@ public:
 	PullGallowLeverController();
 
 private:
-	Gallow* gallows;
+	Gallows* gallows;
 
 	Prompt* createActionPrompt();
 	void preparePrompt(Prompt* prompt);

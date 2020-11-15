@@ -1,28 +1,29 @@
 #include "Main.h"
 
-vector<Gallow*> gallows = {
-	new StandardGallows( // Valentine
+vector<Gallows*> gallows = {
+	new Gallows( // Valentine
 		toVector3(-315.075, 730.922, 119.411),
 		vector<Vector3>{toVector3(-313.787, 728.843, 119.473), toVector3(-314.639, 733.692, 119.473f)},
 		2371225963,
 		"pull_lever_front_trapdoor_val"
 	),
-	new StandardGallows( // Blackwater
+	new Gallows( // Blackwater
 		toVector3(-766.644, -1260.87, 46.4626),
 		vector<Vector3>{toVector3(-764.715, -1260.41, 46.3581)},
 		-1923741333,
 		"pull_lever_deputy_trapdoor_val"
 	),
-	new StDanisGallows()
+	new StDanisGallows(),
+	new Gallows( // Rhodes
+		toVector3(1373.52, -1216.83, 83.2595),
+		vector<Vector3>{toVector3(1375.53, -1215.3, 83.1936)},
+		-1923741333,
+		"pull_lever_front_trapdoor_val"
+	)
 };
 
-//new StandardGallows( // Strawberry
-//	toVector3(-1805.24, -337.156, 166.699), 
-//	vector<Vector3>{ toVector3(-1806.2, -333.923, 166.623) }
-//),
-
-Gallow* Gallow::fromPosition(Vector3 pos) {
-	for (vector<Gallow*>::iterator itr = gallows.begin(); itr != gallows.end(); itr++)
+Gallows* Gallows::fromPosition(Vector3 pos) {
+	for (vector<Gallows*>::iterator itr = gallows.begin(); itr != gallows.end(); itr++)
 	{
 		if (distance((*itr)->getPosition(), pos) <= 1.5f) {
 			return *itr;
@@ -32,7 +33,7 @@ Gallow* Gallow::fromPosition(Vector3 pos) {
 	return NULL;
 }
 
-Gallow::Gallow(Vector3 leverPos, vector<Vector3> trapdoorPositions, int trapdoorModel, char* trapdoorAnimation, GallowsLeverMode leverMode)
+Gallows::Gallows(Vector3 leverPos, vector<Vector3> trapdoorPositions, int trapdoorModel, char* trapdoorAnimation, GallowsLeverMode leverMode)
 {
 	this->leverPosition = leverPos;
 	this->trapdoorPositions = trapdoorPositions;
@@ -41,13 +42,14 @@ Gallow::Gallow(Vector3 leverPos, vector<Vector3> trapdoorPositions, int trapdoor
 	this->leverMode = leverMode;
 }
 
-Vector3 Gallow::getPosition()
+Vector3 Gallows::getPosition()
 {
 	return this->leverPosition;
 }
 
-void Gallow::reset(Ped executioner)
+void Gallows::reset(Ped executioner)
 {
+	getToLever(executioner);
 	playAnimation(executioner, leverMode == Push ? "pull_unarmed_v1" : "push_behind_quick" , "script_re@public_hanging@lever", 4000);
 	WAIT(1700);
 	resetLever(getLever());
@@ -60,21 +62,20 @@ void Gallow::reset(Ped executioner)
 	}
 }
 
-bool Gallow::isLeverPulled()
+bool Gallows::isLeverPulled()
 {
 	return ENTITY::IS_ENTITY_PLAYING_ANIM(getLever(), "script_re@public_hanging@lever", getLeverAnimationName(), 3);
 }
 
-void Gallow::pullLever(Ped executioner)
+GallowsLeverMode Gallows::getLeverMode()
 {
-	WEAPON::SET_CURRENT_PED_WEAPON(executioner, WeaponHash::WEAPON_UNARMED, true, 0, 0, 0);
-	Object seq;
-	AI::OPEN_SEQUENCE_TASK(&seq);
-	AI::TASK_GO_STRAIGHT_TO_COORD(0, leverPosition.x, leverPosition.y, leverPosition.z, 1, 5000, ENTITY::GET_ENTITY_HEADING(getLever()), 0, 0);
-	//AI::TASK_TURN_PED_TO_FACE_COORD(0, leverPosition.x, leverPosition.y, leverPosition.z, 1000);
-	AI::TASK_ACHIEVE_HEADING(0, ENTITY::GET_ENTITY_HEADING(getLever()), 1000);
-	AI::CLOSE_SEQUENCE_TASK(seq);
-	AI::TASK_PERFORM_SEQUENCE(executioner, seq);
+	return this->leverMode;
+}
+
+
+void Gallows::pullLever(Ped executioner)
+{
+	getToLever(executioner);
 
 	vector<Entity> trapdoors = getTrapdoors();
 	for (vector<Entity>::iterator trapdoorItr = trapdoors.begin(); trapdoorItr != trapdoors.end(); trapdoorItr++)
@@ -85,10 +86,9 @@ void Gallow::pullLever(Ped executioner)
 	playLeverAnimation(getLever());
 	WAIT(100);
 	playLeverPullAnimation(executioner);
-	//MAPREGION::_0x43F867EF5C463A53(MAPREGION::_0xF68485C7495D848E(leverPosition.x, leverPosition.y, leverPosition.z, 0, 0, 9.724f, 2.5f, 1.75f, 1.75f, (Any)"m_volGallowsLever"));
 }
 
-vector<Entity> Gallow::getTrapdoors()
+vector<Entity> Gallows::getTrapdoors()
 {
 	vector<Entity> trapdoors;
 
@@ -99,47 +99,47 @@ vector<Entity> Gallow::getTrapdoors()
 	return trapdoors;
 }
 
-Entity Gallow::getLever()
+Entity Gallows::getLever()
 {
 	return OBJECT::GET_CLOSEST_OBJECT_OF_TYPE(leverPosition.x, leverPosition.y, leverPosition.z, 10, -1539465244, false, 0, 0);
 }
 
-void Gallow::playTrapdoorAnimation(Entity trapdoor)
+void Gallows::playTrapdoorAnimation(Entity trapdoor)
 {
 	playEntityAnimation(trapdoor, trapdoorAnimation, "script_re@public_hanging@lever", 1000, false, true, 0.28f, 32768);
 }
 
-void Gallow::playLeverAnimation(Entity lever)
+void Gallows::playLeverAnimation(Entity lever)
 {
 	playEntityAnimation(lever, getLeverAnimationName(), "script_re@public_hanging@lever", 1000.0f, false, true, 0.28f, 32768);
 }
 
-void Gallow::playLeverPullAnimation(Ped executioner)
+void Gallows::playLeverPullAnimation(Ped executioner)
 {
 	playAnimation(executioner, getLeverPulllAnimationName(), "script_re@public_hanging@lever", 4000);
 }
 
-void Gallow::resetLever(Entity lever)
+void Gallows::resetLever(Entity lever)
 {
 	ENTITY::STOP_ENTITY_ANIM(lever, getLeverAnimationName(), "script_re@public_hanging@lever", 0);
 }
 
-void Gallow::resetTrapdoor(Entity trapdoor)
+void Gallows::resetTrapdoor(Entity trapdoor)
 {
 	ENTITY::STOP_ENTITY_ANIM(trapdoor, trapdoorAnimation, "script_re@public_hanging@lever", 0);
 }
 
-int Gallow::getTrapdoorModel()
+int Gallows::getTrapdoorModel()
 {
 	return trapdoorModel;
 }
 
-char* Gallow::getLeverAnimationName()
+char* Gallows::getLeverAnimationName()
 {
 	return "push_lever_deputy_lever";
 }
 
-char* Gallow::getLeverPulllAnimationName()
+char* Gallows::getLeverPulllAnimationName()
 {
 	if (leverMode == Push)
 	{
@@ -148,5 +148,25 @@ char* Gallow::getLeverPulllAnimationName()
 	else
 	{
 		return "pull_unarmed_v1";
+	}
+}
+
+void Gallows::getToLever(Ped executioner)
+{
+	Entity lever = getLever();
+	Vector3 goTo = leverPosition + getRightVector(lever) * -0.7f;
+	Object seq;
+	AI::OPEN_SEQUENCE_TASK(&seq);
+	AI::TASK_GO_STRAIGHT_TO_COORD(0, goTo.x, goTo.y, goTo.z, 1, 5000, 270 - ENTITY::GET_ENTITY_HEADING(getLever()), 0, 0);
+	AI::TASK_ACHIEVE_HEADING(0, 270 - ENTITY::GET_ENTITY_HEADING(getLever()), 1000);
+	AI::CLOSE_SEQUENCE_TASK(seq);
+	AI::TASK_PERFORM_SEQUENCE(executioner, seq);
+	WAIT(500);
+
+	int i = 0;
+	while (AI::GET_SEQUENCE_PROGRESS(executioner) != -1 && i < 50)
+	{
+		WAIT(100);
+		i++;
 	}
 }

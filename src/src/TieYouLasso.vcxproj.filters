@@ -76,12 +76,6 @@
     <ClCompile Include="Gallow.cpp">
       <Filter>Src\World\Gallows</Filter>
     </ClCompile>
-    <ClCompile Include="ValentineGallows.cpp">
-      <Filter>Src\World\Gallows</Filter>
-    </ClCompile>
-    <ClCompile Include="StandardGallows.cpp">
-      <Filter>Src\World\Gallows</Filter>
-    </ClCompile>
     <ClCompile Include="StDanisGallows.cpp">
       <Filter>Src\World\Gallows</Filter>
     </ClCompile>
@@ -169,12 +163,6 @@
       <Filter>Src\Actions</Filter>
     </ClInclude>
     <ClInclude Include="Gallow.h">
-      <Filter>Src\World\Gallows</Filter>
-    </ClInclude>
-    <ClInclude Include="StandardGallows.h">
-      <Filter>Src\World\Gallows</Filter>
-    </ClInclude>
-    <ClInclude Include="ValentineGallows.h">
       <Filter>Src\World\Gallows</Filter>
     </ClInclude>
     <ClInclude Include="StDanisGallows.h">

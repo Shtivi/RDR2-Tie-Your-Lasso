@@ -2,7 +2,7 @@
 
 #include "Main.h"
 
-class ValentineGallows : public Gallow 
+class ValentineGallows : public Gallows
 {
 public:
 	ValentineGallows();

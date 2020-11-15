@@ -106,27 +106,25 @@ void main()
 				showSubtitle("no hit");
 			}*/
 
-			Entity lever;
-			PLAYER::GET_ENTITY_PLAYER_IS_FREE_AIMING_AT(PLAYER::PLAYER_ID(), &lever);
-			if (lever) {
+			//Entity lever;
+			//PLAYER::GET_ENTITY_PLAYER_IS_FREE_AIMING_AT(PLAYER::PLAYER_ID(), &lever);
+			//if (lever) {
 
-				if (!STREAMING::HAS_ANIM_DICT_LOADED((char*)"script_re@public_hanging@lever"))
-				{
-					STREAMING::REQUEST_ANIM_DICT((char*)"script_re@public_hanging@lever");
-				}
-				showSubtitle("playing");
-				//playEntityAnimation(lever, "pull_lever_deputy_trapdoor_std", "script_re@public_hanging@lever", 1000, false, false, 0.28f, 32768);
-				//WAIT(2500);
-				//ENTITY::STOP_ENTITY_ANIM(lever, "pull_lever_front_trapdoor_std", "script_re@public_hanging@lever", 0);
-				//ENTITY::SET_ENTITY_ROTATION(lever, 180, 180, 180, 2, 1);
-				ENTITY::SET_ENTITY_COORDS(lever, 2688.43, -1113.97, 51.849, 1, 1, 1, 0);
-			}
+			//	if (!STREAMING::HAS_ANIM_DICT_LOADED((char*)"script_re@public_hanging@lever"))
+			//	{
+			//		STREAMING::REQUEST_ANIM_DICT((char*)"script_re@public_hanging@lever");
+			//	}
+			//	showSubtitle("playing");
+			//	//playEntityAnimation(lever, "pull_lever_deputy_trapdoor_std", "script_re@public_hanging@lever", 1000, false, false, 0.28f, 32768);
+			//	//WAIT(2500);
+			//	//ENTITY::STOP_ENTITY_ANIM(lever, "pull_lever_front_trapdoor_std", "script_re@public_hanging@lever", 0);
+			//	//ENTITY::SET_ENTITY_ROTATION(lever, 180, 180, 180, 2, 1);
+			//	ENTITY::SET_ENTITY_COORDS(lever, 2688.43, -1113.97, 51.849, 1, 1, 1, 0);
+			//}
 			//else {
 			//	lever = NULL;
 			//	showSubtitle("not a lever");
 			//}
-
-
 		}
 
 		if (IsKeyJustUp(VK_KEY_X)) 
@@ -179,7 +177,7 @@ void main()
 		PLAYER::GET_ENTITY_PLAYER_IS_FREE_AIMING_AT(PLAYER::PLAYER_ID(), &lever);
 		if (lever) {
 			//debug((int)ENTITY::GET_ENTITY_MODEL(lever));
-			debug(ENTITY::IS_ENTITY_PLAYING_ANIM(lever, "script_re@public_hanging@lever", "pull_lever_deputy_trapdoor_std", 2));
+			//debug(ENTITY::GET_ENTITY_HEADING(lever));
 			//debug(entityPos(lever));
 			//if (IsKeyJustUp(VK_KEY_Z)) {
 			//	showSubtitle(to_string((int)ENTITY::GET_ENTITY_MODEL(lever)).c_str());
@@ -191,6 +189,7 @@ void main()
 		//RaycastResult ray = raycast(entityPos(player), getUpVector(player) * -1, 10, Everything, player);
 		//debug(ENTITY::GET_ENTITY_HEIGHT_ABOVE_GROUND(player));
 
+		//debug(AI::GET_SEQUENCE_PROGRESS(player));
 
 		WAIT(0);
 	}

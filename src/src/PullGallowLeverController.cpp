@@ -12,8 +12,14 @@ Prompt* PullGallowLeverController::createActionPrompt()
 
 bool PullGallowLeverController::isAbleToExecute()
 {
+	Hash pedWeapon;
+	if (WEAPON::GET_CURRENT_PED_WEAPON(player, &pedWeapon, 0, 0, 0) && pedWeapon != WeaponHash::WEAPON_UNARMED || findCarriedPedBy(player))
+	{
+		return false;
+	}
+
 	Vector3 playerPos = entityPos(player);
-	gallows = Gallow::fromPosition(playerPos);
+	gallows = Gallows::fromPosition(playerPos);
 
 	return gallows != NULL;
 }
@@ -22,11 +28,11 @@ void PullGallowLeverController::preparePrompt(Prompt* prompt)
 {
 	if (gallows->isLeverPulled())
 	{
-		prompt->setText("Pull Back");
+		prompt->setText(gallows->getLeverMode() == Push ? "Pull Back" : "Push back");
 	}
 	else
 	{
-		prompt->setText("Push Lever");
+		prompt->setText(gallows->getLeverMode() == Push ? "Push Lever" : "Pull Lever");
 	}
 }
 

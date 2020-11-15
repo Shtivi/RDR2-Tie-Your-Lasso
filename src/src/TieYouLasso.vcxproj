@@ -26,12 +26,10 @@
     <ClCompile Include="AttachedRopesHandling.cpp" />
     <ClCompile Include="PullGallowLeverController.cpp" />
     <ClCompile Include="script.cpp" />
-    <ClCompile Include="StandardGallows.cpp" />
     <ClCompile Include="StDanisGallows.cpp" />
     <ClCompile Include="Stopwatch.cpp" />
     <ClCompile Include="StowBodyController.cpp" />
     <ClCompile Include="UnwindRopeController.cpp" />
-    <ClCompile Include="ValentineGallows.cpp" />
     <ClCompile Include="Vehicles.cpp" />
     <ClCompile Include="WindRopeController.cpp" />
     <ClCompile Include="world.cpp" />
@@ -59,12 +57,10 @@
     <ClInclude Include="PullGallowLeverController.h" />
     <ClInclude Include="Rope.h" />
     <ClInclude Include="script.h" />
-    <ClInclude Include="StandardGallows.h" />
     <ClInclude Include="StDanisGallows.h" />
     <ClInclude Include="Stopwatch.h" />
     <ClInclude Include="StowBodyController.h" />
     <ClInclude Include="UnwindRopeController.h" />
-    <ClInclude Include="ValentineGallows.h" />
     <ClInclude Include="Vehicles.h" />
     <ClInclude Include="WindRopeController.h" />
     <ClInclude Include="world.h" />

@@ -1,6 +1,6 @@
 #pragma once
 
-class StDanisGallows : public Gallow
+class StDanisGallows : public Gallows
 {
 public:
 	StDanisGallows();
