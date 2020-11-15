@@ -11,14 +11,16 @@ vector<Gallows*> gallows = {
 		toVector3(-766.644, -1260.87, 46.4626),
 		vector<Vector3>{toVector3(-764.715, -1260.41, 46.3581)},
 		-1923741333,
-		"pull_lever_deputy_trapdoor_val"
+		"pull_lever_deputy_trapdoor_val",
+		90
 	),
 	new StDanisGallows(),
 	new Gallows( // Rhodes
 		toVector3(1373.52, -1216.83, 83.2595),
 		vector<Vector3>{toVector3(1375.53, -1215.3, 83.1936)},
 		-1923741333,
-		"pull_lever_front_trapdoor_val"
+		"pull_lever_front_trapdoor_val",
+		270
 	)
 };
 
@@ -33,13 +35,14 @@ Gallows* Gallows::fromPosition(Vector3 pos) {
 	return NULL;
 }
 
-Gallows::Gallows(Vector3 leverPos, vector<Vector3> trapdoorPositions, int trapdoorModel, char* trapdoorAnimation, GallowsLeverMode leverMode)
+Gallows::Gallows(Vector3 leverPos, vector<Vector3> trapdoorPositions, int trapdoorModel, char* trapdoorAnimation, float leverHeading, GallowsLeverMode leverMode)
 {
 	this->leverPosition = leverPos;
 	this->trapdoorPositions = trapdoorPositions;
 	this->trapdoorModel = trapdoorModel;
 	this->trapdoorAnimation = trapdoorAnimation;
 	this->leverMode = leverMode;
+	this->leverHeading = leverHeading;
 }
 
 Vector3 Gallows::getPosition()
@@ -179,5 +182,5 @@ Vector3 Gallows::getLeverPullingPosition()
 
 float Gallows::getLeverHeading()
 {
-	return 270 - ENTITY::GET_ENTITY_HEADING(getLever());
+	return leverHeading - ENTITY::GET_ENTITY_HEADING(getLever());
 }

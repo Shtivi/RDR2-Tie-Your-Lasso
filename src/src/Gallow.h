@@ -13,11 +13,12 @@ private:
 	int trapdoorModel;
 	char* trapdoorAnimation;
 	GallowsLeverMode leverMode;
+	float leverHeading;
 
 public:
 	static Gallows* fromPosition(Vector3 position);
 
-	Gallows(Vector3 leverPosition, vector<Vector3> trapdoorPositions, int trapdoorModel, char* trapdoorAnimation, GallowsLeverMode leverMode = Push);
+	Gallows(Vector3 leverPosition, vector<Vector3> trapdoorPositions, int trapdoorModel, char* trapdoorAnimation, float leverHeading = 270, GallowsLeverMode leverMode = Push);
 	void pullLever(Ped executioner);
 	void reset(Ped executioner);
 	bool isLeverPulled();
