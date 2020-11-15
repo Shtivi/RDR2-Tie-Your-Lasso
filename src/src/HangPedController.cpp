@@ -1,7 +1,7 @@
 #include "Main.h"
 
 HangPedController::HangPedController() : 
-	BaseActionsController() 
+	BaseActionsController(ActivationType::TAP, 1) 
 {
 	victim = NULL;
 	hangFrom = Vector3();
@@ -52,8 +52,8 @@ bool HangPedController::isAbleToExecute()
 		reset();
 		return false;
 	}
-
 	hangFrom = ray.hitPos;
+
 	return true;
 }
 
@@ -98,7 +98,7 @@ void HangPedController::execute()
 	WAIT(2000);
 	AI::CLEAR_PED_TASKS_IMMEDIATELY(victim, 0, 0);
 
-	float length = distance(hangFrom, victim) + 1.0f;
+	float length = distance(hangFrom, victim) + 0.75f;
 	MultiVertexRope* rope = new MultiVertexRope(new AttachedRope(hangFrom, victim, "SKEL_NECK0", length));
 	rope->pinTo(*pinTo);
 	addRope(rope);

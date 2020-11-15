@@ -35,9 +35,9 @@ protected:
 	virtual char* getLeverAnimationName();
 	virtual char* getLeverPulllAnimationName();
 	virtual int getTrapdoorModel();
-
-private: 
-	void getToLever(Entity executioner);
+	virtual void getToLever(Ped executioner);
+	virtual Vector3 getLeverPullingPosition();
+	virtual float getLeverHeading();
 };
 
 #include "StDanisGallows.h"

@@ -12,9 +12,12 @@ private:
 	bool isInitialized;
 	ActivationType activationType;
 	bool isExecuting;
+	float timeGap;
+	Stopwatch stopwatch;
+	bool allowExecute;
 
 public:
-	BaseActionsController(ActivationType activationType = ActivationType::TAP);
+	BaseActionsController(ActivationType activationType = ActivationType::TAP, float timeGap = 0);
 
 	void update();
 

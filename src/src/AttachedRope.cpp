@@ -6,8 +6,8 @@ AttachedRope::AttachedRope(Vector3 mapPosition, Entity entity, const char* bone,
 	isAttachedToMap = true;
 }
 
-AttachedRope::AttachedRope(Entity entity, Vector3 mapPosition, const char* objectName) :
-	AttachedRope(entity, createMapProp((char*)objectName, mapPosition), NULL, NULL, 0)
+AttachedRope::AttachedRope(Entity entity, Vector3 mapPosition, const char* objectName, bool placeOnGround) :
+	AttachedRope(entity, createMapProp((char*)objectName, mapPosition, placeOnGround), NULL, NULL, 0)
 {
 	isAttachedToMap = true;
 }
@@ -74,6 +74,7 @@ void AttachedRope::startWinding() {
 		{
 			PED::SET_PED_TO_RAGDOLL(entity1, 5000, 5000, 1, false, false, false);
 		}
+		WAIT(100);
 	}
 }
 
@@ -81,6 +82,7 @@ void AttachedRope::stopWinding()
 {
 	ROPE::STOP_ROPE_WINDING(this->ropeId);
 	isWinding = false;
+	WAIT(100);
 }
 
 void AttachedRope::startUnwinding() 
@@ -91,12 +93,14 @@ void AttachedRope::startUnwinding()
 		stopWinding();
 		isUnwinding = true;
 	}
+	WAIT(100);
 }
 
 void AttachedRope::stopUnwinding()
 {
 	ROPE::STOP_ROPE_UNWINDING_FRONT(this->ropeId);
 	isUnwinding = false;
+	WAIT(100);
 }
 
 bool AttachedRope::canWind() 
@@ -171,7 +175,7 @@ int AttachedRope::update()
 	return wait;
 }
 
-Object AttachedRope::createMapProp(char* model, Vector3 position)
+Object AttachedRope::createMapProp(char* model, Vector3 position, bool placeOnGround)
 {
 	Hash modelHash = GAMEPLAY::GET_HASH_KEY(model);
 
@@ -187,7 +191,11 @@ Object AttachedRope::createMapProp(char* model, Vector3 position)
 	Object prop = OBJECT::CREATE_OBJECT(modelHash, position.x, position.y, position.z, false, false, true, 0, 0);
 	ENTITY::FREEZE_ENTITY_POSITION(prop, true);
 	ENTITY::SET_ENTITY_VISIBLE(prop, true);
-	OBJECT::PLACE_OBJECT_ON_GROUND_PROPERLY(prop, 0);
+
+	if (placeOnGround)
+	{
+		OBJECT::PLACE_OBJECT_ON_GROUND_PROPERLY(prop, 0);
+	}
 
 	return prop;
 }

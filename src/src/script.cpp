@@ -36,7 +36,7 @@ void main()
 		{
 			Vector3 pos = add(&ENTITY::GET_ENTITY_COORDS(player, 1, 0), &multiply(&ENTITY::GET_ENTITY_FORWARD_VECTOR(player), 5));
 			getGroundPos(pos, &pos);
-			Ped ped = createPed("A_M_M_LowerSDTownfolk_01", pos);
+			Ped ped = createPed("g_m_o_uniexconfeds_01", pos);
 			DECORATOR::DECOR_SET_INT(ped, "honor_override", -10);
 			ENTITY::SET_ENTITY_AS_NO_LONGER_NEEDED(&ped);
 		}

@@ -1,6 +1,6 @@
 #include "Main.h"
 
-StowBodyController::StowBodyController()
+StowBodyController::StowBodyController() : BaseActionsController()
 {
 	wagon = NULL;
 }

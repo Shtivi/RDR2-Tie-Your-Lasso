@@ -154,11 +154,12 @@ char* Gallows::getLeverPulllAnimationName()
 void Gallows::getToLever(Ped executioner)
 {
 	Entity lever = getLever();
-	Vector3 goTo = leverPosition + getRightVector(lever) * -0.7f;
+	Vector3 goTo = getLeverPullingPosition();
+
 	Object seq;
 	AI::OPEN_SEQUENCE_TASK(&seq);
-	AI::TASK_GO_STRAIGHT_TO_COORD(0, goTo.x, goTo.y, goTo.z, 1, 5000, 270 - ENTITY::GET_ENTITY_HEADING(getLever()), 0, 0);
-	AI::TASK_ACHIEVE_HEADING(0, 270 - ENTITY::GET_ENTITY_HEADING(getLever()), 1000);
+	AI::TASK_GO_STRAIGHT_TO_COORD(0, goTo.x, goTo.y, goTo.z, 1, 5000, getLeverHeading(), 0, 0);
+	//AI::TASK_ACHIEVE_HEADING(0, getLeverHeading(), 1000);
 	AI::CLOSE_SEQUENCE_TASK(seq);
 	AI::TASK_PERFORM_SEQUENCE(executioner, seq);
 	WAIT(500);
@@ -169,4 +170,14 @@ void Gallows::getToLever(Ped executioner)
 		WAIT(100);
 		i++;
 	}
+}
+
+Vector3 Gallows::getLeverPullingPosition()
+{
+	return leverPosition + getRightVector(getLever()) * -0.7f;
+}
+
+float Gallows::getLeverHeading()
+{
+	return 270 - ENTITY::GET_ENTITY_HEADING(getLever());
 }

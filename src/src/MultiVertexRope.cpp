@@ -58,8 +58,7 @@ void MultiVertexRope::stopUnwinding()
 void MultiVertexRope::pinTo(Vector3 pos)
 {
 	AttachedRope* lastRope = ropes.back();
-	AttachedRope* rope = new AttachedRope(lastRope->getBase(), pos, "p_ropewall01x");
-	ENTITY::SET_ENTITY_ROTATION(rope->getBase(), 90, 0, 90, 2, 1);
+	AttachedRope* rope = new AttachedRope(lastRope->getBase(), pos, "p_shotGlass01x", true);
 	ropes.push_back(rope);
 }
 

@@ -16,7 +16,7 @@ private:
 
 public:
 	AttachedRope(Vector3 mapPosition, Entity entity, const char* bone, float length);
-	AttachedRope(Entity entity, Vector3 mapPosition, const char* baseObjectName = "p_shotGlass01x");
+	AttachedRope(Entity entity, Vector3 mapPosition, const char* baseObjectName = "p_shotGlass01x", bool placeOnGround = false);
 	AttachedRope(Entity entity, Entity base, const char* bone1, const char* bone2, float length);
 
 	bool getIsAttachedToMap();
@@ -34,5 +34,5 @@ public:
 	int update();
 
 private:
-	Object createMapProp(char* model, Vector3 position);
+	Object createMapProp(char* model, Vector3 position, bool placeOnGround = false);
 };

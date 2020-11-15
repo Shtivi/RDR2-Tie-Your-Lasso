@@ -15,3 +15,13 @@ void StDanisGallows::resetTrapdoor(Entity trapdoor)
 	ENTITY::SET_ENTITY_ROTATION(trapdoor, 180, 180, 180, 2, 1);
 	ENTITY::SET_ENTITY_COORDS(trapdoor, 2688.43, -1113.97, 51.849, 1, 1, 1, 0);
 }
+
+Vector3 StDanisGallows::getLeverPullingPosition()
+{
+	return getPosition() + getRightVector(getLever()) * 0.7f;
+}
+
+float StDanisGallows::getLeverHeading()
+{
+	return 90 - ENTITY::GET_ENTITY_HEADING(getLever());
+}

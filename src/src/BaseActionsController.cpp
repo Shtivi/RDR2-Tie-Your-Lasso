@@ -1,11 +1,14 @@
 #include "Main.h"
 
-BaseActionsController::BaseActionsController(ActivationType activationType)
+BaseActionsController::BaseActionsController(ActivationType activationType, float timeGap)
 {
 	isInitialized = false;
 	prompt = NULL;
 	this->activationType = activationType;
 	isExecuting = false;
+	this->timeGap = timeGap;
+	stopwatch.start();
+	this->allowExecute = false;
 }
 
 void BaseActionsController::update()
@@ -16,7 +19,20 @@ void BaseActionsController::update()
 		isInitialized = true;
 	}
 
-	if (isAbleToExecute())
+	if (timeGap)
+	{
+		if (stopwatch.getElapsedSeconds() >= timeGap)
+		{
+			allowExecute = isAbleToExecute();
+			stopwatch.start();
+		}
+	}
+	else
+	{
+		allowExecute = isAbleToExecute();
+	}
+
+	if (allowExecute)
 	{
 		preparePrompt(prompt);
 		prompt->show();
