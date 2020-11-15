@@ -29,50 +29,16 @@ void main()
 
 		if (IsKeyJustUp(VK_KEY_Z))
 		{
-			//Vector3 pos = add(&ENTITY::GET_ENTITY_COORDS(player, 1, 0), &multiply(&ENTITY::GET_ENTITY_FORWARD_VECTOR(player), 13));
-			//getGroundPos(pos, &pos);
-			//Ped ped = createPed("G_M_M_UniBanditos_01", pos);
-			//PED::SET_BLOCKING_OF_NON_TEMPORARY_EVENTS(ped, 1);
-			//DECORATOR::DECOR_SET_INT(ped, "honor_override", 0);
-
-			//Vector3 propPos = PED::GET_PED_BONE_COORDS(ped, 14283, 0, 0, 0);
-			//Vector3 boneOffset = entityPos(ped) - propPos;
-			//Object prop = createProp("s_ropehogtiehands01x", propPos);
-			//ENTITY::SET_ENTITY_ROTATION(prop, 0, 100, 1000, 2, 1);
-			//ENTITY::ATTACH_ENTITY_TO_ENTITY(prop, ped, 0, 8, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0);
-			//ENTITY::ATTACH_ENTITY_TO_ENTITY_PHYSICALLY(ped, prop, ENTITY::GET_ENTITY_BONE_INDEX_BY_NAME(ped, "SKEL_NECK0"), 0, 0, 0, 0, 0, 0, 0, 0, 100, 1000, 9999999, false, 0, 0, 0, 2, 0, 0, 0);
-			// s_ropehogtiehandsmedium01x_a
-			// p_ropewall01x
-			// p_cs_fusespool01x
-
-			//showSubtitle(to_string(entityPos(player)));
-
-			//Vector3 pos = getGroundPos(entityPos(player) + getForwardVector(player));
-			//ENTITY::SET_ENTITY_COORDS(player, pos.x, pos.y, pos.z, 1, 1, 1, 1);
-
-			//showSubtitle(to_string(INTERIOR::GET_INTERIOR_FROM_ENTITY(player)).c_str());
-
-
-			//playAnimation(player, "gen_shelf_r_b_player", "script_proc@robberies@coach@rhodes", 10000);
-			//playAnimation(player, "gen_shelf_r_c_alden", "script_proc@robberies@coach@rhodes", 10000);
-
-			//Vector3 pos1 = entityPos(player) + getForwardVector(player) * 5;
-			//Vector3 pos2 = entityPos(player) + getForwardVector(player) * 7;
-			//Ped ped = createPed("U_M_M_VhtStationClerk_01", pos1);
-			//Ped ped2 = createPed("G_M_M_UniBanditos_01", pos2);
-			//WAIT(1000);
-			//AI::TASK_TURN_PED_TO_FACE_ENTITY(ped2, ped, 2000, 0, 0, 0);
-			//WAIT(3000);
-			//playAnimation(ped, "gen_shelf_r_c_alden", "script_proc@robberies@coach@rhodes", 20000);
-			//playAnimation(ped2, "gen_shelf_r_b_player", "script_proc@robberies@coach@rhodes", 10000);
-			//playAmbientSpeech(player, "VOCAL_FX_BUY_RESPONSE", "0507_U_M_M_VHTSTATIONCLERK_01");
 		}
 
 		if (IsKeyJustUp(VK_KEY_X)) 
+
 		{
-			//Vector3 pos = add(&ENTITY::GET_ENTITY_COORDS(player, 1, 0), &multiply(&ENTITY::GET_ENTITY_FORWARD_VECTOR(player), 13));
-			//getGroundPos(pos, &pos);
-			//createVehicle(VehicleHash::ChuckWagon002X, pos, ENTITY::GET_ENTITY_HEADING(player));
+			Vector3 pos = add(&ENTITY::GET_ENTITY_COORDS(player, 1, 0), &multiply(&ENTITY::GET_ENTITY_FORWARD_VECTOR(player), 5));
+			getGroundPos(pos, &pos);
+			Ped ped = createPed("A_M_M_LowerSDTownfolk_01", pos);
+			DECORATOR::DECOR_SET_INT(ped, "honor_override", -10);
+			ENTITY::SET_ENTITY_AS_NO_LONGER_NEEDED(&ped);
 		}
 
 		WAIT(0);

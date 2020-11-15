@@ -37,3 +37,4 @@ private:
 #include "HangPedController.h";
 #include "StowBodyController.h";
 #include "UnwindRopeController.h";
+#include "PullGallowLeverController.h";

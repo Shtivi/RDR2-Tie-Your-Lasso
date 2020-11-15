@@ -36,6 +36,7 @@ using namespace std;
 #pragma comment(lib, "../../inc/MinHook/libMinHook.x64.lib")
 
 #include "world.h";
+#include "Gallow.h";
 #include "Camera.h";
 #include "Vehicles.h";
 #include "Stopwatch.h";
