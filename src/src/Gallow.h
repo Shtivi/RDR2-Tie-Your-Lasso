@@ -16,6 +16,7 @@ private:
 	GallowsLeverMode leverMode;
 	float leverHeading;
 	vector<NooseSpot> nooseSpots;
+	float noosedPedHeading;
 
 public:
 	static Gallows* fromPosition(Vector3 position);
@@ -26,6 +27,7 @@ public:
 		int trapdoorModel, 
 		char* trapdoorAnimation, 
 		float leverHeading,
+		float noosedPedHeading,
 		vector<NooseSpot> nooseSpots = vector<NooseSpot>{},
 		GallowsLeverMode leverMode = Push
 	);

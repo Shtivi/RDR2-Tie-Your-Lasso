@@ -29,6 +29,7 @@ void main()
 
 		if (IsKeyJustUp(VK_KEY_Z))
 		{
+			/*CASH::PLAYER_ADD_CASH(PLAYER::PLAYER_ID(), 10000);*/
 		}
 
 		if (IsKeyJustUp(VK_KEY_X)) 
@@ -41,7 +42,7 @@ void main()
 			ENTITY::SET_ENTITY_AS_NO_LONGER_NEEDED(&ped);
 		}
 
-		if (!true) {
+		if (true) {
 
 			Vector3 pos = entityPos(player);
 			Hash weaponHash;
