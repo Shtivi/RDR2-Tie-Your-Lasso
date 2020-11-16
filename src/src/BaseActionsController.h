@@ -41,3 +41,4 @@ private:
 #include "StowBodyController.h";
 #include "UnwindRopeController.h";
 #include "PullGallowLeverController.h";
+#include "TieGallowsNooseController.h";

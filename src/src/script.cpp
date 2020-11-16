@@ -34,11 +34,25 @@ void main()
 		if (IsKeyJustUp(VK_KEY_X)) 
 
 		{
-			//Vector3 pos = add(&ENTITY::GET_ENTITY_COORDS(player, 1, 0), &multiply(&ENTITY::GET_ENTITY_FORWARD_VECTOR(player), 5));
-			//getGroundPos(pos, &pos);
-			//Ped ped = createPed("g_m_o_uniexconfeds_01", pos);
-			//DECORATOR::DECOR_SET_INT(ped, "honor_override", -10);
-			//ENTITY::SET_ENTITY_AS_NO_LONGER_NEEDED(&ped);
+			Vector3 pos = add(&ENTITY::GET_ENTITY_COORDS(player, 1, 0), &multiply(&ENTITY::GET_ENTITY_FORWARD_VECTOR(player), 5));
+			getGroundPos(pos, &pos);
+			Ped ped = createPed("g_m_o_uniexconfeds_01", pos);
+			DECORATOR::DECOR_SET_INT(ped, "honor_override", -10);
+			ENTITY::SET_ENTITY_AS_NO_LONGER_NEEDED(&ped);
+		}
+
+		if (!true) {
+
+			Vector3 pos = entityPos(player);
+			Hash weaponHash;
+			WEAPON::GET_CURRENT_PED_WEAPON(player, &weaponHash, 0, 0, 0);
+			if (weaponHash != WeaponHash::WEAPON_UNARMED) {
+				RaycastResult ray = raycastCrosshair(10, Map);
+				debug(ray.hitPos);
+			}
+			else {
+				debug(pos);
+			}
 		}
 
 		WAIT(0);

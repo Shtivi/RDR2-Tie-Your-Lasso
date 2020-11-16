@@ -87,6 +87,18 @@ RaycastResult raycastRadius(Vector3 source, Vector3 target, float radius, Raycas
 	return result;
 }
 
+RaycastResult raycastCrosshair(float maxDist, RaycastIntersectionOptions intersectionOptions, Entity ignore)
+{
+	Vector3 source = CAM::GET_GAMEPLAY_CAM_COORD();
+	Vector3 rot = ((float)3.1452 / 180.0) * CAM::_GET_GAMEPLAY_CAM_ROT(2);
+	Vector3 forward = normalOf(toVector3(
+		-sin(rot.z) * abs(cos(rot.x)),
+		cos(rot.z) * abs(cos(rot.x)),
+		sin(rot.x)
+	));
+	return raycast(source, forward, maxDist, intersectionOptions, ignore);
+}
+
 Ped findCarriedPedBy(Ped carrier)
 {
 	return PED::_0xD806CD2A4F2C2996(carrier);

@@ -12,6 +12,7 @@ void initActions()
 	//actionControllers.push_back(new StowBodyController());
 	actionControllers.push_back(new UnwindRopeController());
 	actionControllers.push_back(new PullGallowLeverController());
+	actionControllers.push_back(new TieGallowsNooseController());
 }
 
 void handleActions()
