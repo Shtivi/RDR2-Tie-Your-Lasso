@@ -12,5 +12,6 @@ public:
 	virtual bool canUnwind() = 0;
 	virtual void startUnwinding() = 0;
 	virtual void stopUnwinding() = 0;
+	virtual void detach() = 0;
 	virtual int update() = 0;
 };

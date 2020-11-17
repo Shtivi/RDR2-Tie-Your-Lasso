@@ -21,7 +21,11 @@ vector<Gallows*> gallows = {
 		-1923741333,
 		"pull_lever_deputy_trapdoor_val",
 		90,
-		90
+		360,
+		vector<NooseSpot>{
+			NooseSpot(toVector3(-764.132, -1259.81, 49.5529), toVector3(-764.132, -1259.81, 49.5529), toVector3(-763.769, -1259.63, 47.3899)),
+			NooseSpot(toVector3(-765.368, -1259.89, 49.5529), toVector3(-765.368, -1259.89, 49.5529), toVector3(-765.381, -1259.48, 47.3899))
+		}
 	),
 	new StDanisGallows(),
 	new Gallows( // Rhodes
@@ -79,21 +83,28 @@ void Gallows::reset(Ped executioner)
 {
 	getToLever(executioner);
 	playAnimation(executioner, leverMode == Push ? "pull_unarmed_v1" : "push_behind_quick" , "script_re@public_hanging@lever", 4000);
+
 	WAIT(1700);
 	resetLever(getLever());
+
+	for (vector<NooseSpot>::iterator itr = nooseSpots.begin(); itr != nooseSpots.end(); itr++)
+	{
+		if (!itr->isAvailable()) {
+			Rope* rope = getRopeAttachedTo(itr->getOccupant());
+			if (rope) {
+				rope->detach();
+			}
+			else {
+				showSubtitle("no attached");
+			}
+		}
+	}
 
 	WAIT(400);
 	vector<Entity> trapdoors = getTrapdoors();
 	for (vector<Entity>::iterator trapdoorItr = trapdoors.begin(); trapdoorItr != trapdoors.end(); trapdoorItr++)
 	{
 		resetTrapdoor(*trapdoorItr);
-	}
-
-	for (vector<NooseSpot>::iterator itr = nooseSpots.begin(); itr != nooseSpots.end(); itr++)
-	{
-		if (!itr->isAvailable()) {
-			ENTITY::DETACH_ENTITY(itr->getOccupant(), 1, 1);
-		}
 	}
 }
 

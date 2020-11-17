@@ -147,7 +147,7 @@ int AttachedRope::update()
 		if (isEntityHanging && heightAboveGround < HANGING_TRESHOLD)
 		{
 			isEntityHanging = false;
-			wait = 500;
+			wait = 1000;
 		}
 
 		if (!isEntityHanging && heightAboveGround >= HANGING_TRESHOLD)
@@ -159,7 +159,7 @@ int AttachedRope::update()
 		{
 			PED::SET_PED_TO_RAGDOLL(ped, 5000, 5000, 0, false, false, false);
 			currHealth = ENTITY::GET_ENTITY_HEALTH(ped);
-			ENTITY::SET_ENTITY_HEALTH(ped, max(currHealth - 1, 0), 0);
+			ENTITY::SET_ENTITY_HEALTH(ped, max(currHealth - 2, 0), 0);
 		}
 	}
 
@@ -173,6 +173,13 @@ int AttachedRope::update()
 	}
 
 	return wait;
+}
+
+void AttachedRope::detach()
+{
+	ROPE::DETACH_ROPE_FROM_ENTITY(ropeId, this->getAttached());
+	Vector3 downVec = -1 * getUpVector(this->getAttached());
+	ENTITY::APPLY_FORCE_TO_ENTITY(this->getAttached(), 0, downVec.x, downVec.y, downVec.z, 0, 0, 0, 0, 0, 1, 1, 0, 0);
 }
 
 Object AttachedRope::createMapProp(char* model, Vector3 position, bool placeOnGround)

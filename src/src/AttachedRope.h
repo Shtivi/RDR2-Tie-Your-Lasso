@@ -31,6 +31,7 @@ public:
 	bool canUnwind();
 	void startUnwinding();
 	void stopUnwinding();
+	void detach();
 	int update();
 
 private:

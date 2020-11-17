@@ -35,7 +35,7 @@ void NooseSpot::setOccupant(Ped occupant) {
 }
 
 void NooseSpot::updateOccupant() {
-	if (occupant && (!ENTITY::DOES_ENTITY_EXIST(occupant) || ENTITY::IS_ENTITY_DEAD(occupant) || !PED::IS_PED_HUMAN(occupant))) {
+	if (occupant && (!ENTITY::DOES_ENTITY_EXIST(occupant) || !PED::IS_PED_HUMAN(occupant))) {
 		this->clear();
 	}
 }

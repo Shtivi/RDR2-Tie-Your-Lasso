@@ -78,3 +78,22 @@ Rope* getClosestRopeWithin(Vector3 position, float radius) {
 
 	return best;
 }
+
+Rope* getRopeAttachedTo(Entity entity) {
+	std::vector<Rope*>::iterator it;
+	Rope* curr;
+
+	if (!entity) {
+		return NULL;
+	}
+
+	for (it = attachedRopes.begin(); it != attachedRopes.end(); ++it)
+	{
+		curr = *it;
+		if (curr->isExist() && (curr->getAttached() == entity || curr->getBase() == entity)) {
+			return &(*curr);
+		}
+	}
+
+	return NULL;
+}
