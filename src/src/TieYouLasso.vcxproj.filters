@@ -85,6 +85,9 @@
     <ClCompile Include="TieGallowsNooseController.cpp">
       <Filter>Src\Actions</Filter>
     </ClCompile>
+    <ClCompile Include="StrawberryGallows.cpp">
+      <Filter>Src\World\Gallows</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\inc\types.h">
@@ -179,6 +182,9 @@
     </ClInclude>
     <ClInclude Include="TieGallowsNooseController.h">
       <Filter>Src\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="StrawberryGallows.h">
+      <Filter>Src\World\Gallows</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

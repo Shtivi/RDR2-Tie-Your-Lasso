@@ -39,7 +39,8 @@ vector<Gallows*> gallows = {
 			NooseSpot(toVector3(1374.76, -1216.23, 86.4909), toVector3(1373.4, -1217.74, 84.161), toVector3(1374.63, -1215.9, 84.2286)),
 			NooseSpot(toVector3(1374.95, -1214.53, 86.6254), toVector3(1373.89, -1212.46, 85.8205), toVector3(1374.84, -1214.49, 84.2374))
 		}
-	)
+	),
+	new StrawberryGallows()
 };
 
 Gallows* Gallows::fromPosition(Vector3 pos) {
@@ -93,9 +94,6 @@ void Gallows::reset(Ped executioner)
 			Rope* rope = getRopeAttachedTo(itr->getOccupant());
 			if (rope) {
 				rope->detach();
-			}
-			else {
-				showSubtitle("no attached");
 			}
 		}
 	}
@@ -154,7 +152,7 @@ void Gallows::noose(Ped victim, Vector3 position)
 
 	PED::SET_BLOCKING_OF_NON_TEMPORARY_EVENTS(victim, true);
 	ENTITY::SET_ENTITY_COORDS(victim, nooseSpot->getTrapdoorPosition().x, nooseSpot->getTrapdoorPosition().y, nooseSpot->getTrapdoorPosition().z, 1, 1, 0, false);
-	WAIT(1000);
+	WAIT(500);
 	AI::CLEAR_PED_TASKS_IMMEDIATELY(victim, 0, 0);
 	AI::TASK_STAND_STILL(victim, -1);
 	PED::SET_ENABLE_HANDCUFFS(victim, true, 0);

@@ -46,6 +46,9 @@ void TieGallowsNooseController::execute()
 	AI::CLOSE_SEQUENCE_TASK(seq);
 	AI::TASK_PERFORM_SEQUENCE(player, seq);
 
-	WAIT(5000);
+	WAIT(2500);
+	CAM::DO_SCREEN_FADE_OUT(300);
 	gallows->noose(victim, placeOn);
+	WAIT(2500);
+	CAM::DO_SCREEN_FADE_IN(300);
 }

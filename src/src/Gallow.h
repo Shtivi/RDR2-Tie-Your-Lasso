@@ -61,3 +61,4 @@ private:
 };
 
 #include "StDanisGallows.h"
+#include "StrawberryGallows.h"

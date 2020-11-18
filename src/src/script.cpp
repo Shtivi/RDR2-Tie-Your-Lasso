@@ -32,19 +32,30 @@ void main()
 		{
 			Vector3 pos = add(&ENTITY::GET_ENTITY_COORDS(player, 1, 0), &multiply(&ENTITY::GET_ENTITY_FORWARD_VECTOR(player), 5));
 			getGroundPos(pos, &pos);
-			Ped ped = createPed("g_m_o_uniexconfeds_01", pos);
+			Ped ped = createPed("CS_ColmODriscoll", pos);
 			DECORATOR::DECOR_SET_INT(ped, "honor_override", -10);
 			ENTITY::SET_ENTITY_AS_NO_LONGER_NEEDED(&ped);
+			//PED::SET_BLOCKING_OF_NON_TEMPORARY_EVENTS(ped, 1);
 		}
 
-		if (!true) {
+		if (true) {
 
 			Vector3 pos = entityPos(player);
 			Hash weaponHash;
 			WEAPON::GET_CURRENT_PED_WEAPON(player, &weaponHash, 0, 0, 0);
 			if (weaponHash != WeaponHash::WEAPON_UNARMED) {
-				RaycastResult ray = raycastCrosshair(10, Map);
-				debug(ray.hitPos);
+				Entity e;
+				if (PLAYER::GET_ENTITY_PLAYER_IS_FREE_AIMING_AT(PLAYER::PLAYER_ID(), &e) && distanceBetweenEntities(player, e) < 10) {
+					if (IsKeyJustUp(VK_KEY_Z)) {
+						showSubtitle(to_string(ENTITY::GET_ENTITY_MODEL(e)).c_str());
+					} 
+					debug(entityPos(e));
+				}
+				else 
+				{
+					RaycastResult ray = raycastCrosshair(40, Map);
+					debug(ray.hitPos);
+				}
 			}
 			else {
 				debug(pos);

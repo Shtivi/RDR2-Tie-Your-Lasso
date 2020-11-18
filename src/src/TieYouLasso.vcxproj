@@ -30,6 +30,7 @@
     <ClCompile Include="StDanisGallows.cpp" />
     <ClCompile Include="Stopwatch.cpp" />
     <ClCompile Include="StowBodyController.cpp" />
+    <ClCompile Include="StrawberryGallows.cpp" />
     <ClCompile Include="TieGallowsNooseController.cpp" />
     <ClCompile Include="UnwindRopeController.cpp" />
     <ClCompile Include="Vehicles.cpp" />
@@ -63,6 +64,7 @@
     <ClInclude Include="StDanisGallows.h" />
     <ClInclude Include="Stopwatch.h" />
     <ClInclude Include="StowBodyController.h" />
+    <ClInclude Include="StrawberryGallows.h" />
     <ClInclude Include="TieGallowsNooseController.h" />
     <ClInclude Include="UnwindRopeController.h" />
     <ClInclude Include="Vehicles.h" />

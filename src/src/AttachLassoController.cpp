@@ -48,5 +48,9 @@ void AttachLassoController::execute()
 	AI::CLEAR_PED_TASKS(lassoTarget, 0, 0);
 	WEAPON::REMOVE_ALL_PED_WEAPONS(lassoTarget, 0, 0);
 	AI::TASK_STAND_STILL(lassoTarget, -1);
-	PED::SET_ENABLE_HANDCUFFS(lassoTarget, 1, 0);
+
+	if (PED::IS_PED_HUMAN(lassoTarget))
+	{
+		PED::SET_ENABLE_HANDCUFFS(lassoTarget, 1, 0);
+	}
 }
