@@ -7,7 +7,7 @@ vector<Gallows*> gallows = {
 		2371225963,
 		"pull_lever_front_trapdoor_val",
 		270,
-		270,
+		90,
 		vector<NooseSpot>{
 			NooseSpot(toVector3(-314.166, 727.714, 122.854), toVector3(-313.907, 726.881, 121.285), toVector3(-314.543, 728.321, 120.608)),
 			NooseSpot(toVector3(-314.487, 729.75, 122.897), toVector3(-314.697, 731.494, 121.753), toVector3(-314.735, 729.307, 120.615)),
@@ -95,6 +95,7 @@ void Gallows::reset(Ped executioner)
 			if (rope) {
 				rope->detach();
 			}
+			itr->clear();
 		}
 	}
 

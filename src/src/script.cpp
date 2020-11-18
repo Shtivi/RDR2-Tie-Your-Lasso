@@ -38,7 +38,7 @@ void main()
 			//PED::SET_BLOCKING_OF_NON_TEMPORARY_EVENTS(ped, 1);
 		}
 
-		if (true) {
+		if (!true) {
 
 			Vector3 pos = entityPos(player);
 			Hash weaponHash;
