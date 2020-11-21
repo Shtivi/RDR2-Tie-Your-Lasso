@@ -19,7 +19,7 @@ bool TieGallowsNooseController::isAbleToExecute()
 		return false;
 	}
 
-	if (!PED::IS_PED_HUMAN(victim) || ENTITY::IS_ENTITY_DEAD(victim))
+	if (!ENTITY::IS_ENTITY_A_PED(victim) || !PED::IS_PED_HUMAN(victim) || ENTITY::IS_ENTITY_DEAD(victim))
 	{
 		return false;
 	}

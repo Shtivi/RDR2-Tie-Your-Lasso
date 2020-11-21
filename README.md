@@ -18,4 +18,3 @@ This mod allows you to hitch your lasso, along with the peds tied to it, to the 
 - It's also possible to attach the ped you carry to the ground.
 - After attaching a ped to the ground, you can wind the rope by standing near it and pressing E or unwinding it by pressing R.
 - Hang peds by hogting them and stand under a bridge or a tree. Then press V. Try to keep the player's front area clear because there the rope will be hitched so you can control it.
-- Stow peds in wagons by standing near the rear and pressing R. You can use this as a gallow.

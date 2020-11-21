@@ -121,7 +121,6 @@ GallowsLeverMode Gallows::getLeverMode()
 void Gallows::pullLever(Ped executioner)
 {
 	getToLever(executioner);
-
 	vector<Entity> trapdoors = getTrapdoors();
 	for (vector<Entity>::iterator trapdoorItr = trapdoors.begin(); trapdoorItr != trapdoors.end(); trapdoorItr++)
 	{
@@ -131,6 +130,19 @@ void Gallows::pullLever(Ped executioner)
 	playLeverAnimation(getLever());
 	WAIT(100);
 	playLeverPullAnimation(executioner);
+
+	if (isLeverPulled()) 
+	{
+		WAIT(2000);
+		for (vector<NooseSpot>::iterator itr = nooseSpots.begin(); itr != nooseSpots.end(); itr++)
+		{
+			if (!itr->isAvailable())
+			{
+				PED::EXPLODE_PED_HEAD(itr->getOccupant(), GAMEPLAY::GET_HASH_KEY("WEAPON_LASSO"));
+				//ENTITY::SET_ENTITY_HEALTH(itr->getOccupant(), 4, 0);
+			}
+		}
+	}
 }
 
 bool Gallows::canNooseAtPosition(Vector3 position)

@@ -30,11 +30,11 @@ void main()
 		if (IsKeyJustUp(VK_KEY_X)) 
 
 		{
-			Vector3 pos = add(&ENTITY::GET_ENTITY_COORDS(player, 1, 0), &multiply(&ENTITY::GET_ENTITY_FORWARD_VECTOR(player), 5));
-			getGroundPos(pos, &pos);
-			Ped ped = createPed("CS_ColmODriscoll", pos);
-			DECORATOR::DECOR_SET_INT(ped, "honor_override", -10);
-			ENTITY::SET_ENTITY_AS_NO_LONGER_NEEDED(&ped);
+			//Vector3 pos = add(&ENTITY::GET_ENTITY_COORDS(player, 1, 0), &multiply(&ENTITY::GET_ENTITY_FORWARD_VECTOR(player), 5));
+			//getGroundPos(pos, &pos);
+			//Ped ped = createPed("CS_ColmODriscoll", pos);
+			//DECORATOR::DECOR_SET_INT(ped, "honor_override", -10);
+			//ENTITY::SET_ENTITY_AS_NO_LONGER_NEEDED(&ped);
 			//PED::SET_BLOCKING_OF_NON_TEMPORARY_EVENTS(ped, 1);
 		}
 
@@ -49,7 +49,8 @@ void main()
 					if (IsKeyJustUp(VK_KEY_Z)) {
 						showSubtitle(to_string(ENTITY::GET_ENTITY_MODEL(e)).c_str());
 					} 
-					debug(entityPos(e));
+					//debug(entityPos(e));
+					debug(ENTITY::GET_ENTITY_ROTATION(e, 2));
 				}
 				else 
 				{
