@@ -49,3 +49,4 @@ void playAnimation(Ped ped, const char* animName, const char* animDict, int dura
 void loadImap(Hash imapHash);
 void loadInteriorSet(Interior interior, const char* setName);
 void playEntityAnimation(Entity entity, const char* animName, const char* animDict, float duration, bool loop = false, bool stayInAnim = false, float delta = 0, int bitset = 0);
+void playSoundFromEntity(Entity e, char* soundset, char* soundname);

@@ -12,7 +12,7 @@ vector<Gallows*> gallows = {
 			NooseSpot(toVector3(-314.166, 727.714, 122.854), toVector3(-313.907, 726.881, 121.285), toVector3(-314.543, 728.321, 120.608)),
 			NooseSpot(toVector3(-314.487, 729.75, 122.897), toVector3(-314.697, 731.494, 121.753), toVector3(-314.735, 729.307, 120.615)),
 			NooseSpot(toVector3(-315.338, 734.837, 122.885), toVector3(-315.492, 735.995, 121.696), toVector3(-315.63, 734.277, 120.617)),
-			NooseSpot(toVector3(-315.04, 732.948, 122.899), toVector3(-314.741, 731.737, 121.504), toVector3(-315.383, 732.747, 120.61))
+			NooseSpot(toVector3(-315.04, 732.948, 122.899), toVector3(-314.741, 731.737, 121.504), toVector3(-315.193, 732.929, 120.61))
 		}
 	),
 	new Gallows( // Blackwater
@@ -37,7 +37,7 @@ vector<Gallows*> gallows = {
 		90,
 		vector<NooseSpot>{
 			NooseSpot(toVector3(1374.76, -1216.23, 86.4909), toVector3(1373.4, -1217.74, 84.161), toVector3(1374.63, -1215.9, 84.2286)),
-			NooseSpot(toVector3(1374.95, -1214.53, 86.6254), toVector3(1373.89, -1212.46, 85.8205), toVector3(1374.84, -1214.49, 84.2374))
+			NooseSpot(toVector3(1374.95, -1214.53, 86.6254), toVector3(1373.89, -1212.46, 85.8205), toVector3(1374.8, -1214.38, 84.2374))
 		}
 	),
 	new StrawberryGallows()
@@ -133,13 +133,18 @@ void Gallows::pullLever(Ped executioner)
 
 	if (isLeverPulled()) 
 	{
-		WAIT(2000);
+		WAIT(1300);
+		for (vector<Entity>::iterator trapdoorItr = trapdoors.begin(); trapdoorItr != trapdoors.end(); trapdoorItr++)
+		{
+			playSoundFromEntity(*trapdoorItr, "HIDEOUT_HDR_Sounds", "OPEN_BARN_DOORS");
+		}
+
+		WAIT(1000);
 		for (vector<NooseSpot>::iterator itr = nooseSpots.begin(); itr != nooseSpots.end(); itr++)
 		{
 			if (!itr->isAvailable())
 			{
 				PED::EXPLODE_PED_HEAD(itr->getOccupant(), GAMEPLAY::GET_HASH_KEY("WEAPON_LASSO"));
-				//ENTITY::SET_ENTITY_HEALTH(itr->getOccupant(), 4, 0);
 			}
 		}
 	}
@@ -170,8 +175,7 @@ void Gallows::noose(Ped victim, Vector3 position)
 	AI::TASK_STAND_STILL(victim, -1);
 	PED::SET_ENABLE_HANDCUFFS(victim, true, 0);
 	float length = distance(nooseSpot->getTrapdoorPosition(), nooseSpot->getAnchorPosition()) + 0.75;
-	MultiVertexRope* rope = new MultiVertexRope(new AttachedRope(nooseSpot->getAnchorPosition(), victim, "SKEL_NECK0", length));
-	rope->pinTo(nooseSpot->getVerticalAnchorPosition());
+	AttachedRope* rope = new AttachedRope(nooseSpot->getAnchorPosition(), victim, "SKEL_NECK0", length);
 	addRope(rope);
 	WAIT(500);
 	ENTITY::SET_ENTITY_HEADING(victim, noosedPedHeading);

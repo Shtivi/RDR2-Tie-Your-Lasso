@@ -27,41 +27,47 @@ void main()
 		handleActions();
 		UpdateRopes();
 
-		if (IsKeyJustUp(VK_KEY_X)) 
+		//if (IsKeyJustUp(VK_KEY_X)) 
 
-		{
-			//Vector3 pos = add(&ENTITY::GET_ENTITY_COORDS(player, 1, 0), &multiply(&ENTITY::GET_ENTITY_FORWARD_VECTOR(player), 5));
-			//getGroundPos(pos, &pos);
-			//Ped ped = createPed("CS_ColmODriscoll", pos);
-			//DECORATOR::DECOR_SET_INT(ped, "honor_override", -10);
-			//ENTITY::SET_ENTITY_AS_NO_LONGER_NEEDED(&ped);
-			//PED::SET_BLOCKING_OF_NON_TEMPORARY_EVENTS(ped, 1);
-		}
+		//{
+		//	Vector3 pos = add(&ENTITY::GET_ENTITY_COORDS(player, 1, 0), &multiply(&ENTITY::GET_ENTITY_FORWARD_VECTOR(player), 5));
+		//	getGroundPos(pos, &pos);
+		//	Ped ped = createPed("CS_ColmODriscoll", pos);
+		//	DECORATOR::DECOR_SET_INT(ped, "honor_override", -10);
+		//	//ENTITY::SET_ENTITY_AS_NO_LONGER_NEEDED(&ped);
+		//	PED::SET_BLOCKING_OF_NON_TEMPORARY_EVENTS(ped, 1);
 
-		if (!true) {
+		//	Vector3 pos2 = add(&ENTITY::GET_ENTITY_COORDS(player, 1, 0), &multiply(&ENTITY::GET_ENTITY_FORWARD_VECTOR(player), 5));
+		//	getGroundPos(pos2, &pos2);
+		//	Ped ped2 = createPed("CS_exconfedsleader_01", pos2);
+		//	DECORATOR::DECOR_SET_INT(ped2, "honor_override", -10);
+		//	//ENTITY::SET_ENTITY_AS_NO_LONGER_NEEDED(&ped);
+		//	PED::SET_BLOCKING_OF_NON_TEMPORARY_EVENTS(ped2, 1);
+		//}
 
-			Vector3 pos = entityPos(player);
-			Hash weaponHash;
-			WEAPON::GET_CURRENT_PED_WEAPON(player, &weaponHash, 0, 0, 0);
-			if (weaponHash != WeaponHash::WEAPON_UNARMED) {
-				Entity e;
-				if (PLAYER::GET_ENTITY_PLAYER_IS_FREE_AIMING_AT(PLAYER::PLAYER_ID(), &e) && distanceBetweenEntities(player, e) < 10) {
-					if (IsKeyJustUp(VK_KEY_Z)) {
-						showSubtitle(to_string(ENTITY::GET_ENTITY_MODEL(e)).c_str());
-					} 
-					//debug(entityPos(e));
-					debug(ENTITY::GET_ENTITY_ROTATION(e, 2));
-				}
-				else 
-				{
-					RaycastResult ray = raycastCrosshair(40, Map);
-					debug(ray.hitPos);
-				}
-			}
-			else {
-				debug(pos);
-			}
-		}
+		//if (!true) {
+		//	Vector3 pos = entityPos(player);
+		//	Hash weaponHash;
+		//	WEAPON::GET_CURRENT_PED_WEAPON(player, &weaponHash, 0, 0, 0);
+		//	if (weaponHash != WeaponHash::WEAPON_UNARMED) {
+		//		Entity e;
+		//		if (PLAYER::GET_ENTITY_PLAYER_IS_FREE_AIMING_AT(PLAYER::PLAYER_ID(), &e) && distanceBetweenEntities(player, e) < 10) {
+		//			if (IsKeyJustUp(VK_KEY_Z)) {
+		//				//showSubtitle(to_string(ENTITY::GET_ENTITY_MODEL(e)).c_str());
+		//				//playSoundFromEntity(e, "HIDEOUT_HDR_Sounds", "OPEN_BARN_DOORS");
+		//			} 
+		//			debug(entityPos(e));
+		//		}
+		//		else 
+		//		{
+		//			RaycastResult ray = raycastCrosshair(40, Map);
+		//			debug(ray.hitPos);
+		//		}
+		//	}
+		//	else {
+		//		debug(pos);
+		//	}
+		//}
 
 		WAIT(0);
 	}
