@@ -72,6 +72,11 @@ void MultiVertexRope::stopWinding()
 	ropes.front()->stopWinding();
 }
 
+void MultiVertexRope::detach()
+{
+	ropes.front()->detach();
+}
+
 int MultiVertexRope::update()
 {
 	return ropes.front()->update();

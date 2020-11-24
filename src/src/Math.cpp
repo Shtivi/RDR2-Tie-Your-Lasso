@@ -78,6 +78,21 @@ float get_vector_length(Vector3 vector) {
 	return(float)sqrt(x * x + y * y + z * z);
 }
 
+Vector3 normalOf(Vector3 source)
+{
+	float length = get_vector_length(source);
+	if (length == 0) {
+		return toVector3(0, 0, 0);
+	}
+
+	Vector3 result;
+	float num = 1 / length;
+	result.x = source.x * num;
+	result.y = source.y * num;
+	result.z = source.z * num;
+	return result;
+}
+
 Vector3 cross(Vector3 left, Vector3 right)
 {
 	Vector3 result;

@@ -1,4 +1,5 @@
 #pragma once
+#include "NooseSpot.h"
 
 enum GallowsLeverMode {
 	Push,
@@ -14,13 +15,28 @@ private:
 	char* trapdoorAnimation;
 	GallowsLeverMode leverMode;
 	float leverHeading;
+	vector<NooseSpot> nooseSpots;
+	float noosedPedHeading;
 
 public:
 	static Gallows* fromPosition(Vector3 position);
 
-	Gallows(Vector3 leverPosition, vector<Vector3> trapdoorPositions, int trapdoorModel, char* trapdoorAnimation, float leverHeading = 270, GallowsLeverMode leverMode = Push);
+	Gallows(
+		Vector3 leverPosition, 
+		vector<Vector3> trapdoorPositions, 
+		int trapdoorModel, 
+		char* trapdoorAnimation, 
+		float leverHeading,
+		float noosedPedHeading,
+		vector<NooseSpot> nooseSpots = vector<NooseSpot>{},
+		GallowsLeverMode leverMode = Push
+	);
+	
+	bool canNooseAtPosition(Vector3 position);
+	void noose(Ped victim, Vector3 position);
 	void pullLever(Ped executioner);
 	void reset(Ped executioner);
+	
 	bool isLeverPulled();
 	GallowsLeverMode getLeverMode();
 	Vector3 getPosition();
@@ -39,6 +55,10 @@ protected:
 	virtual void getToLever(Ped executioner);
 	virtual Vector3 getLeverPullingPosition();
 	virtual float getLeverHeading();
+
+private:
+	NooseSpot* findClosestAvailableNooseSlot(Vector3 position);
 };
 
 #include "StDanisGallows.h"
+#include "StrawberryGallows.h"

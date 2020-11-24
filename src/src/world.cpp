@@ -87,6 +87,18 @@ RaycastResult raycastRadius(Vector3 source, Vector3 target, float radius, Raycas
 	return result;
 }
 
+RaycastResult raycastCrosshair(float maxDist, RaycastIntersectionOptions intersectionOptions, Entity ignore)
+{
+	Vector3 source = CAM::GET_GAMEPLAY_CAM_COORD();
+	Vector3 rot = ((float)3.1452 / 180.0) * CAM::_GET_GAMEPLAY_CAM_ROT(2);
+	Vector3 forward = normalOf(toVector3(
+		-sin(rot.z) * abs(cos(rot.x)),
+		cos(rot.z) * abs(cos(rot.x)),
+		sin(rot.x)
+	));
+	return raycast(source, forward, maxDist, intersectionOptions, ignore);
+}
+
 Ped findCarriedPedBy(Ped carrier)
 {
 	return PED::_0xD806CD2A4F2C2996(carrier);
@@ -262,9 +274,12 @@ Vector3* getSafeCoordForPed(Vector3 destination)
 }
 
 void playEntityAnimation(Entity entity, const char* animName, const char* animDict, float duration, bool loop, bool stayInAnim, float delta, int bitset ) {
-	if (!STREAMING::HAS_ANIM_DICT_LOADED((char*)animDict))
+	int i = 0;
+	while (!STREAMING::HAS_ANIM_DICT_LOADED((char*)animDict) && i <= 500)
 	{
 		STREAMING::REQUEST_ANIM_DICT((char*)animDict);
+		i++;
+		WAIT(10);
 	}
 
 	ENTITY::PLAY_ENTITY_ANIM(entity, (char*)animName, (char*)animDict, duration, loop, stayInAnim, 1, delta, bitset);
@@ -272,11 +287,6 @@ void playEntityAnimation(Entity entity, const char* animName, const char* animDi
 
 void playAnimation(Ped ped, const char* animName, const char* animDict, int duration, float blendInSpeed, float blendOutSpeed, int flags)
 {
-	if (!STREAMING::HAS_ANIM_DICT_LOADED((char*)animDict))
-	{
-		STREAMING::REQUEST_ANIM_DICT((char*)animDict);
-	}
-
 	Stopwatch stopwatch;
 	stopwatch.start();
 	while (!STREAMING::HAS_ANIM_DICT_LOADED((char*)animDict) && stopwatch.getElapsedSeconds() <= 1)
@@ -290,9 +300,10 @@ void playAnimation(Ped ped, const char* animName, const char* animDict, int dura
 
 void loadImap(Hash imapHash)
 {
-	if (!STREAMING::_0xD779B9B910BD3B7C(imapHash))
+	while (!STREAMING::_0xD779B9B910BD3B7C(imapHash))
 	{
 		STREAMING::_0x59767C5A7A9AE6DA(imapHash);
+		WAIT(0);
 	}
 }
 
@@ -301,4 +312,14 @@ void loadInteriorSet(Interior interior, const char* setName)
 	if (!INTERIOR::_IS_INTERIOR_PROP_ENABLED(interior, (char*) setName)) {
 		INTERIOR::_ENABLE_INTERIOR_PROP(interior, (char*) setName, 1);
 	}
+}
+
+void playSoundFromEntity(Entity e, char* soundset, char* soundname)
+{
+	int i = 1;
+	while (i <= 50 && !AUDIO::_0xD9130842D7226045((Any*)soundset, 0)) {
+		i++;
+		WAIT(100);
+	}
+	AUDIO::_0x6FB1DA3CA9DA7D90((Any*)soundname, e, (Any*)soundset, 1, 0, 0);
 }

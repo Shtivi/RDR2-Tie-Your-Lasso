@@ -18,6 +18,12 @@ bool HangPedController::isAbleToExecute()
 	Ped player = PLAYER::PLAYER_PED_ID();
 	Ped carriedPed = findCarriedPedBy(player);
 	Ped targetEntity = findHogtiedTargetEntity();
+	Vector3 playerPos = ENTITY::GET_ENTITY_COORDS(player, 1, 0);
+
+	Gallows* gallows = Gallows::fromPosition(playerPos);
+	if (gallows && gallows->canNooseAtPosition(playerPos)) {
+		return false;
+	}
 
 	if (!carriedPed)
 	{
@@ -43,7 +49,6 @@ bool HangPedController::isAbleToExecute()
 		return false;
 	}
 
-	Vector3 playerPos = ENTITY::GET_ENTITY_COORDS(player, 1, 0);
 	RaycastResult ray = raycast(playerPos, getUpVector(player), 100, RaycastIntersectionOptions::Map);
 	
 	float dist = distance(playerPos, ray.hitPos) + 0.1f;

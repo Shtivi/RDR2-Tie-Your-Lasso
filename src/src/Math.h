@@ -13,6 +13,7 @@ Vector3 add(Vector3* vectorA, Vector3* vectorB);
 Vector3 multiply(Vector3* vector, float x);
 float get_distance(Vector3* pointA, Vector3* pointB);
 float get_vector_length(Vector3 vector);
+Vector3 normalOf(Vector3 source);
 Vector3 cross(Vector3 left, Vector3 right);
 float dotProduct(Vector3 a, Vector3 b);
 Vector3 getUpVector(Entity entity);

@@ -21,7 +21,7 @@ bool PullGallowLeverController::isAbleToExecute()
 	Vector3 playerPos = entityPos(player);
 	gallows = Gallows::fromPosition(playerPos);
 
-	return gallows != NULL;
+	return gallows != NULL && distance(gallows->getPosition(), playerPos) < 1.5f;
 }
 
 void PullGallowLeverController::preparePrompt(Prompt* prompt)

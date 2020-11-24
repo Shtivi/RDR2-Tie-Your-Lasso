@@ -5,14 +5,27 @@ vector<Gallows*> gallows = {
 		toVector3(-315.075, 730.922, 119.411),
 		vector<Vector3>{toVector3(-313.787, 728.843, 119.473), toVector3(-314.639, 733.692, 119.473f)},
 		2371225963,
-		"pull_lever_front_trapdoor_val"
+		"pull_lever_front_trapdoor_val",
+		270,
+		90,
+		vector<NooseSpot>{
+			NooseSpot(toVector3(-314.166, 727.714, 122.854), toVector3(-313.907, 726.881, 121.285), toVector3(-314.543, 728.321, 120.608)),
+			NooseSpot(toVector3(-314.487, 729.75, 122.897), toVector3(-314.697, 731.494, 121.753), toVector3(-314.735, 729.307, 120.615)),
+			NooseSpot(toVector3(-315.338, 734.837, 122.885), toVector3(-315.492, 735.995, 121.696), toVector3(-315.63, 734.277, 120.617)),
+			NooseSpot(toVector3(-315.04, 732.948, 122.899), toVector3(-314.741, 731.737, 121.504), toVector3(-315.193, 732.929, 120.61))
+		}
 	),
 	new Gallows( // Blackwater
 		toVector3(-766.644, -1260.87, 46.4626),
 		vector<Vector3>{toVector3(-764.715, -1260.41, 46.3581)},
 		-1923741333,
 		"pull_lever_deputy_trapdoor_val",
-		90
+		90,
+		360,
+		vector<NooseSpot>{
+			NooseSpot(toVector3(-764.132, -1259.81, 49.5529), toVector3(-764.132, -1259.81, 49.5529), toVector3(-763.769, -1259.63, 47.3899)),
+			NooseSpot(toVector3(-765.368, -1259.89, 49.5529), toVector3(-765.368, -1259.89, 49.5529), toVector3(-765.381, -1259.48, 47.3899))
+		}
 	),
 	new StDanisGallows(),
 	new Gallows( // Rhodes
@@ -20,14 +33,20 @@ vector<Gallows*> gallows = {
 		vector<Vector3>{toVector3(1375.53, -1215.3, 83.1936)},
 		-1923741333,
 		"pull_lever_front_trapdoor_val",
-		270
-	)
+		270,
+		90,
+		vector<NooseSpot>{
+			NooseSpot(toVector3(1374.76, -1216.23, 86.4909), toVector3(1373.4, -1217.74, 84.161), toVector3(1374.63, -1215.9, 84.2286)),
+			NooseSpot(toVector3(1374.95, -1214.53, 86.6254), toVector3(1373.89, -1212.46, 85.8205), toVector3(1374.8, -1214.38, 84.2374))
+		}
+	),
+	new StrawberryGallows()
 };
 
 Gallows* Gallows::fromPosition(Vector3 pos) {
 	for (vector<Gallows*>::iterator itr = gallows.begin(); itr != gallows.end(); itr++)
 	{
-		if (distance((*itr)->getPosition(), pos) <= 1.5f) {
+		if (distance((*itr)->getPosition(), pos) <= 8) {
 			return *itr;
 		}
 	}
@@ -35,7 +54,16 @@ Gallows* Gallows::fromPosition(Vector3 pos) {
 	return NULL;
 }
 
-Gallows::Gallows(Vector3 leverPos, vector<Vector3> trapdoorPositions, int trapdoorModel, char* trapdoorAnimation, float leverHeading, GallowsLeverMode leverMode)
+Gallows::Gallows(
+	Vector3 leverPos, 
+	vector<Vector3> trapdoorPositions, 
+	int trapdoorModel, 
+	char* trapdoorAnimation, 
+	float leverHeading, 
+	float noosedPedHeading, 
+	vector<NooseSpot> nooseSpots, 
+	GallowsLeverMode leverMode
+)
 {
 	this->leverPosition = leverPos;
 	this->trapdoorPositions = trapdoorPositions;
@@ -43,6 +71,8 @@ Gallows::Gallows(Vector3 leverPos, vector<Vector3> trapdoorPositions, int trapdo
 	this->trapdoorAnimation = trapdoorAnimation;
 	this->leverMode = leverMode;
 	this->leverHeading = leverHeading;
+	this->nooseSpots = nooseSpots;
+	this->noosedPedHeading = noosedPedHeading;
 }
 
 Vector3 Gallows::getPosition()
@@ -54,8 +84,20 @@ void Gallows::reset(Ped executioner)
 {
 	getToLever(executioner);
 	playAnimation(executioner, leverMode == Push ? "pull_unarmed_v1" : "push_behind_quick" , "script_re@public_hanging@lever", 4000);
+
 	WAIT(1700);
 	resetLever(getLever());
+
+	for (vector<NooseSpot>::iterator itr = nooseSpots.begin(); itr != nooseSpots.end(); itr++)
+	{
+		if (!itr->isAvailable()) {
+			Rope* rope = getRopeAttachedTo(itr->getOccupant());
+			if (rope) {
+				rope->detach();
+			}
+			itr->clear();
+		}
+	}
 
 	WAIT(400);
 	vector<Entity> trapdoors = getTrapdoors();
@@ -79,7 +121,6 @@ GallowsLeverMode Gallows::getLeverMode()
 void Gallows::pullLever(Ped executioner)
 {
 	getToLever(executioner);
-
 	vector<Entity> trapdoors = getTrapdoors();
 	for (vector<Entity>::iterator trapdoorItr = trapdoors.begin(); trapdoorItr != trapdoors.end(); trapdoorItr++)
 	{
@@ -89,6 +130,57 @@ void Gallows::pullLever(Ped executioner)
 	playLeverAnimation(getLever());
 	WAIT(100);
 	playLeverPullAnimation(executioner);
+
+	if (isLeverPulled()) 
+	{
+		WAIT(1300);
+		for (vector<Entity>::iterator trapdoorItr = trapdoors.begin(); trapdoorItr != trapdoors.end(); trapdoorItr++)
+		{
+			playSoundFromEntity(*trapdoorItr, "HIDEOUT_HDR_Sounds", "OPEN_BARN_DOORS");
+		}
+
+		WAIT(1000);
+		for (vector<NooseSpot>::iterator itr = nooseSpots.begin(); itr != nooseSpots.end(); itr++)
+		{
+			if (!itr->isAvailable())
+			{
+				PED::EXPLODE_PED_HEAD(itr->getOccupant(), GAMEPLAY::GET_HASH_KEY("WEAPON_LASSO"));
+			}
+		}
+	}
+}
+
+bool Gallows::canNooseAtPosition(Vector3 position)
+{
+	if (isLeverPulled()) {
+		return false;
+	}
+
+	NooseSpot* nooseSpot = findClosestAvailableNooseSlot(position);
+	return nooseSpot != NULL;
+}
+
+void Gallows::noose(Ped victim, Vector3 position)
+{
+	NooseSpot* nooseSpot = findClosestAvailableNooseSlot(position);
+	
+	if (!nooseSpot) {
+		return;
+	}
+
+	PED::SET_BLOCKING_OF_NON_TEMPORARY_EVENTS(victim, true);
+	ENTITY::SET_ENTITY_COORDS(victim, nooseSpot->getTrapdoorPosition().x, nooseSpot->getTrapdoorPosition().y, nooseSpot->getTrapdoorPosition().z, 1, 1, 0, false);
+	WAIT(500);
+	AI::CLEAR_PED_TASKS_IMMEDIATELY(victim, 0, 0);
+	AI::TASK_STAND_STILL(victim, -1);
+	PED::SET_ENABLE_HANDCUFFS(victim, true, 0);
+	float length = distance(nooseSpot->getTrapdoorPosition(), nooseSpot->getAnchorPosition()) + 0.75;
+	AttachedRope* rope = new AttachedRope(nooseSpot->getAnchorPosition(), victim, "SKEL_NECK0", length);
+	addRope(rope);
+	WAIT(500);
+	ENTITY::SET_ENTITY_HEADING(victim, noosedPedHeading);
+	nooseSpot->setOccupant(victim);
+
 }
 
 vector<Entity> Gallows::getTrapdoors()
@@ -162,7 +254,6 @@ void Gallows::getToLever(Ped executioner)
 	Object seq;
 	AI::OPEN_SEQUENCE_TASK(&seq);
 	AI::TASK_GO_STRAIGHT_TO_COORD(0, goTo.x, goTo.y, goTo.z, 1, 5000, getLeverHeading(), 0, 0);
-	//AI::TASK_ACHIEVE_HEADING(0, getLeverHeading(), 1000);
 	AI::CLOSE_SEQUENCE_TASK(seq);
 	AI::TASK_PERFORM_SEQUENCE(executioner, seq);
 	WAIT(500);
@@ -171,8 +262,8 @@ void Gallows::getToLever(Ped executioner)
 	while (AI::GET_SEQUENCE_PROGRESS(executioner) != -1 && i < 50)
 	{
 		WAIT(100);
-		i++;
 	}
+	i++;
 }
 
 Vector3 Gallows::getLeverPullingPosition()
@@ -183,4 +274,29 @@ Vector3 Gallows::getLeverPullingPosition()
 float Gallows::getLeverHeading()
 {
 	return leverHeading - ENTITY::GET_ENTITY_HEADING(getLever());
+}
+
+NooseSpot* Gallows::findClosestAvailableNooseSlot(Vector3 position)
+{
+	NooseSpot* closest = &(*nooseSpots.begin());
+	if (!closest) {
+		return NULL;
+	}
+
+	float bestDistance = distance(closest->getTrapdoorPosition(), position);
+
+	for (vector<NooseSpot>::iterator itr = nooseSpots.begin(); itr != nooseSpots.end(); itr++)
+	{
+		float currentDistance = distance((*itr).getTrapdoorPosition(), position);
+		if (currentDistance <= bestDistance && itr->isAvailable()) {
+			closest = &(*itr);
+			bestDistance = currentDistance;
+		}
+	}
+
+	if (bestDistance > 2 || !closest->isAvailable()) {
+		return NULL;
+	}
+
+	return closest;
 }
