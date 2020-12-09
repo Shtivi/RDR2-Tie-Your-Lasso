@@ -1,7 +1,7 @@
 #include "Main.h"
 
 HangPedController::HangPedController() : 
-	BaseActionsController(ActivationType::TAP, 1) 
+	BaseActionsController(ActivationType::TAP) 
 {
 	victim = NULL;
 	hangFrom = Vector3();
@@ -17,42 +17,29 @@ bool HangPedController::isAbleToExecute()
 {
 	Ped player = PLAYER::PLAYER_PED_ID();
 	Ped carriedPed = findCarriedPedBy(player);
-	Ped targetEntity = findHogtiedTargetEntity();
 	Vector3 playerPos = ENTITY::GET_ENTITY_COORDS(player, 1, 0);
 
-	Gallows* gallows = Gallows::fromPosition(playerPos);
-	if (gallows && gallows->canNooseAtPosition(playerPos)) {
-		return false;
-	}
-
-	if (!carriedPed)
-	{
-		if (!targetEntity)
-		{
-			reset();
-			return false;
-		} 
-		else
-		{
-			shouldDrop = false;
-			victim = targetEntity;
-		}
-	}
-	else
-	{
-		shouldDrop = true;
-		victim = carriedPed;
-	}
-
-	if (!PED::IS_PED_HUMAN(victim))
+	if (!carriedPed || !PED::IS_PED_HUMAN(victim))
 	{
 		return false;
 	}
 
-	RaycastResult ray = raycast(playerPos, getUpVector(player), 100, RaycastIntersectionOptions::Map);
-	
-	float dist = distance(playerPos, ray.hitPos) + 0.1f;
-	if (dist < 0.8f || dist > 5)
+	shouldDrop = true;
+	victim = carriedPed;
+
+	//Hash pedWeapon;
+	//if (WEAPON::GET_CURRENT_PED_WEAPON(player, &pedWeapon, 0, 0, 0) && pedWeapon == WeaponHash::WEAPON_UNARMED)
+	//{
+	//	return false;
+	//}
+
+	RaycastResult ray = raycastCrosshair(20, RaycastIntersectionOptions::Map);
+;	if (ray.hitPos.z <= entityPos(player).z + 0.7f) {
+		return false;
+	}
+
+	float dist = distance(playerPos, ray.hitPos);
+	if (dist < 0.8f || dist > 12)
 	{
 		reset();
 		return false;
@@ -70,40 +57,30 @@ void HangPedController::preparePrompt(Prompt* prompt)
 void HangPedController::execute()
 {
 	Vector3* pinTo = getSafeCoordForPed(playerPos() + (ENTITY::GET_ENTITY_FORWARD_VECTOR(player) * 4));
-	Vector3 placeOn = playerPos();
+	Vector3 placeOn = getGroundPos(hangFrom);;
 	if (!pinTo)
 	{
 		pinTo = &placeOn;
 	}
 
-	AI::TASK_SET_BLOCKING_OF_NON_TEMPORARY_EVENTS(victim, 1);
 	WEAPON::REMOVE_ALL_PED_WEAPONS(victim, 0, 0);
 
 	Vector3 goTo = playerPos() + getForwardVector(player) * 2;
 	Object seq;
 	AI::OPEN_SEQUENCE_TASK(&seq);
-	if (shouldDrop)
-	{
-		AI::_0xC7F0B43DCDC57E3D(0, victim, placeOn.x, placeOn.y, placeOn.z, 10.0f, 1);
-	}
-	AI::TASK_GO_STRAIGHT_TO_COORD(0, goTo.x, goTo.y, goTo.z, 1, 2500, ENTITY::GET_ENTITY_HEADING(player), 0, 0);
+	AI::TASK_GO_STRAIGHT_TO_COORD(0, placeOn.x, placeOn.y, placeOn.z, 1, 5000, ENTITY::GET_ENTITY_HEADING(player), 0, 0);
+	AI::_0xC7F0B43DCDC57E3D(0, victim, placeOn.x, placeOn.y, placeOn.z, 10.0f, 1);
+	AI::TASK_GO_STRAIGHT_TO_COORD(0, goTo.x, goTo.y, goTo.z, 1, 3000, ENTITY::GET_ENTITY_HEADING(player), 0, 0);
 	AI::CLOSE_SEQUENCE_TASK(seq);
 	AI::TASK_PERFORM_SEQUENCE(player, seq);
 
-	if (shouldDrop)
-	{
-		WAIT(2000);
-	} 
-	else
-	{
-		WAIT(500);
-	}
+	WAIT(max(2000, 1000 * distance(placeOn, entityPos(player))));
 
 	CAM::DO_SCREEN_FADE_OUT(300);
 	WAIT(2000);
 	AI::CLEAR_PED_TASKS_IMMEDIATELY(victim, 0, 0);
 
-	float length = distance(hangFrom, victim) + 0.75f;
+	float length = distance(hangFrom, victim) + 0.4f;
 	MultiVertexRope* rope = new MultiVertexRope(new AttachedRope(hangFrom, victim, "SKEL_NECK0", length));
 	rope->pinTo(*pinTo);
 	addRope(rope);

@@ -24,26 +24,28 @@ void main()
 
 	while (true)
 	{
+		player = PLAYER::PLAYER_PED_ID();
+
 		handleActions();
 		UpdateRopes();
 
-		//if (IsKeyJustUp(VK_KEY_X)) 
+		if (IsKeyJustUp(VK_KEY_X)) 
 
-		//{
-		//	Vector3 pos = add(&ENTITY::GET_ENTITY_COORDS(player, 1, 0), &multiply(&ENTITY::GET_ENTITY_FORWARD_VECTOR(player), 5));
-		//	getGroundPos(pos, &pos);
-		//	Ped ped = createPed("CS_ColmODriscoll", pos);
-		//	DECORATOR::DECOR_SET_INT(ped, "honor_override", -10);
-		//	//ENTITY::SET_ENTITY_AS_NO_LONGER_NEEDED(&ped);
-		//	PED::SET_BLOCKING_OF_NON_TEMPORARY_EVENTS(ped, 1);
+		{
+			//Vector3 pos = add(&ENTITY::GET_ENTITY_COORDS(player, 1, 0), &multiply(&ENTITY::GET_ENTITY_FORWARD_VECTOR(player), 5));
+			//getGroundPos(pos, &pos);
+			//Ped ped = createPed("CS_ColmODriscoll", pos);
+			//DECORATOR::DECOR_SET_INT(ped, "honor_override", -10);
+			//ENTITY::SET_ENTITY_AS_NO_LONGER_NEEDED(&ped);
+			//PED::SET_BLOCKING_OF_NON_TEMPORARY_EVENTS(ped, 1);
 
-		//	Vector3 pos2 = add(&ENTITY::GET_ENTITY_COORDS(player, 1, 0), &multiply(&ENTITY::GET_ENTITY_FORWARD_VECTOR(player), 5));
-		//	getGroundPos(pos2, &pos2);
-		//	Ped ped2 = createPed("CS_exconfedsleader_01", pos2);
-		//	DECORATOR::DECOR_SET_INT(ped2, "honor_override", -10);
-		//	//ENTITY::SET_ENTITY_AS_NO_LONGER_NEEDED(&ped);
-		//	PED::SET_BLOCKING_OF_NON_TEMPORARY_EVENTS(ped2, 1);
-		//}
+			//Vector3 pos2 = add(&ENTITY::GET_ENTITY_COORDS(player, 1, 0), &multiply(&ENTITY::GET_ENTITY_FORWARD_VECTOR(player), 5));
+			//getGroundPos(pos2, &pos2);
+			//Ped ped2 = createPed("CS_exconfedsleader_01", pos2);
+			//DECORATOR::DECOR_SET_INT(ped2, "honor_override", -10);
+			//ENTITY::SET_ENTITY_AS_NO_LONGER_NEEDED(&ped);
+			//PED::SET_BLOCKING_OF_NON_TEMPORARY_EVENTS(ped2, 1);
+		}
 
 		//if (!true) {
 		//	Vector3 pos = entityPos(player);
