@@ -36,6 +36,9 @@ AttachedRope::AttachedRope(Entity entity1, Entity entity2, const char* bone1, co
 	this->isEntityHanging = false;
 	this->isWinding = false;
 	this->isUnwinding = false;
+
+	DECORATOR::DECOR_SET_INT(entity1, "TYL_hanged", 1);
+	DECORATOR::DECOR_SET_INT(entity2, "TYL_hanged", 1);
 }
 
 bool AttachedRope::getIsAttachedToMap()
