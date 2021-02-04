@@ -15,6 +15,8 @@ Ped player;
 void Initialize() 
 {
 	player = PLAYER::PLAYER_PED_ID();
+	DECORATOR::DECOR_REGISTER("TYL_hanged", 3);
+
 	initActions();
 }
 
@@ -32,6 +34,7 @@ void main()
 		if (IsKeyJustUp(VK_KEY_X)) 
 
 		{
+			//WEAPON::GIVE_DELAYED_WEAPON_TO_PED(player, GAMEPLAY::GET_HASH_KEY("WEAPON_REVOLVER_LEMAT"), 30, 1, 1);
 			//Vector3 pos = add(&ENTITY::GET_ENTITY_COORDS(player, 1, 0), &multiply(&ENTITY::GET_ENTITY_FORWARD_VECTOR(player), 5));
 			//getGroundPos(pos, &pos);
 			//Ped ped = createPed("CS_ColmODriscoll", pos);
