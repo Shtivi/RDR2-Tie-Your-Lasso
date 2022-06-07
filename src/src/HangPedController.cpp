@@ -57,7 +57,7 @@ void HangPedController::preparePrompt(Prompt* prompt)
 void HangPedController::execute()
 {
 	Vector3* pinTo = getSafeCoordForPed(playerPos() + (ENTITY::GET_ENTITY_FORWARD_VECTOR(player) * 4));
-	Vector3 placeOn = getGroundPos(hangFrom);;
+	Vector3 placeOn = getGroundPos(hangFrom);
 	if (!pinTo)
 	{
 		pinTo = &placeOn;
@@ -65,12 +65,12 @@ void HangPedController::execute()
 
 	WEAPON::REMOVE_ALL_PED_WEAPONS(victim, 0, 0);
 
-	Vector3 goTo = playerPos() + getForwardVector(player) * 2;
+	Vector3 goTo = playerPos() - normalOf(playerPos() - placeOn) * min(distance(playerPos(), placeOn), 4);
 	Object seq;
 	AI::OPEN_SEQUENCE_TASK(&seq);
-	AI::TASK_GO_STRAIGHT_TO_COORD(0, placeOn.x, placeOn.y, placeOn.z, 1, 5000, ENTITY::GET_ENTITY_HEADING(player), 0, 0);
+	AI::TASK_FOLLOW_NAV_MESH_TO_COORD(0, placeOn.x, placeOn.y, placeOn.z, 1, 10000, ENTITY::GET_ENTITY_HEADING(player), 0, 0);
 	AI::_0xC7F0B43DCDC57E3D(0, victim, placeOn.x, placeOn.y, placeOn.z, 10.0f, 1);
-	AI::TASK_GO_STRAIGHT_TO_COORD(0, goTo.x, goTo.y, goTo.z, 1, 3000, ENTITY::GET_ENTITY_HEADING(player), 0, 0);
+	AI::TASK_FOLLOW_NAV_MESH_TO_COORD(0, goTo.x, goTo.y, goTo.z, 1, 3000, ENTITY::GET_ENTITY_HEADING(player), 0, 0);
 	AI::CLOSE_SEQUENCE_TASK(seq);
 	AI::TASK_PERFORM_SEQUENCE(player, seq);
 

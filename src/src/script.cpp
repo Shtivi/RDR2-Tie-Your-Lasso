@@ -31,10 +31,11 @@ void main()
 		handleActions();
 		UpdateRopes();
 
-		if (IsKeyJustUp(VK_KEY_X)) 
+		if (true && IsKeyJustUp(VK_F11)) 
 
 		{
-			//WEAPON::GIVE_DELAYED_WEAPON_TO_PED(player, GAMEPLAY::GET_HASH_KEY("WEAPON_REVOLVER_LEMAT"), 30, 1, 1);
+			WEAPON::GIVE_DELAYED_WEAPON_TO_PED(player, GAMEPLAY::GET_HASH_KEY("weapon_revolver_navy"), 30, 1, 1);
+			showSubtitle("navy");
 			//Vector3 pos = add(&ENTITY::GET_ENTITY_COORDS(player, 1, 0), &multiply(&ENTITY::GET_ENTITY_FORWARD_VECTOR(player), 5));
 			//getGroundPos(pos, &pos);
 			//Ped ped = createPed("CS_ColmODriscoll", pos);
@@ -53,7 +54,7 @@ void main()
 		//if (!true) {
 		//	Vector3 pos = entityPos(player);
 		//	Hash weaponHash;
-		//	WEAPON::GET_CURRENT_PED_WEAPON(player, &weaponHash, 0, 0, 0);
+		//	WEAPON::GET_CURRENT_PED_WEAPON(player, &weaponHasbh, 0, 0, 0);
 		//	if (weaponHash != WeaponHash::WEAPON_UNARMED) {
 		//		Entity e;
 		//		if (PLAYER::GET_ENTITY_PLAYER_IS_FREE_AIMING_AT(PLAYER::PLAYER_ID(), &e) && distanceBetweenEntities(player, e) < 10) {

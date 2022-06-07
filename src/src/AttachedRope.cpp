@@ -27,8 +27,22 @@ AttachedRope::AttachedRope(Entity entity1, Entity entity2, const char* bone1, co
 	this->ropeLength = length;
 	this->bone1 = bone1;
 	this->bone2 = bone2;
-	this->ropeId = ROPE::ADD_ROPE(pos1.x, pos1.y, pos1.z, 0, 0, 0, length, 14, length + 3.0f, 1.0f, 1.0f, 0, 1, true, 1.25f, true, 0, 0);
-	ROPE::_0x462FF2A432733A44(ropeId, entity1, entity2, 0, 0, 0, 0, 0, 0, (Any*)bone1, (Any*)bone2);
+	this->ropeId = ROPE::ADD_ROPE(pos1.x, pos1.y, pos1.z, 0, 0, 0, length, 0, length + 3.0f, 1.0f, 1.0f, 0, 1, true, 1.25f, true, 0, 0);
+
+	Vector3 attachOffset = toVector3(0, 0, 0);
+	if (ENTITY::IS_ENTITY_A_PED(entity1))
+	{
+		Vector3 offset = toVector3(0.09, -0.068, 0.008);
+		attachOffset = offset + toVector3(0, -0.12, 0.01);
+		
+		if (!DECORATOR::DECOR_GET_INT(entity1, "TYL_hanged"))
+		{
+			Entity noose = createProp("p_noose02x", pos1);
+			ENTITY::ATTACH_ENTITY_TO_ENTITY(noose, entity1, PED::GET_PED_BONE_INDEX(entity1, 14283), offset.x, offset.y, offset.z, -30, -100, 15, true, true, false, true, 2, true, 0, 0);
+		}
+	}
+
+	ROPE::_0x462FF2A432733A44(ropeId, entity1, entity2, attachOffset.x, attachOffset.y, attachOffset.z, 0, 0, 0, (Any*)bone1, (Any*)bone2);
 	ROPE::ACTIVATE_PHYSICS(ropeId);
 	ROPE::_0x3C6490D940FF5D0B(ropeId, 0, (Any*)"noose01x_Rope_03", length, 0);
 
@@ -160,7 +174,7 @@ int AttachedRope::update()
 
 		if (isEntityHanging)
 		{
-			PED::SET_PED_TO_RAGDOLL(ped, 5000, 5000, 0, false, false, false);
+			PED::SET_PED_TO_RAGDOLL(ped, 5000, 5000, 1, false, false, false);
 			currHealth = ENTITY::GET_ENTITY_HEALTH(ped);
 			ENTITY::SET_ENTITY_HEALTH(ped, max(currHealth - 2, 0), 0);
 		}

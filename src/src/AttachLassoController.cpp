@@ -33,16 +33,28 @@ bool AttachLassoController::isAbleToExecute()
 		lassoTarget = NULL;
 	}
 
-	return lassoTarget != 0 && ENTITY::IS_ENTITY_A_PED(lassoTarget) && !PED::IS_PED_ON_MOUNT(player);
+	return lassoTarget != 0 && ENTITY::IS_ENTITY_A_PED(lassoTarget) && PED::IS_PED_ON_FOOT(player) && PED::IS_PED_HUMAN(lassoTarget);
 }
 
 void AttachLassoController::execute()
 {
 	Vector3 playerPos = ENTITY::GET_ENTITY_COORDS(player, true, 0);
-	Vector3 playerGroundPos;
-	getGroundPos(playerPos, &playerGroundPos);
+	AttachedRope* rope;
+	Vector3 hitchingCoords;
+	getGroundPos(playerPos, &hitchingCoords);
 
-	AttachedRope* rope = new AttachedRope(playerGroundPos, lassoTarget, "SKEL_NECK0", 0);
+	int hitchingScenarioPoint = AI::_0xF533D68FF970D190(playerPos.x, playerPos.y, playerPos.z, GAMEPLAY::GET_HASH_KEY("PROP_HITCHINGPOST"), 3, 1, 1);
+	if (hitchingScenarioPoint)
+	{
+		Entity hitchingPostObject = invoke<Entity>(0x7467165EE97D3C68, hitchingScenarioPoint);
+		if (hitchingPostObject) 
+		{
+			hitchingCoords = entityPos(hitchingPostObject);
+			hitchingCoords.z += 0.8;
+		}
+	}
+	
+	rope = new AttachedRope(hitchingCoords, lassoTarget, "SKEL_NECK0", 0);
 	addRope(rope);
 
 	AI::CLEAR_PED_TASKS(lassoTarget, 0, 0);
