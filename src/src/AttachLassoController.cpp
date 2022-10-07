@@ -64,5 +64,8 @@ void AttachLassoController::execute()
 	if (PED::IS_PED_HUMAN(lassoTarget))
 	{
 		PED::SET_ENABLE_HANDCUFFS(lassoTarget, 1, 0);
+		//PED::_0x1902C4CFCC5BE57C(lassoTarget, 0x222D41E5);
+		//PED::_0xCC8CA3E88256E58F(lassoTarget, false, true, true, true, false);
+		PED::SET_PED_COMBAT_MOVEMENT(lassoTarget, 0);
 	}
 }

@@ -27,10 +27,16 @@ bool WindRopeController::isAbleToExecute()
 
 void WindRopeController::execute()
 {
-	rope->startWinding();
+	if (rope)
+	{
+		rope->startWinding();
+	}
 }
 
 void WindRopeController::stop() 
 {
-	rope->stopWinding();
+	if (rope)
+	{
+		rope->stopWinding();
+	}
 }

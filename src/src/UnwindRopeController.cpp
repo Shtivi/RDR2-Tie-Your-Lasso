@@ -27,10 +27,16 @@ bool UnwindRopeController::isAbleToExecute()
 
 void UnwindRopeController::execute()
 {
-	rope->startUnwinding();
+	if (rope)
+	{
+		rope->startUnwinding();
+	}
 }
 
 void UnwindRopeController::stop()
 {
-	rope->stopUnwinding();
+	if (rope)
+	{
+		rope->stopUnwinding();
+	}
 }

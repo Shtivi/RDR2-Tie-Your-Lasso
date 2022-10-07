@@ -33,7 +33,7 @@ AttachedRope::AttachedRope(Entity entity1, Entity entity2, const char* bone1, co
 	if (ENTITY::IS_ENTITY_A_PED(entity1))
 	{
 		Vector3 offset = toVector3(0.09, -0.068, 0.008);
-		attachOffset = offset + toVector3(0, -0.12, 0.01);
+		attachOffset = offset + toVector3(0.01, -0.12, -0.01);
 		
 		if (!DECORATOR::DECOR_GET_INT(entity1, "TYL_hanged"))
 		{

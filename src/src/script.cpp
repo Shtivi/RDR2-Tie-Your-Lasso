@@ -31,7 +31,7 @@ void main()
 		handleActions();
 		UpdateRopes();
 
-		if (true && IsKeyJustUp(VK_F11)) 
+		if (false && IsKeyJustUp(VK_F11)) 
 
 		{
 			WEAPON::GIVE_DELAYED_WEAPON_TO_PED(player, GAMEPLAY::GET_HASH_KEY("weapon_revolver_navy"), 30, 1, 1);
